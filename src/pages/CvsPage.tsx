@@ -1,8 +1,4 @@
 const CvsPage = () => {
-    return ( 
-        <div>
-            cvs
-        </div>
-    );
+  return <div>cvs</div>
 }
-export default CvsPage;
+export default CvsPage

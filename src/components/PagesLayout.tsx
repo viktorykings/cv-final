@@ -1,11 +1,11 @@
-import { Outlet } from "react-router-dom";
+import { Outlet } from 'react-router-dom'
 
 const PagesLayout = () => {
-    return ( 
-        <div>
-            breadcrumbs
-            <Outlet />
-        </div>
-    );
+  return (
+    <div>
+      breadcrumbs
+      <Outlet />
+    </div>
+  )
 }
-export default PagesLayout;
+export default PagesLayout

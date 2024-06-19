@@ -1,8 +1,4 @@
 const DetailsPage = () => {
-    return ( 
-        <div>
-            details
-        </div>
-    );
+  return <div>details</div>
 }
-export default DetailsPage;
+export default DetailsPage

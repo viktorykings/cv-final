@@ -1,8 +1,4 @@
 const PositionsPage = () => {
-    return ( 
-        <div>
-            PositionsPage
-        </div>
-    );
+  return <div>PositionsPage</div>
 }
-export default PositionsPage;
+export default PositionsPage

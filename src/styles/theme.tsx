@@ -1,6 +1,5 @@
-import { createTheme } from '@mui/material/styles';
-import { red } from '@mui/material/colors';
-
+import { createTheme } from '@mui/material/styles'
+import { red } from '@mui/material/colors'
 
 // A custom theme for this app
 // const theme = createTheme({
@@ -41,24 +40,24 @@ import { red } from '@mui/material/colors';
 // });
 const theme = createTheme({
   palette: {
-    mode:"dark",
+    mode: 'dark',
     primary: {
-      main: '#313131',
+      main: '#313131'
     },
     secondary: {
-      main: 'rgb(198, 48, 49)',
+      main: 'rgb(198, 48, 49)'
     },
     error: {
-      main: red.A400,
+      main: red.A400
     },
     background: {
-      default: '#313131',
+      default: '#313131'
     },
     text: {
       primary: '#fff',
       secondary: '#808080',
       disabled: '#606060'
-    },
+    }
   },
   typography: {
     fontFamily: [
@@ -71,16 +70,16 @@ const theme = createTheme({
       'sans-serif',
       '"Apple Color Emoji"',
       '"Segoe UI Emoji"',
-      '"Segoe UI Symbol"',
-    ].join(','),
+      '"Segoe UI Symbol"'
+    ].join(',')
   },
   components: {
     MuiInputBase: {
       defaultProps: {
-        disableInjectingGlobalStyles: true,
-      },
-    },
-  },
-});
+        disableInjectingGlobalStyles: true
+      }
+    }
+  }
+})
 
-export default theme;
+export default theme
