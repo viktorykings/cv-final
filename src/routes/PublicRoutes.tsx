@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import Root from './Root.tsx'
 import { Paths } from './paths.ts'
-import { ErrorPage, LogInPage, SignUpPage } from './lazyRouts.ts'
+import { LogInPage, SignUpPage } from './lazyRouts.ts'
 
 export const PublicRoutes: RouteObject[] = [
   {
@@ -12,7 +12,6 @@ export const PublicRoutes: RouteObject[] = [
         <Root />
       </Suspense>
     ),
-    errorElement: <ErrorPage />,
 
     children: [
       {

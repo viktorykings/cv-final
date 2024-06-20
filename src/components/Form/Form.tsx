@@ -1,31 +1,76 @@
-import { VisibilityOff, Visibility } from '@mui/icons-material'
 import {
-  TextField,
+  Box,
+  Typography,
+  Button,
   FormControl,
+  FormHelperText,
+  IconButton,
+  InputAdornment,
   InputLabel,
   OutlinedInput,
-  InputAdornment,
-  IconButton,
-  FormHelperText
+  TextField
 } from '@mui/material'
+import { SubmitHandler, useForm } from 'react-hook-form'
+import { Link, useNavigate } from 'react-router-dom'
+import { TFormData } from '../../types/formType'
+import { VisibilityOff, Visibility } from '@mui/icons-material'
+import { useLazyQuery } from '@apollo/client'
+import { LOGIN } from '../../queries/auth'
+import { LoginResult } from '../../types/queryTypes'
 import { useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { FormData } from '../../types/formType'
+import { AUTH_TOKEN, userToken } from '../../constants/constants'
 
 const Form = () => {
-  const {
-    register,
-    formState: { errors }
-  } = useFormContext<FormData>()
   const [showPassword, setShowPassword] = useState(false)
+  const navigate = useNavigate()
 
   const handleClickShowPassword = () => setShowPassword(show => !show)
 
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
   }
+
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm<TFormData>()
+
+  const [login] = useLazyQuery<LoginResult>(LOGIN, {
+    onCompleted: data => {
+      localStorage.setItem(AUTH_TOKEN, data.login.access_token)
+      userToken(data.login.access_token)
+      navigate(`/users`)
+    }
+  })
+
+  const onSubmit: SubmitHandler<TFormData> = async formData => {
+    console.log(formData)
+    await login({ variables: formData })
+  }
   return (
-    <>
+    <Box
+      onSubmit={handleSubmit(onSubmit)}
+      component="form"
+      display="flex"
+      alignItems="center"
+      justifyContent="center"
+      height={'90vh'}
+      flexDirection="column"
+      gap={'20px'}
+      sx={{
+        '& > :not(style)': { width: '560px' }
+      }}
+      noValidate
+      autoComplete="on"
+    >
+      <Typography variant="h4" gutterBottom align="center">
+        Welcome Back
+      </Typography>
+      <Typography variant="subtitle1" gutterBottom align="center">
+        Hello again! Sign in to continue.
+      </Typography>
+
       <TextField
         id="email"
         label="Email"
@@ -78,8 +123,14 @@ const Form = () => {
           </FormHelperText>
         )}
       </FormControl>
-    </>
+
+      <Button variant="contained" color="secondary" type="submit">
+        Sign in
+      </Button>
+      <Button variant="text" color="secondary" component={Link} to="/auth/signup">
+        I don't have an account
+      </Button>
+    </Box>
   )
 }
-
 export default Form

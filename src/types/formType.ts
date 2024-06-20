@@ -1,4 +1,4 @@
-export type FormData = {
+export type TFormData = {
   email: string
   password: string
 }

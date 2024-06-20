@@ -4,7 +4,6 @@ import Root from './Root.tsx'
 import { Paths } from './paths.ts'
 import PagesLayout from '../components/PagesLayout.tsx'
 import {
-  ErrorPage,
   UsersPage,
   ProfilePage,
   SkillsPage,
@@ -26,7 +25,6 @@ export const PrivateRoutes: RouteObject[] = [
         <Root />
       </Suspense>
     ),
-    errorElement: <ErrorPage />,
 
     children: [
       {

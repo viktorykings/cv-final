@@ -1,8 +1,8 @@
 import { lazy } from 'react'
 
+// export const LogInPage = lazy(() => import('../pages/Login.tsx'))
 export const LogInPage = lazy(() => import('../pages/LogInPage.tsx'))
 export const SignUpPage = lazy(() => import('../pages/SignUpPage.tsx'))
-export const ErrorPage = lazy(() => import('../pages/ErrorPage.tsx'))
 
 export const UsersPage = lazy(() => import('../pages/UsersPage.tsx'))
 export const ProfilePage = lazy(() => import('../pages/ProfilePage.tsx'))
