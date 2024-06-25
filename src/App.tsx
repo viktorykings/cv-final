@@ -8,7 +8,7 @@ import { Paths } from './routes/paths'
 const App = () => {
   const isAuthorised = useReactiveVar(userToken)
   const content = useRoutes(isAuthorised ? PrivateRoutes : PublicRoutes)
-  const defaultRoute = isAuthorised ? Paths.USERS : `${Paths.AUTH}/${Paths.LOGIN}`
+  const defaultRoute = isAuthorised ? Paths.EMPLOYEES : `${Paths.AUTH}/${Paths.LOGIN}`
   return content ? content : <Navigate to={defaultRoute} />
 }
 export default App

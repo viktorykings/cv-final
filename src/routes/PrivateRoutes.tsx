@@ -28,7 +28,7 @@ export const PrivateRoutes: RouteObject[] = [
 
     children: [
       {
-        path: Paths.USERS,
+        path: Paths.EMPLOYEES,
         element: <PagesLayout />,
         children: [
           { path: ``, element: <UsersPage /> },

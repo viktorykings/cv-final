@@ -3,7 +3,7 @@ export enum Paths {
   AUTH = 'auth',
   LOGIN = 'login',
   SIGNUP = 'signup',
-  USERS = 'users',
+  EMPLOYEES = 'users',
   PROFILE = 'profile',
   SKILLS = 'skills',
   LANGUAGES = 'languages',
