@@ -12,6 +12,17 @@ export const LOGIN = gql`
     }
   }
 `
+export const SIGNUP = gql`
+  mutation Signup($auth: AuthInput!) {
+    signup(auth: $auth) {
+      user {
+        id
+        email
+      }
+      access_token
+    }
+  }
+`
 
 export const GET_CVS = gql`
   query {
@@ -19,25 +30,6 @@ export const GET_CVS = gql`
       languages {
         proficiency
       }
-    }
-  }
-`
-
-export const GET_TODOS = gql`
-  query {
-    characters {
-      info {
-        count
-      }
-      results {
-        name
-      }
-    }
-    location(id: 1) {
-      id
-    }
-    episodesByIds(ids: [1, 2]) {
-      id
     }
   }
 `

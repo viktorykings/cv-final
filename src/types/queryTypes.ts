@@ -7,3 +7,10 @@ export type LoginArgs = {
 export type LoginResult = {
   login: AuthResult
 }
+
+export type SignupResult = {
+  signup: AuthResult
+}
+export type SignupArgs = {
+  auth: AuthInput
+}

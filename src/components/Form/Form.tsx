@@ -14,13 +14,17 @@ import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link, useNavigate } from 'react-router-dom'
 import { TFormData } from '../../types/formType'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
-import { useLazyQuery } from '@apollo/client'
-import { LOGIN } from '../../queries/auth'
-import { LoginResult } from '../../types/queryTypes'
+import { useLazyQuery, useMutation } from '@apollo/client'
+import { LOGIN, SIGNUP } from '../../queries/auth'
+import { LoginResult, SignupArgs, SignupResult } from '../../types/queryTypes'
 import { useState } from 'react'
-import { AUTH_TOKEN, userToken } from '../../constants/constants'
+import { AUTH_TOKEN, USER_EMAIL, userToken } from '../../constants/constants'
 
-const Form = () => {
+interface IForm {
+  isRegisterForm: boolean
+}
+
+const Form = ({ isRegisterForm }: IForm) => {
   const [showPassword, setShowPassword] = useState(false)
   const navigate = useNavigate()
 
@@ -36,9 +40,20 @@ const Form = () => {
     formState: { errors }
   } = useForm<TFormData>()
 
+  const [reg] = useMutation<SignupResult, SignupArgs>(SIGNUP, {
+    onCompleted: data => {
+      console.log(data)
+      localStorage.setItem(AUTH_TOKEN, data.signup.access_token)
+      localStorage.setItem(USER_EMAIL, data.signup.user.email)
+      userToken(data.signup.access_token)
+      navigate(`/users`)
+    }
+  })
+
   const [login] = useLazyQuery<LoginResult>(LOGIN, {
     onCompleted: data => {
       localStorage.setItem(AUTH_TOKEN, data.login.access_token)
+      localStorage.setItem(USER_EMAIL, data.login.user.email)
       userToken(data.login.access_token)
       navigate(`/users`)
     }
@@ -46,7 +61,9 @@ const Form = () => {
 
   const onSubmit: SubmitHandler<TFormData> = async formData => {
     console.log(formData)
-    await login({ variables: formData })
+    isRegisterForm
+      ? await reg({ variables: { auth: formData } })
+      : await login({ variables: formData })
   }
   return (
     <Box
@@ -65,10 +82,10 @@ const Form = () => {
       autoComplete="on"
     >
       <Typography variant="h4" gutterBottom align="center">
-        Welcome Back
+        {isRegisterForm ? 'Register Now' : 'Welcome Back'}
       </Typography>
       <Typography variant="subtitle1" gutterBottom align="center">
-        Hello again! Sign in to continue.
+        {isRegisterForm ? 'Welcome! Sign up to continue.' : 'Hello again! Sign in to continue.'}
       </Typography>
 
       <TextField
@@ -128,7 +145,7 @@ const Form = () => {
         Sign in
       </Button>
       <Button variant="text" color="secondary" component={Link} to="/auth/signup">
-        I don't have an account
+        {isRegisterForm ? 'I have an account' : "I don't have an account"}
       </Button>
     </Box>
   )
