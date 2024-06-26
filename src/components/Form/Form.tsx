@@ -19,6 +19,7 @@ import { LOGIN, SIGNUP } from '../../queries/auth'
 import { LoginResult, SignupArgs, SignupResult } from '../../types/queryTypes'
 import { useState } from 'react'
 import { AUTH_TOKEN, USER_EMAIL, userToken } from '../../constants/constants'
+import { ToastContainer } from 'react-toastify'
 
 interface IForm {
   isRegisterForm: boolean
@@ -49,7 +50,6 @@ const Form = ({ isRegisterForm }: IForm) => {
       navigate(`/users`)
     }
   })
-
   const [login] = useLazyQuery<LoginResult>(LOGIN, {
     onCompleted: data => {
       localStorage.setItem(AUTH_TOKEN, data.login.access_token)
@@ -65,6 +65,7 @@ const Form = ({ isRegisterForm }: IForm) => {
       ? await reg({ variables: { auth: formData } })
       : await login({ variables: formData })
   }
+
   return (
     <Box
       onSubmit={handleSubmit(onSubmit)}
@@ -147,6 +148,7 @@ const Form = ({ isRegisterForm }: IForm) => {
       <Button variant="text" color="secondary" component={Link} to="/auth/signup">
         {isRegisterForm ? 'I have an account' : "I don't have an account"}
       </Button>
+      <ToastContainer />
     </Box>
   )
 }

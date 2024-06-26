@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink } from '@apollo/client'
+import { ApolloClient, InMemoryCache, ApolloProvider, createHttpLink, from } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
 import App from './App.tsx'
 import { BrowserRouter } from 'react-router-dom'
@@ -8,10 +8,28 @@ import { ThemeProvider } from '@emotion/react'
 import theme from './styles/theme.tsx'
 import { CssBaseline } from '@mui/material'
 import { AUTH_TOKEN } from './constants/constants.ts'
+import { onError } from '@apollo/client/link/error'
+import showToast from './utils/showToast.tsx'
 import './index.css'
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_HTTP_LINK
+})
+
+const errorLink = onError(({ graphQLErrors, networkError }) => {
+  if (graphQLErrors) {
+    console.log(graphQLErrors)
+    graphQLErrors.forEach(({ message }) => {
+      if (message === 'Invalid credentials') {
+        showToast('Wrong email or password')
+      } else if (message.match('duplicate key value')) {
+        showToast('User already exist')
+      } else {
+        showToast(message)
+      }
+    })
+    if (networkError) showToast(networkError.toString())
+  }
 })
 
 const authLink = setContext((_, { headers }) => {
@@ -27,7 +45,7 @@ const authLink = setContext((_, { headers }) => {
 })
 
 export const client = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: from([authLink, errorLink, httpLink]),
   cache: new InMemoryCache()
 })
 

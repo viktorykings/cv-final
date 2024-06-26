@@ -7,6 +7,7 @@ import HeaderNavAuth from '../components/Navigation/HeaderNavAuth'
 import { Container } from '@mui/material'
 function Root() {
   const isAuth = useReactiveVar(userToken)
+
   return (
     <>
       <Header>
