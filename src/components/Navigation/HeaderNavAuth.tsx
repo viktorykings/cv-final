@@ -27,16 +27,11 @@ function HeaderNavAuth({ toggleDrawer }: SidebarProps) {
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
-  // const [open, setOpen] = useState(false)
   const [lang, setLang] = useState('EN')
 
   const handleChangeLang = (event: SelectChangeEvent) => {
     setLang(event.target.value)
   }
-
-  // const toggleDrawer = (newOpen: boolean) => () => {
-  //   setOpen(newOpen)
-  // }
 
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)

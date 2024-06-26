@@ -1,22 +1,11 @@
-import {
-  Box,
-  List,
-  ListItem,
-  IconButton,
-  Divider,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText
-} from '@mui/material'
-import { Paths } from '../../routes/paths'
-import sidebarIcons from '../../styles/sidebarIcons'
+import { Box, List, ListItem, IconButton, Divider } from '@mui/material'
+import { MenuItems } from '../../assets/sidebarIcons'
 import { useNavigate } from 'react-router-dom'
 import CloseIcon from '@mui/icons-material/Close'
 import { useEffect, useState } from 'react'
-type SidebarProps = {
-  open: boolean
-  toggleDrawer: (newOpen: boolean) => void
-}
+import SidebarListItem from './ListItem'
+import { SidebarProps } from './types'
+import { Paths } from '../../routes/paths'
 
 const SidebarList = ({ toggleDrawer, open }: SidebarProps) => {
   const navigate = useNavigate()
@@ -42,44 +31,23 @@ const SidebarList = ({ toggleDrawer, open }: SidebarProps) => {
       </List>
       <Divider />
       <List>
-        <ListItemButton
-          onClick={() => {
-            handleLink(Paths.EMPLOYEES)
-          }}
-        >
-          <ListItemIcon>{sidebarIcons['HOME']}</ListItemIcon>
-          <ListItemText>Home</ListItemText>
-        </ListItemButton>
-      </List>
-      <Divider />
-      <List>
-        {['Employees', 'Projects', 'CVS'].map(text => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              onClick={() => {
-                handleLink(Paths[text.toUpperCase() as keyof typeof Paths])
-              }}
-            >
-              <ListItemIcon>{sidebarIcons[text.toUpperCase()]}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {[MenuItems.HOME].map(text => (
+          <SidebarListItem key={text} text={text} handleLink={() => handleLink(Paths.EMPLOYEES)} />
         ))}
       </List>
       <Divider />
       <List>
-        {['Departments', 'Positions', 'Skills', 'Languages'].map(text => (
-          <ListItem key={text} disablePadding>
-            <ListItemButton
-              onClick={() => {
-                handleLink(Paths[text.toUpperCase() as keyof typeof Paths])
-              }}
-            >
-              <ListItemIcon>{sidebarIcons[text.toUpperCase()]}</ListItemIcon>
-              <ListItemText primary={text} />
-            </ListItemButton>
-          </ListItem>
+        {[MenuItems.EMPLOYEES, MenuItems.PROJECTS, MenuItems.CVS].map(text => (
+          <SidebarListItem key={text} text={text} handleLink={handleLink} />
         ))}
+      </List>
+      <Divider />
+      <List>
+        {[MenuItems.DEPARTMENTS, MenuItems.POSITIONS, MenuItems.SKILLS, MenuItems.LANGUAGES].map(
+          text => (
+            <SidebarListItem key={text} text={text} handleLink={handleLink} />
+          )
+        )}
       </List>
     </Box>
   )
