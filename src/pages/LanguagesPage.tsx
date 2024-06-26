@@ -1,8 +1,4 @@
 const LanguagesPage = () => {
-    return ( 
-        <div>
-            langs
-        </div>
-    );
+  return <div>langs</div>
 }
-export default LanguagesPage;
+export default LanguagesPage

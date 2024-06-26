@@ -1,8 +1,4 @@
 const SkillsPage = () => {
-    return ( 
-        <div>
-            skills
-        </div>
-    );
+  return <div>skills</div>
 }
-export default SkillsPage;
+export default SkillsPage

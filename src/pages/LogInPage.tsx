@@ -1,8 +1,6 @@
+import Form from '../components/Form/Form'
+
 const LogInPage = () => {
-    return ( 
-        <div>
-            LogInPage
-        </div>
-    );
+  return <Form isRegisterForm={false} />
 }
-export default LogInPage;
+export default LogInPage

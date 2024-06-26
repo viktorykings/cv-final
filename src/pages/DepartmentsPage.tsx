@@ -1,8 +1,4 @@
 const DepartmentsPage = () => {
-    return ( 
-        <div>
-            DepartmentsPage
-        </div>
-    );
+  return <div>DepartmentsPage</div>
 }
-export default DepartmentsPage;
+export default DepartmentsPage
