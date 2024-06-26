@@ -32,7 +32,7 @@ export const PrivateRoutes: RouteObject[] = [
         element: <PagesLayout />,
         children: [
           { path: ``, element: <UsersPage /> },
-          { path: `:id/${Paths.PROFILE}`, element: <ProfilePage /> },
+          { path: `:id/`, element: <ProfilePage /> },
           { path: `:id/${Paths.SKILLS}`, element: <SkillsPage /> },
           { path: `:id/${Paths.LANGUAGES}`, element: <LanguagesPage /> },
           { path: `:id/${Paths.CVS}`, element: <CvsPage /> }
