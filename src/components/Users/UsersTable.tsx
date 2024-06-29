@@ -9,6 +9,18 @@ import {
   TableRow
 } from '@mui/material'
 import { GetUsersResult } from '../../types/queryTypes'
+import { IUser } from '../../interfaces/IUser'
+import SearchBar from '../Search'
+import { useState } from 'react'
+
+const filterData = (query: string, data: IUser[] | undefined) => {
+  if (!query) {
+    return data
+  } else {
+    if (!data) return
+    return data.filter(d => d.profile.full_name?.toLowerCase().includes(query))
+  }
+}
 
 // function stringToColor(string: string) {
 //     let hash = 0;
@@ -42,8 +54,12 @@ import { GetUsersResult } from '../../types/queryTypes'
 const headerCells = ['', 'First Name', 'Last Name', 'Email', 'Department', 'Position', '']
 
 const UsersTable = ({ users }: GetUsersResult) => {
+  const [searchQuery, setSearchQuery] = useState('')
+  const dataFiltered = filterData(searchQuery, users)
+
   return (
     <TableContainer component={Paper} sx={{ background: 'transparent' }}>
+      <SearchBar setSearchQuery={setSearchQuery} />
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
@@ -53,8 +69,8 @@ const UsersTable = ({ users }: GetUsersResult) => {
           </TableRow>
         </TableHead>
         <TableBody>
-          {users &&
-            users.map(row => (
+          {dataFiltered &&
+            dataFiltered.map(row => (
               <TableRow key={row.id} sx={{ '&:last-child td, &:last-child th': { border: 0 } }}>
                 <TableCell align="left">
                   <Avatar alt={row.profile.first_name?.slice(0, 1)} src={row.profile.avatar} />
