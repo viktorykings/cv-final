@@ -1,4 +1,5 @@
 import type { AuthInput, AuthResult } from 'cv-graphql'
+import { IUser } from '../interfaces/IUser'
 
 export type LoginArgs = {
   auth: AuthInput
@@ -13,4 +14,8 @@ export type SignupResult = {
 }
 export type SignupArgs = {
   auth: AuthInput
+}
+
+export type GetUsersResult = {
+  users: IUser[] | undefined
 }

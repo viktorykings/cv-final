@@ -1,5 +1,5 @@
 import { useLazyQuery, useMutation } from '@apollo/client'
-import { LOGIN, SIGNUP } from '../graphql/queries/auth'
+import { LOGIN, SIGNUP } from '../graphql/queries/authQuery'
 import { LoginResult, LoginArgs, SignupResult, SignupArgs } from '../types/queryTypes'
 
 export const useLogin = () => {
