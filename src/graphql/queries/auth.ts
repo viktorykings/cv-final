@@ -1,12 +1,11 @@
 import { gql } from '@apollo/client'
 
 export const LOGIN = gql`
-  query Login($email: String!, $password: String!) {
-    login(auth: { email: $email, password: $password }) {
+  query Login($auth: AuthInput!) {
+    login(auth: $auth) {
       user {
         id
         email
-        role
       }
       access_token
     }
@@ -30,6 +29,14 @@ export const GET_CVS = gql`
       languages {
         proficiency
       }
+    }
+  }
+`
+export const GET_USERS = gql`
+  query GET_USERS {
+    users {
+      id
+      role
     }
   }
 `
