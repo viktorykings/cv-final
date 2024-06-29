@@ -11,59 +11,45 @@ import {
   TextField
 } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
-import { Link, useNavigate } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { TFormData } from '../../types/formType'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
-import { useLazyQuery, useMutation } from '@apollo/client'
-import { LOGIN, SIGNUP } from '../../graphql/queries/auth'
-import { LoginResult, SignupArgs, SignupResult } from '../../types/queryTypes'
 import { useState } from 'react'
-import { AUTH_TOKEN, USER_EMAIL, userToken } from '../../constants/constants'
 import { ToastContainer } from 'react-toastify'
+import { LoginArgs, LoginResult, SignupArgs, SignupResult } from '../../types/queryTypes'
+import {
+  ApolloCache,
+  DefaultContext,
+  FetchResult,
+  LazyQueryExecFunction,
+  MutationFunctionOptions
+} from '@apollo/client'
 
 interface IForm {
   isRegisterForm: boolean
+  login?: LazyQueryExecFunction<LoginResult, LoginArgs>
+  signup?: (
+    options?: // eslint-disable-next-line  @typescript-eslint/no-explicit-any
+    MutationFunctionOptions<SignupResult, SignupArgs, DefaultContext, ApolloCache<any>> | undefined
+  ) => Promise<FetchResult<SignupResult>>
 }
 
-const Form = ({ isRegisterForm }: IForm) => {
+const Form = ({ isRegisterForm, login, signup }: IForm) => {
   const [showPassword, setShowPassword] = useState(false)
-  const navigate = useNavigate()
-
   const handleClickShowPassword = () => setShowPassword(show => !show)
-
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
   }
-
   const {
     register,
     handleSubmit,
     formState: { errors }
   } = useForm<TFormData>()
 
-  const [reg] = useMutation<SignupResult, SignupArgs>(SIGNUP, {
-    onCompleted: data => {
-      console.log(data)
-      localStorage.setItem(AUTH_TOKEN, data.signup.access_token)
-      localStorage.setItem(USER_EMAIL, data.signup.user.email)
-      userToken(data.signup.access_token)
-      navigate(`/users`)
-    }
-  })
-  const [login] = useLazyQuery<LoginResult>(LOGIN, {
-    onCompleted: data => {
-      localStorage.setItem(AUTH_TOKEN, data.login.access_token)
-      localStorage.setItem(USER_EMAIL, data.login.user.email)
-      userToken(data.login.access_token)
-      navigate(`/users`)
-    }
-  })
-
   const onSubmit: SubmitHandler<TFormData> = async formData => {
     console.log(formData)
-    isRegisterForm
-      ? await reg({ variables: { auth: formData } })
-      : await login({ variables: formData })
+    if (signup) await signup({ variables: { auth: formData } })
+    if (login) await login({ variables: { auth: formData } })
   }
 
   return (
