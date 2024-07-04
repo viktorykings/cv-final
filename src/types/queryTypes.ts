@@ -30,3 +30,7 @@ export type GetDepatrmentsResult = {
 export type GetPositionsResult = {
   positions: IPosition[]
 }
+
+export type getSkillsCategories = {
+  skillCategories: string[]
+}

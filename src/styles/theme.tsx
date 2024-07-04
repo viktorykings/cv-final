@@ -38,22 +38,7 @@ import { red } from '@mui/material/colors'
 //     ].join(','),
 //   },
 // });
-declare module '@mui/material/styles' {
-  interface Palette {
-    grayIcon: Palette['primary']
-  }
 
-  interface PaletteOptions {
-    grayIcon?: PaletteOptions['primary']
-  }
-}
-
-// Update the Button's color options to include an ochre option
-declare module '@mui/material/Button' {
-  interface ButtonPropsColorOverrides {
-    grayIcon: true
-  }
-}
 const theme = createTheme({
   palette: {
     mode: 'dark',

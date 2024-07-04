@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import { useGetUser } from '../../hooks/useGetUser'
+import { useGetUser } from '../../graphql/hooks/queries/useGetUser'
 import { Box, Typography, Avatar, styled, Button } from '@mui/material'
 import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
 import ProfileUpdateForm from '../../components/Profile/ProfileUpdateForm'

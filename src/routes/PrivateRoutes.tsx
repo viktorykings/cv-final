@@ -17,6 +17,7 @@ import {
   SettingsPage
 } from './lazyRouts.ts'
 import ProfileLayout from '../components/ProfileLayout.tsx'
+import ProfileSkills from '../pages/Profile/Skills.tsx'
 
 export const PrivateRoutes: RouteObject[] = [
   {
@@ -39,7 +40,7 @@ export const PrivateRoutes: RouteObject[] = [
             children: [
               { path: Paths.PROFILE, element: <ProfilePage /> },
               // { path: Paths.PROFILE, element: <ProfilePage /> },
-              { path: Paths.SKILLS, element: <SkillsPage /> },
+              { path: Paths.SKILLS, element: <ProfileSkills /> },
               { path: Paths.LANGUAGES, element: <LanguagesPage /> },
               { path: Paths.CVS, element: <CvsPage /> }
             ]
