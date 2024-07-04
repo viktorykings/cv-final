@@ -5,7 +5,7 @@ export const LogInPage = lazy(() => import('../pages/LogInPage.tsx'))
 export const SignUpPage = lazy(() => import('../pages/SignUpPage.tsx'))
 
 export const UsersPage = lazy(() => import('../pages/UsersPage.tsx'))
-export const ProfilePage = lazy(() => import('../pages/ProfilePage.tsx'))
+export const ProfilePage = lazy(() => import('../pages/Profile/ProfilePage.tsx'))
 export const CvsPage = lazy(() => import('../pages/CvsPage.tsx'))
 export const DetailsPage = lazy(() => import('../pages/DetailsPage.tsx'))
 export const PreviewPage = lazy(() => import('../pages/PreviewPage.tsx'))

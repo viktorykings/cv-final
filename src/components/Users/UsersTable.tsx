@@ -12,6 +12,8 @@ import { GetUsersResult } from '../../types/queryTypes'
 import { IUser } from '../../interfaces/IUser'
 import SearchBar from '../Search'
 import { useState } from 'react'
+import { Paths } from '../../routes/paths'
+import { Link } from 'react-router-dom'
 
 const filterData = (query: string, data: IUser[] | undefined) => {
   if (!data) return
@@ -35,7 +37,7 @@ const sort = (valueA: string | undefined, valueB: string | undefined, sortOrder:
   if (sortOrder === 'asc') return valueA < valueB ? -1 : 1
   else return valueA > valueB ? -1 : 1
 }
-const sortData = (data: IUser[] | undefined, sortKey: SortKey, sortOrder: SortOrder = 'asc') => {
+const sortData = (data: IUser[] | undefined, sortKey: SortKey, sortOrder: SortOrder) => {
   if (!data) return
   if (!sortKey) return data
   const dataToSort = [...data]
@@ -134,7 +136,9 @@ const UsersTable = ({ users }: GetUsersResult) => {
                 <TableCell align="left">{row.email}</TableCell>
                 <TableCell align="left">{row.department_name}</TableCell>
                 <TableCell align="left">{row.position_name}</TableCell>
-                <TableCell align="left"></TableCell>
+                <TableCell align="left">
+                  <Link to={`${row.id}/${Paths.PROFILE}`}>click</Link>
+                </TableCell>
               </TableRow>
             ))}
         </TableBody>
