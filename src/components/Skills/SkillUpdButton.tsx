@@ -2,11 +2,12 @@ import { Button, LinearProgress, Typography } from '@mui/material'
 type SkillBtn = {
   skill: string
   progress: number
+  handleClickOpen: () => void
 }
 
-const SkillUpdButton = ({ skill, progress }: SkillBtn) => {
+const SkillUpdButton = ({ skill, progress, handleClickOpen }: SkillBtn) => {
   return (
-    <Button sx={{ width: '284px', textTransform: 'none', gap: 2 }}>
+    <Button sx={{ width: '284px', textTransform: 'none', gap: 2 }} onClick={handleClickOpen}>
       <LinearProgress
         variant="determinate"
         value={progress}

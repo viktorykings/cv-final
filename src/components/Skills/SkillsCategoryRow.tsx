@@ -1,6 +1,7 @@
 import { Box, Typography } from '@mui/material'
 import { ISkillMastery, SkillLevel } from '../../interfaces/ISkillMastery'
 import SkillUpdButton from './SkillUpdButton'
+import { useState } from 'react'
 
 type TSkillsCategory = {
   skills: ISkillMastery[]
@@ -27,15 +28,29 @@ function getSkillLevel(level: SkillLevel): number {
 }
 
 const SkillCategory = ({ skills, category }: TSkillsCategory) => {
+  const [, setOpen] = useState(false)
+
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+
   return (
     <Box>
       <Typography> {category}</Typography>
-      {skills &&
-        skills
-          .filter(el => el.category === category)
-          .map(el => (
-            <SkillUpdButton key={el.name} skill={el.name} progress={getSkillLevel(el.mastery)} />
-          ))}
+      {
+        skills &&
+          skills
+            .filter(el => el.category === category)
+            .map(el => (
+              <SkillUpdButton
+                key={el.name}
+                skill={el.name}
+                progress={getSkillLevel(el.mastery)}
+                handleClickOpen={handleClickOpen}
+              />
+            ))
+        // <SkillUpdateForm/>
+      }
     </Box>
   )
 }

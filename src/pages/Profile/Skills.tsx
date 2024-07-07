@@ -1,14 +1,26 @@
 import { useParams } from 'react-router-dom'
 import { useGetUser } from '../../graphql/hooks/queries/useGetUser'
-import { useGetSkillCategory } from '../../graphql/hooks/queries/getSkills'
-import SkillCategory from '../../components/Skills/SkillCategory'
+import { useGetSkillCategory, useGetSkills } from '../../graphql/hooks/queries/getSkills'
+import SkillCategory from '../../components/Skills/SkillsCategoryRow'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
+import SkillUpdForm from '../../components/Skills/SkillUpdForm'
+import { useState } from 'react'
 
 const ProfileSkills = () => {
   const { id } = useParams()
   const { data } = useGetUser(id as string)
-  const { data: skills } = useGetSkillCategory()
+  const { data: categories } = useGetSkillCategory()
+  const { data: skills } = useGetSkills()
+  const [open, setOpen] = useState(false)
+
+  const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
   return (
     <Box
       sx={{
@@ -22,14 +34,26 @@ const ProfileSkills = () => {
         gap: 4
       }}
     >
-      <Button sx={{ color: 'text.secondary', margin: '0 auto' }}>
+      <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
         <AddIcon /> Add skill
       </Button>
-      {skills &&
-        data &&
-        skills.skillCategories
-          .filter(el => data.user.profile.skills.map(el => el.category).includes(el))
-          .map(el => <SkillCategory key={el} skills={data.user.profile.skills} category={el} />)}
+      {data &&
+        skills &&
+        categories &&
+        categories.skillCategories
+          .filter(category => data.user.profile.skills.map(el => el.category).includes(category))
+          .map(el => (
+            <SkillCategory key={el} skills={data.user.profile.skills} category={el || 'Other'} />
+          ))}
+      {data && (
+        <SkillUpdForm
+          open={open}
+          handleClose={handleClose}
+          label="add skill"
+          user={data.user}
+          mastery={masteries}
+        />
+      )}
     </Box>
   )
 }
