@@ -1,8 +1,8 @@
-import UsersTable from '../components/Users/UsersTable'
-import { useGetUsers } from '../graphql/hooks/queries/getData'
+import UsersTable from '../components/UsersList/UsersTable'
+import { useGetAllUsers } from '../graphql/users/hooks/useGetAllUsers'
 
 const UsersPage = () => {
-  const { data } = useGetUsers()
+  const { data } = useGetAllUsers()
   return <UsersTable users={data?.users} />
 }
 
