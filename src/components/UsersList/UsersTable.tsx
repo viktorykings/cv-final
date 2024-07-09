@@ -10,7 +10,7 @@ import {
 } from '@mui/material'
 import { GetUsersResult } from '../../types/queryTypes'
 import { IUser } from '../../interfaces/IUser'
-import SearchBar from '../Search'
+import SearchBar from './Search'
 import { useState } from 'react'
 import { Paths } from '../../routes/paths'
 import { Link } from 'react-router-dom'

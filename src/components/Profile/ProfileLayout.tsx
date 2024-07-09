@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom'
-import ProfileTabs from './Profile/ProfileTabs'
+import ProfileTabs from './ProfileTabs'
 import { Box } from '@mui/material'
 
 const ProfileLayout = () => {

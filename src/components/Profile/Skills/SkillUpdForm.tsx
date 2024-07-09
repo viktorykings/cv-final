@@ -1,15 +1,15 @@
 import { Button, Dialog, DialogContent, DialogContentText, DialogActions } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
-import { ISkillMastery, Mastery } from '../../interfaces/ISkillMastery'
-import { IUser } from '../../interfaces/IUser'
-import ProfileSelect from '../Profile/Select/ProfileSelect'
+import { ISkillMastery, Mastery } from '../../../interfaces/ISkillMastery'
+import { IUser } from '../../../interfaces/IUser'
+import ProfileSelect from '../../Profile/Select/ProfileSelect'
 import { useReactiveVar } from '@apollo/client'
-import { userID } from '../../constants/constants'
+import { userID } from '../../../constants/constants'
 
 import { useEffect, useState } from 'react'
 import CategoriesSelect from './CategoriesSelect'
-import { useGetSkills } from '../../graphql/skills/hooks/useGettAllSkills'
-import { useAddProfileSkill } from '../../graphql/users/skills/hooks/useAddProfileSkill'
+import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
+import { useAddProfileSkill } from '../../../graphql/users/skills/hooks/useAddProfileSkill'
 
 type TFormProps = {
   open: boolean

@@ -1,4 +1,4 @@
-import UsersTable from '../components/Users/UsersTable'
+import UsersTable from '../components/UsersList/UsersTable'
 import { useGetAllUsers } from '../graphql/users/hooks/useGetAllUsers'
 
 const UsersPage = () => {

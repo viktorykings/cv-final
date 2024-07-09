@@ -1,12 +1,12 @@
 import { useParams } from 'react-router-dom'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 import { useGetSkillCategory } from '../../graphql/skills/hooks/useGetSkillsCategories'
-import SkillCategory from '../../components/Skills/SkillsCategoryRow'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
-import SkillUpdForm from '../../components/Skills/SkillUpdForm'
 import { useState } from 'react'
 import { useGetSkills } from '../../graphql/skills/hooks/useGettAllSkills'
+import SkillCategory from '../../components/Profile/Skills/SkillsCategoryRow'
+import SkillUpdForm from '../../components/Profile/Skills/SkillUpdForm'
 
 const ProfileSkills = () => {
   const { id } = useParams()
