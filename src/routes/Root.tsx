@@ -21,7 +21,10 @@ function Root() {
           {isAuth ? <HeaderNavAuth toggleDrawer={toggleDrawer} /> : <HeaderNav />}
         </Container>
       </Header>
-      <Container maxWidth="xl">
+      <Container
+        maxWidth="xl"
+        sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
+      >
         <Outlet />
       </Container>
       <Drawer open={open ?? false} onClose={() => toggleDrawer(false)}>

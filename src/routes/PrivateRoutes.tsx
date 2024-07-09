@@ -16,6 +16,8 @@ import {
   PositionsPage,
   SettingsPage
 } from './lazyRouts.ts'
+import ProfileLayout from '../components/ProfileLayout.tsx'
+import ProfileSkills from '../pages/Profile/Skills.tsx'
 
 export const PrivateRoutes: RouteObject[] = [
   {
@@ -32,10 +34,17 @@ export const PrivateRoutes: RouteObject[] = [
         element: <PagesLayout />,
         children: [
           { path: ``, element: <UsersPage /> },
-          { path: `:id/`, element: <ProfilePage /> },
-          { path: `:id/${Paths.SKILLS}`, element: <SkillsPage /> },
-          { path: `:id/${Paths.LANGUAGES}`, element: <LanguagesPage /> },
-          { path: `:id/${Paths.CVS}`, element: <CvsPage /> }
+          {
+            path: `:id`,
+            element: <ProfileLayout />,
+            children: [
+              { path: Paths.PROFILE, element: <ProfilePage /> },
+              // { path: Paths.PROFILE, element: <ProfilePage /> },
+              { path: Paths.SKILLS, element: <ProfileSkills /> },
+              { path: Paths.LANGUAGES, element: <LanguagesPage /> },
+              { path: Paths.CVS, element: <CvsPage /> }
+            ]
+          }
         ]
       },
       {

@@ -1,11 +1,12 @@
+import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
 
 const PagesLayout = () => {
   return (
-    <div>
-      breadcrumbs
+    <>
+      <Box>breadcrumbs</Box>
       <Outlet />
-    </div>
+    </>
   )
 }
 export default PagesLayout
