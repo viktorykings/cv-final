@@ -1,14 +1,5 @@
 import { gql } from '@apollo/client'
 
-export const GET_CVS = gql`
-  query {
-    cvs {
-      languages {
-        proficiency
-      }
-    }
-  }
-`
 export const GET_USERS = gql`
   query GET_USERS {
     users {

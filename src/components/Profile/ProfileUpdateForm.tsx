@@ -1,13 +1,14 @@
 import { Box, Button, TextField } from '@mui/material'
 import ProfileSelect from './Select/ProfileSelect'
-import { useGetPositions } from '../../graphql/hooks/queries/useGetPositions'
-import { useGetDepartments } from '../../graphql/hooks/queries/useGetDepartments'
+import { useGetPositions } from '../../graphql/positions/hooks/useGetPositions'
+import { useGetDepartments } from '../../graphql/departments/hooks/useGetDepartments'
 import { IUser } from '../../interfaces/IUser'
 import { useForm, Controller } from 'react-hook-form'
-import { useUpdateUser, useUpdateUserProfile } from '../../graphql/hooks/mutations/useMutateUser'
+import { useUpdateUser } from '../../graphql/users/hooks/useUpdateUser'
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../constants/constants'
 import { IDepartment } from '../../interfaces/IDepartment'
+import { useUpdateUserProfile } from '../../graphql/users/profile/hooks/useUpdateProfile'
 
 type FormValues = {
   firstName: string

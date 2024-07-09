@@ -1,5 +1,5 @@
 import { useQuery } from '@apollo/client'
-import { GET_USER } from '../../queries/getUserQuery'
+import { GET_USER } from '../getUser'
 import { GetUserResult } from '../../../types/queryTypes'
 
 export const useGetUser = (id: string) => {
