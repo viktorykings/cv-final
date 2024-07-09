@@ -7,6 +7,8 @@ import { useState } from 'react'
 import { useGetSkills } from '../../graphql/skills/hooks/useGettAllSkills'
 import SkillsTableRow from '../../components/Profile/Skills/SkillsTableRow.tsx'
 import SkillUpdForm from '../../components/Profile/Skills/SkillUpdForm'
+import { useReactiveVar } from '@apollo/client'
+import { userID } from '../../constants/constants.ts'
 
 const ProfileSkills = () => {
   const { id } = useParams()
@@ -15,6 +17,8 @@ const ProfileSkills = () => {
   const { data: skills } = useGetSkills()
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
+  const currentUserID = useReactiveVar(userID)
+  const isCurrentUserProfile = currentUserID === user?.user.id
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -70,7 +74,7 @@ const ProfileSkills = () => {
               />
             ))}
       </div>
-      {user && (
+      {user && isCurrentUserProfile && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}
