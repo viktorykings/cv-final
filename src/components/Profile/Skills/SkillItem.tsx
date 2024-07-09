@@ -1,11 +1,11 @@
 import { Button, LinearProgress, Typography } from '@mui/material'
-type SkillBtn = {
+type TSkillItem = {
   skill: string
   progress: number
   handleClickOpen: () => void
 }
 
-const SkillUpdButton = ({ skill, progress, handleClickOpen }: SkillBtn) => {
+const SkillItem = ({ skill, progress, handleClickOpen }: TSkillItem) => {
   return (
     <Button sx={{ width: '284px', textTransform: 'none', gap: 2 }} onClick={handleClickOpen}>
       <LinearProgress
@@ -21,4 +21,4 @@ const SkillUpdButton = ({ skill, progress, handleClickOpen }: SkillBtn) => {
   )
 }
 
-export default SkillUpdButton
+export default SkillItem

@@ -5,11 +5,12 @@ import { IUser } from '../../../interfaces/IUser'
 import ProfileSelect from '../../Profile/Select/ProfileSelect'
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../../constants/constants'
-
 import { useEffect, useState } from 'react'
 import CategoriesSelect from './CategoriesSelect'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
 import { useAddProfileSkill } from '../../../graphql/users/skills/hooks/useAddProfileSkill'
+import { useUpdateProfileSkill } from '../../../graphql/users/skills/hooks/useUpdateProfileSkill'
+// import { useDeleteProfileSkill } from '../../../graphql/users/skills/hooks/useDeleteProfileSkill'
 
 type TFormProps = {
   open: boolean
@@ -17,6 +18,7 @@ type TFormProps = {
   label: string
   user: IUser
   mastery: string[] | ISkillMastery[]
+  defaultSkill: string
 }
 
 type TFormValues = {
@@ -25,34 +27,75 @@ type TFormValues = {
   mastery: Mastery
 }
 
-const SkillUpdForm = ({ open, handleClose, label, user, mastery }: TFormProps) => {
+const SkillUpdForm = ({ open, handleClose, label, user, mastery, defaultSkill }: TFormProps) => {
   const currentUserID = useReactiveVar(userID)
-  const { control, handleSubmit, watch, setValue } = useForm<TFormValues>()
+  const { control, handleSubmit, watch, setValue } = useForm<TFormValues>({
+    defaultValues: {
+      skill: defaultSkill,
+      category: '',
+      mastery: Mastery.Novice
+    }
+  })
   const { data: skills } = useGetSkills()
   const [addSkill] = useAddProfileSkill()
+  const [updateSkill] = useUpdateProfileSkill()
+  // const [deleteSkill] = useDeleteProfileSkill()
   const [category, setCategory] = useState('')
   const watchFields = watch(['skill'])
+  const [userSkills, setUserSkills] = useState<ISkillMastery[]>()
 
   useEffect(() => {
+    if (user) {
+      setUserSkills(user.profile.skills)
+    }
     if (skills && !!watchFields[0]) {
       setCategory(() => skills.skills.filter(el => el.name === watchFields[0])[0].category || '')
       setValue('category', category)
     }
-  }, [watchFields, category, setValue, skills])
+  }, [watchFields, category, setValue, skills, user])
+  useEffect(() => {
+    if (defaultSkill) {
+      setValue('skill', defaultSkill)
+    } else setValue('skill', '')
+  }, [defaultSkill, setValue])
 
   const onSubmit = (formData: TFormValues) => {
-    console.log(formData)
-    addSkill({
-      variables: {
-        skill: {
-          userId: currentUserID,
-          name: formData.skill,
-          category: formData.category,
-          mastery: formData.mastery
-        }
+    if (userSkills) {
+      if (userSkills.map(el => el.name).includes(formData.skill)) {
+        updateSkill({
+          variables: {
+            skill: {
+              userId: currentUserID,
+              name: formData.skill,
+              mastery: formData.mastery
+            }
+          }
+        })
+      } else {
+        addSkill({
+          variables: {
+            skill: {
+              userId: currentUserID,
+              name: formData.skill,
+              category: formData.category,
+              mastery: formData.mastery
+            }
+          }
+        })
       }
-    })
+    }
   }
+
+  // const handleDelete = () => {
+  //   deleteSkill({
+  //     variables: {
+  //       skill: {
+  //         userId: currentUserID,
+  //         name: ['MobX']
+  //       }
+  //     }
+  //   })
+  // }
 
   return (
     <Dialog
@@ -73,7 +116,6 @@ const SkillUpdForm = ({ open, handleClose, label, user, mastery }: TFormProps) =
               <Controller
                 name="skill"
                 control={control}
-                defaultValue={user.profile.skills[0]?.toString() ?? ''}
                 render={({ field }) => (
                   <ProfileSelect {...field} label="Skill" options={skills.skills} />
                 )}
@@ -104,6 +146,9 @@ const SkillUpdForm = ({ open, handleClose, label, user, mastery }: TFormProps) =
           )}
         </DialogContent>
         <DialogActions>
+          {/* <Button variant="outlined" onClick={handleDelete} sx={{ color: 'text.secondary' }}>
+            Delete
+          </Button> */}
           <Button variant="outlined" onClick={handleClose} sx={{ color: 'text.secondary' }}>
             Cancel
           </Button>
