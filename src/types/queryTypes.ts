@@ -9,6 +9,7 @@ import { IUser } from '../interfaces/IUser'
 import { IDepartment } from '../interfaces/IDepartment'
 import { IPosition } from '../interfaces/IPosition'
 import { ISkill } from '../interfaces/ISkill'
+import { ILanguageProficiency } from '../interfaces/ILanguageProficiency'
 
 export type LoginArgs = {
   auth: AuthInput
@@ -43,6 +44,9 @@ export type getSkillsCategories = {
 }
 export type getSkills = {
   skills: ISkill[]
+}
+export type getLanguages = {
+  languages: ILanguageProficiency[]
 }
 
 export type skillArgs = {
