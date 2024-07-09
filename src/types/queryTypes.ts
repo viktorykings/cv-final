@@ -1,4 +1,10 @@
-import type { AddProfileSkillInput, AuthInput, AuthResult, Profile } from 'cv-graphql'
+import type {
+  AddProfileLanguageInput,
+  AddProfileSkillInput,
+  AuthInput,
+  AuthResult,
+  Profile
+} from 'cv-graphql'
 import { IUser } from '../interfaces/IUser'
 import { IDepartment } from '../interfaces/IDepartment'
 import { IPosition } from '../interfaces/IPosition'
@@ -41,6 +47,9 @@ export type getSkills = {
 
 export type skillArgs = {
   skill: AddProfileSkillInput
+}
+export type languageArgs = {
+  skill: AddProfileLanguageInput
 }
 
 export type skillResult = {
