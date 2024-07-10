@@ -1,7 +1,6 @@
 import { useMutation } from '@apollo/client'
-import { skillResult, languageArgs } from '../../../../types/queryTypes'
-import { DELETE_PROFILE_SKILL } from '../../skills/deleteProfileSkill'
+import { DELETE_PROFILE_LANGUAGE } from '../deleteProfileLanguage'
 
-export const useAddProfileSkill = () => {
-  return useMutation<skillResult, languageArgs>(DELETE_PROFILE_SKILL)
+export const useDeleteProfileLang = () => {
+  return useMutation(DELETE_PROFILE_LANGUAGE)
 }

@@ -52,10 +52,10 @@ export type getLanguages = {
 export type skillArgs = {
   skill: AddProfileSkillInput
 }
-export type languageArgs = {
-  skill: AddProfileLanguageInput
-}
 
 export type skillResult = {
   profile: Profile
+}
+export type languageArgs = {
+  language: AddProfileLanguageInput
 }
