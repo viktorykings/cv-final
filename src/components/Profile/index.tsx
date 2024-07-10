@@ -57,7 +57,6 @@ const Profile = () => {
                   role={undefined}
                   variant="contained"
                   tabIndex={-1}
-                  // startIcon={<FileUploadOutlinedIcon />}
                   sx={{
                     background: 'transparent',
                     boxShadow: 'none',
