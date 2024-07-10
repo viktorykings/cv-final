@@ -1,5 +1,5 @@
 import { ILanguageProficiency } from './ILanguageProficiency'
-import { IProject } from './IProgect'
+import { IProject } from './IProject'
 import { ISkillMastery } from './ISkillMastery'
 import { IUser } from './IUser'
 

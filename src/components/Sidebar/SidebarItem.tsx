@@ -1,10 +1,10 @@
 import { ListItem, ListItemButton, ListItemIcon, ListItemText } from '@mui/material'
 import { Paths } from '../../routes/paths'
 import sidebarIcons from '../../assets/sidebarIcons'
-import { convertText } from '../../utils/convertText'
-import { SidebarItemProps } from './types'
+import { convertText } from '../utils/convertText'
+import { INavigationProps } from '../../shared/interfaces/INavigationProps'
 
-const SidebarListItem = (props: SidebarItemProps) => {
+const SidebarListItem = (props: INavigationProps) => {
   const { text, handleLink } = props
 
   return (

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
-import Form from '../components/Form/Form'
-import { AUTH_TOKEN, USER_EMAIL, USER_ID, userID, userToken } from '../constants/constants'
+import Form from '../components/Form'
+import { AUTH_TOKEN, USER_EMAIL, USER_ID, userID, userToken } from '../shared/constants'
 import { useNavigate } from 'react-router-dom'
 import { useLogin } from '../graphql/auth/hooks/useLogin'
 

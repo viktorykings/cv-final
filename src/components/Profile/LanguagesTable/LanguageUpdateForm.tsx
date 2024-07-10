@@ -1,15 +1,15 @@
 import { Controller, useForm } from 'react-hook-form'
-import { ILanguageProficiency, Proficiency } from '../../../interfaces/ILanguageProficiency'
-import { IUser } from '../../../interfaces/IUser'
+import { ILanguageProficiency, Proficiency } from '../../../shared/interfaces/ILanguageProficiency'
+import { IUser } from '../../../shared/interfaces/IUser'
 import { Dialog, DialogContent, DialogContentText, DialogActions, Button } from '@mui/material'
-import CategoriesSelect from '../Skills/CategoriesSelect'
 import { useEffect, useState } from 'react'
 import { useGetLanguages } from '../../../graphql/languages/hooks/useGetAllLanguages'
 import { useReactiveVar } from '@apollo/client'
-import { userID } from '../../../constants/constants'
+import { userID } from '../../../shared/constants'
 import { useAddProfileLang } from '../../../graphql/users/languages/hooks/useAddProfileLang'
 import { useUpdateProfileLang } from '../../../graphql/users/languages/hooks/useUpdateProfileLang'
 import { useDeleteProfileLang } from '../../../graphql/users/languages/hooks/useDeleteProfileLang'
+import CustomSelect from '../../../shared/components/Select'
 
 type TFormProps = {
   open: boolean
@@ -100,7 +100,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
                 name="language"
                 control={control}
                 render={({ field }) => (
-                  <CategoriesSelect
+                  <CustomSelect
                     {...field}
                     label="Language"
                     options={languages.languages.map(el => el.name)}
@@ -111,7 +111,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
                 name="proficiency"
                 control={control}
                 render={({ field }) => (
-                  <CategoriesSelect {...field} label="Language proficiency" options={proficiency} />
+                  <CustomSelect {...field} label="Language proficiency" options={proficiency} />
                 )}
               />
             </>

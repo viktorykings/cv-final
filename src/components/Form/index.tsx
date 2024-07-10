@@ -12,11 +12,10 @@ import {
 } from '@mui/material'
 import { SubmitHandler, useForm } from 'react-hook-form'
 import { Link } from 'react-router-dom'
-import { TFormData } from '../../types/formType'
 import { VisibilityOff, Visibility } from '@mui/icons-material'
 import { useState } from 'react'
 import { ToastContainer } from 'react-toastify'
-import { LoginArgs, LoginResult, SignupArgs, SignupResult } from '../../types/queryTypes'
+import { LoginArgs, LoginResult, SignupArgs, SignupResult } from '../../graphql/types/queryTypes'
 import {
   ApolloCache,
   DefaultContext,
@@ -24,6 +23,11 @@ import {
   LazyQueryExecFunction,
   MutationFunctionOptions
 } from '@apollo/client'
+
+type TFormData = {
+  email: string
+  password: string
+}
 
 interface IForm {
   isRegisterForm: boolean

@@ -20,11 +20,6 @@ function HeaderNav() {
   const currentTab = routeMatch?.pattern?.path
 
   return (
-    // <Tabs value={currentTab} textColor="secondary" centered TabIndicatorProps={{ style: { background: theme.palette.secondary.main  }}} >
-    //     <Tab label="Login" value="/auth/login" to="/auth/login" component={Link} sx={{ width: 150, "& .Mui-selected": { color: theme.palette.secondary.main }, "&.MuiTab-root:hover": {bgcolor: "transparent", color:"white"} }} />
-    //     <Tab label="Signup" value="/auth/signup" to="/auth/signup" component={Link} sx={{ width: 150, "& .Mui-selected": { color: theme.palette.secondary.main }, "&.MuiTab-root:hover": {bgcolor: "transparent",  color:"white"}}} />
-    // </Tabs>
-
     <Box sx={{ flexGrow: 1 }}>
       <AppBar position="static">
         <Toolbar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
@@ -44,14 +39,6 @@ function HeaderNav() {
               sx={{ width: 150 }}
             />
           </Tabs>
-          {/* <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="menu"
-              sx={{ mr: 2 }}
-            >
-            </IconButton> */}
         </Toolbar>
       </AppBar>
     </Box>

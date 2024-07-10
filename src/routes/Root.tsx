@@ -1,11 +1,11 @@
 import { Outlet } from 'react-router-dom'
-import Header from '../components/Header/Header'
+import Header from '../components/Header'
 import HeaderNav from '../components/Navigation/HeaderNav'
 import { useReactiveVar } from '@apollo/client'
-import { userToken } from '../constants/constants'
+import { userToken } from '../shared/constants'
 import HeaderNavAuth from '../components/Navigation/HeaderNavAuth'
 import { Container, Drawer } from '@mui/material'
-import SidebarList from '../components/Sidebar.tsx/SidebarList'
+import SidebarList from '../components/Sidebar'
 import { useState } from 'react'
 
 function Root() {

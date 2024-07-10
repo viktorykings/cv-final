@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import Root from './Root.tsx'
 import { Paths } from './paths.ts'
-import { LogInPage, SignUpPage } from './lazyRouts.ts'
+import { LogInPage, SignUpPage } from './lazyRoutes.ts'
 
 export const PublicRoutes: RouteObject[] = [
   {

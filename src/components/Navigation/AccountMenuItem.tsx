@@ -1,10 +1,10 @@
 import { MenuItem } from '@mui/material'
 import { Paths } from '../../routes/paths'
 import sidebarIcons from '../../assets/sidebarIcons'
-import { SidebarItemProps } from '../Sidebar.tsx/types'
-import { convertText } from '../../utils/convertText'
+import { convertText } from '../utils/convertText'
+import { INavigationProps } from '../../shared/interfaces/INavigationProps'
 
-const AccountMenuItem = (props: SidebarItemProps) => {
+const AccountMenuItem = (props: INavigationProps) => {
   const { text, handleLink } = props
   return (
     <MenuItem onClick={() => handleLink(Paths[text as keyof typeof Paths])}>
