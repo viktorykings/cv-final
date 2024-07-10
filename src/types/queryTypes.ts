@@ -1,8 +1,15 @@
-import type { AddProfileSkillInput, AuthInput, AuthResult, Profile } from 'cv-graphql'
+import type {
+  AddProfileLanguageInput,
+  AddProfileSkillInput,
+  AuthInput,
+  AuthResult,
+  Profile
+} from 'cv-graphql'
 import { IUser } from '../interfaces/IUser'
 import { IDepartment } from '../interfaces/IDepartment'
 import { IPosition } from '../interfaces/IPosition'
 import { ISkill } from '../interfaces/ISkill'
+import { ILanguageProficiency } from '../interfaces/ILanguageProficiency'
 
 export type LoginArgs = {
   auth: AuthInput
@@ -38,6 +45,9 @@ export type getSkillsCategories = {
 export type getSkills = {
   skills: ISkill[]
 }
+export type getLanguages = {
+  languages: ILanguageProficiency[]
+}
 
 export type skillArgs = {
   skill: AddProfileSkillInput
@@ -45,4 +55,7 @@ export type skillArgs = {
 
 export type skillResult = {
   profile: Profile
+}
+export type languageArgs = {
+  language: AddProfileLanguageInput
 }
