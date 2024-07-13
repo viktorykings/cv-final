@@ -1,26 +1,22 @@
 import { TableHead, TableRow, TableCell, TableSortLabel, Box } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
-type SortKey = 'name' | 'description' | ''
-
-type SortOrder = 'asc' | 'desc'
-export interface Data {
-  id: SortKey
-  label: string
-}
+import { SortOrder } from '../../interfaces/TSortOrder'
+import { HeadCell } from '../THeadCells'
+import { TCvsTableHeaderProps } from '../../interfaces/TSort'
 
 interface TableProps {
   // onRequestSort: (event: React.MouseEvent<unknown>, property: keyof Data) => void;
-  onRequestSort: (event: React.MouseEvent<unknown>, property: SortKey) => void
+  onRequestSort: (event: React.MouseEvent<unknown>, property: keyof TCvsTableHeaderProps) => void
   order: SortOrder
-  orderBy: SortKey
-  headCells: Data[]
+  orderBy: string
+  headCells: HeadCell[]
 }
 
 function TableHeader(props: TableProps) {
   const { order, orderBy, onRequestSort, headCells } = props
   const createSortHandler =
     //   (property: keyof Data) => (event: React.MouseEvent<unknown>) => {
-    (property: SortKey) => (event: React.MouseEvent<unknown>) => {
+    (property: keyof TCvsTableHeaderProps) => (event: React.MouseEvent<unknown>) => {
       onRequestSort(event, property)
     }
 

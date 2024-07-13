@@ -1,31 +1,33 @@
 import { TableContainer, Table, TableBody, Button, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import SearchBar from '../../../shared/components/Search'
-import { useCallback, useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { useGetUser } from '../../../graphql/users/hooks/useGetUser'
 import { userID } from '../../../shared/constants'
 import CvItem from './CvItem'
 import AddIcon from '@mui/icons-material/Add'
-import TableHeader, { Data } from '../../../shared/components/TableHeader'
-import { ICV } from '../../../shared/interfaces/ICV'
+import customFilter from '../../../shared/utils/customFilter'
+import TableHeader from '../../../shared/components/TableHeader'
+import customSort from '../../../shared/utils/customSort'
+import { SortOrder } from '../../../shared/interfaces/TSortOrder'
+import { TCvsTableHeaderProps } from '../../../shared/interfaces/TSort'
+import { HeadCell } from '../../../shared/components/THeadCells'
 
-const headerCells: Data[] = [
+const headerCells: HeadCell[] = [
   {
-    id: 'name' as const,
+    id: 'name',
     label: 'Name'
   },
   {
-    id: 'description' as const,
+    id: 'description',
     label: 'Description'
   },
   {
-    id: '',
+    id: 'id',
     label: ''
   }
 ]
-type SortKey = 'name' | 'description' | ''
-type SortOrder = 'asc' | 'desc'
 
 const CvsTable = () => {
   const { id } = useParams()
@@ -36,57 +38,23 @@ const CvsTable = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   const [order, setOrder] = useState<SortOrder>('asc')
-  const [orderBy, setOrderBy] = useState<SortKey>('name')
-  // const [selected, setSelected] = useState<readonly number[]>([]);
-  const filterData = (query: string, data: ICV[] | undefined) => {
-    if (!data) return
+  const [orderBy, setOrderBy] = useState<keyof TCvsTableHeaderProps>('name')
 
-    if (!query) {
-      return data
-    } else {
-      return data.filter(
-        d => d.name?.toLowerCase().includes(query) || d.description?.toLowerCase().includes(query)
-      )
-    }
-  }
-
-  const sort = (valueA: string | undefined, valueB: string | undefined, sortOrder: string) => {
-    if (valueA === valueB) return 0
-
-    if (!valueA) return 1
-
-    if (!valueB) return -1
-    if (sortOrder === 'asc') return valueA < valueB ? -1 : 1
-    else return valueA > valueB ? -1 : 1
-  }
-
-  const handleRequestSort = (event: React.MouseEvent<unknown>, property: SortKey) => {
+  const handleRequestSort = (
+    event: React.MouseEvent<unknown>,
+    property: keyof TCvsTableHeaderProps
+  ) => {
     event.preventDefault()
     const isAsc = orderBy === property && order === 'asc'
     setOrder(isAsc ? 'desc' : 'asc')
     setOrderBy(property)
   }
 
-  const sortData = useCallback(
-    (data: ICV[] | undefined, sortKey: SortKey, sortOrder: SortOrder) => {
-      if (!data) return
-      if (!sortKey) return data
-      const dataToSort = [...data]
-      return dataToSort.sort((a, b) => sort(a[sortKey], b[sortKey], sortOrder))
-    },
-    []
+  const filtered = customFilter(user && user.user.cvs && user.user.cvs, searchQuery)
+  const visibleRows = useMemo(
+    () => filtered && customSort(filtered, order, orderBy),
+    [order, orderBy, filtered]
   )
-  const filtered = filterData(searchQuery, user?.user.cvs)
-
-  const visibleRows = useMemo(() => {
-    return filtered?.length
-      ? sortData(filtered, orderBy, order)
-      : sortData(user?.user.cvs, orderBy, order)
-  }, [filtered, order, orderBy, user?.user.cvs, sortData])
-  // useEffect(() => {
-  //   if (user) console.log(user.user.cvs)
-  //   if (user && user?.user.cvs) console.log(sortData(user.user.cvs, orderBy, order))
-  // }, [user])
 
   return (
     <TableContainer component={'div'} sx={{ background: 'transparent' }}>
