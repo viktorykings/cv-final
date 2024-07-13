@@ -1,6 +1,5 @@
 import { lazy } from 'react'
 
-// export const LogInPage = lazy(() => import('../pages/Login.tsx'))
 export const LogInPage = lazy(() => import('../pages/LogInPage.tsx'))
 export const SignUpPage = lazy(() => import('../pages/SignUpPage.tsx'))
 
@@ -16,5 +15,5 @@ export const DepartmentsPage = lazy(() => import('../pages/DepartmentsPage.tsx')
 export const PositionsPage = lazy(() => import('../pages/PositionsPage.tsx'))
 export const SettingsPage = lazy(() => import('../pages/SettingsPage.tsx'))
 export const ProfileSkills = lazy(() => import('../pages/Profile/Skills.tsx'))
-export const ProfileLayout = lazy(() => import('../components/Profile/ProfileLayout.tsx'))
+export const ProfileLayout = lazy(() => import('../components/Layouts/ProfileLayout.tsx'))
 export const Languages = lazy(() => import('../pages/Profile/Languages.tsx'))

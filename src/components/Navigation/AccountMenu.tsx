@@ -5,7 +5,7 @@ import AccountMenuItem from './AccountMenuItem'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Paths } from '../../routes/paths'
-import { AUTH_TOKEN, userToken } from '../../constants/constants'
+import { AUTH_TOKEN, userToken } from '../../shared/constants'
 
 const AccountMenu = () => {
   const navigate = useNavigate()
@@ -59,8 +59,6 @@ const AccountMenu = () => {
         {[MenuItems.PROFILE, MenuItems.SETTINGS].map(path => (
           <AccountMenuItem key={path} text={path} handleLink={handleAccountLink} />
         ))}
-        {/* <MenuItem onClick={() =>  handleAccountLink()}> Profile</MenuItem>
-          <MenuItem onClick={handleAccountLink}>Settings</MenuItem> */}
         <AccountMenuItem key={'logout'} text="Logout" handleLink={handleLogOut} />
       </Menu>
     </Box>

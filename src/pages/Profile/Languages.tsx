@@ -1,4 +1,4 @@
-import LanguagesTable from '../../components/Profile/Languages/LanguagesTable'
+import LanguagesTable from '../../components/Profile/LanguagesTable'
 const Languages = () => {
   return <LanguagesTable />
 }

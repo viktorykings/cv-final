@@ -7,28 +7,34 @@ import {
   FormHelperText,
   SelectChangeEvent
 } from '@mui/material'
-import { IDepartment } from '../../../interfaces/IDepartment'
-import { ISkill } from '../../../interfaces/ISkill'
+import { IDepartment } from '../../interfaces/IDepartment'
+import { ISkill } from '../../interfaces/ISkill'
+import { ISkillMastery } from '../../interfaces/ISkillMastery'
+import hasId from '../../../components/utils/optionHasId'
 
 interface CustomSelectProps {
   label: string
   value: string
   onChange: (event: SelectChangeEvent<string>, child: ReactNode) => void
-  options: IDepartment[] | ISkill[]
+  options: IDepartment[] | ISkill[] | string[] | ISkillMastery[]
   error?: boolean
   helperText?: string
+  isDisabled?: boolean
 }
 
-const ProfileSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
+const CustomSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
   ({ label, value, onChange, options, error, helperText }, ref) => {
     return (
       <FormControl variant="outlined" margin="normal" error={error} sx={{ width: '410px' }}>
         <InputLabel>{label}</InputLabel>
         <Select ref={ref} value={value} onChange={onChange} label={label}>
           {options &&
-            options.map(option => (
-              <MenuItem key={option.id} value={option.name}>
-                {option.name}
+            options.map((option, i) => (
+              <MenuItem
+                key={hasId(option) ? option.id : i}
+                value={typeof option === 'string' ? option : option.name}
+              >
+                {typeof option === 'string' ? option : option.name}
               </MenuItem>
             ))}
         </Select>
@@ -38,4 +44,4 @@ const ProfileSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
   }
 )
 
-export default ProfileSelect
+export default CustomSelect

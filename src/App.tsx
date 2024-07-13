@@ -2,7 +2,7 @@ import { Navigate, useRoutes } from 'react-router-dom'
 import { PrivateRoutes } from './routes/PrivateRoutes'
 import { PublicRoutes } from './routes/PublicRoutes'
 import { useReactiveVar } from '@apollo/client'
-import { userToken } from './constants/constants'
+import { userToken } from './shared/constants'
 import { Paths } from './routes/paths'
 
 const App = () => {

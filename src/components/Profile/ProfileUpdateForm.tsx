@@ -1,13 +1,13 @@
 import { Box, Button, TextField } from '@mui/material'
-import ProfileSelect from './Select/ProfileSelect'
+import ProfileSelect from '../../shared/components/Select'
 import { useGetPositions } from '../../graphql/positions/hooks/useGetPositions'
 import { useGetDepartments } from '../../graphql/departments/hooks/useGetDepartments'
-import { IUser } from '../../interfaces/IUser'
+import { IUser } from '../../shared/interfaces/IUser'
 import { useForm, Controller } from 'react-hook-form'
 import { useUpdateUser } from '../../graphql/users/hooks/useUpdateUser'
 import { useReactiveVar } from '@apollo/client'
-import { userID } from '../../constants/constants'
-import { IDepartment } from '../../interfaces/IDepartment'
+import { userID } from '../../shared/constants'
+import { IDepartment } from '../../shared/interfaces/IDepartment'
 import { useUpdateUserProfile } from '../../graphql/users/profile/hooks/useUpdateProfile'
 
 type FormValues = {
@@ -27,11 +27,10 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
   const getId = (arr: IDepartment[] | undefined, str: string) => {
     if (!arr) return
     const res = arr.filter(el => el.name === str)[0]
-    return res.id
+    return res ? res.id : ''
   }
 
   const onSubmit = (formData: FormValues) => {
-    console.log(formData)
     updateProfile({
       variables: {
         profile: {
@@ -45,8 +44,8 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
       variables: {
         user: {
           userId: data.id,
-          positionId: getId(positions && positions.positions, formData.position),
-          departmentId: getId(departments && departments.departments, formData.department)
+          positionId: getId(positions && positions.positions, formData.position) ?? '',
+          departmentId: getId(departments && departments.departments, formData.department) ?? ''
         }
       }
     })

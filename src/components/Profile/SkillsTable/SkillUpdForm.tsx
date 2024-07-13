@@ -1,12 +1,11 @@
 import { Button, Dialog, DialogContent, DialogContentText, DialogActions } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
-import { ISkillMastery, Mastery } from '../../../interfaces/ISkillMastery'
-import { IUser } from '../../../interfaces/IUser'
-import ProfileSelect from '../../Profile/Select/ProfileSelect'
+import { ISkillMastery, Mastery } from '../../../shared/interfaces/ISkillMastery'
+import { IUser } from '../../../shared/interfaces/IUser'
+import CustomSelect from '../../../shared/components/Select'
 import { useReactiveVar } from '@apollo/client'
-import { userID } from '../../../constants/constants'
+import { userID } from '../../../shared/constants'
 import { useEffect, useState } from 'react'
-import CategoriesSelect from './CategoriesSelect'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
 import { useAddProfileSkill } from '../../../graphql/users/skills/hooks/useAddProfileSkill'
 import { useUpdateProfileSkill } from '../../../graphql/users/skills/hooks/useUpdateProfileSkill'
@@ -117,7 +116,7 @@ const SkillUpdForm = ({ open, handleClose, label, user, mastery, defaultSkill }:
                 name="skill"
                 control={control}
                 render={({ field }) => (
-                  <ProfileSelect {...field} label="Skill" options={skills.skills} />
+                  <CustomSelect {...field} label="Skill" options={skills.skills} />
                 )}
               />
               <Controller
@@ -125,7 +124,7 @@ const SkillUpdForm = ({ open, handleClose, label, user, mastery, defaultSkill }:
                 control={control}
                 defaultValue={category}
                 render={({ field }) => (
-                  <CategoriesSelect
+                  <CustomSelect
                     {...field}
                     label="Category"
                     options={[category]}
@@ -139,7 +138,7 @@ const SkillUpdForm = ({ open, handleClose, label, user, mastery, defaultSkill }:
                 control={control}
                 defaultValue={Mastery.Novice}
                 render={({ field }) => (
-                  <CategoriesSelect {...field} label="Skill mastery" options={mastery} />
+                  <CustomSelect {...field} label="Skill mastery" options={mastery} />
                 )}
               />
             </>

@@ -3,9 +3,13 @@ import { MenuItems } from '../../assets/sidebarIcons'
 import { useNavigate } from 'react-router-dom'
 import CloseIcon from '@mui/icons-material/Close'
 import { useEffect, useState } from 'react'
-import SidebarListItem from './ListItem'
-import { SidebarProps } from './types'
+import SidebarListItem from './SidebarItem'
 import { Paths } from '../../routes/paths'
+
+type SidebarProps = {
+  open: boolean
+  toggleDrawer: (newOpen: boolean) => void
+}
 
 const SidebarList = ({ toggleDrawer, open }: SidebarProps) => {
   const navigate = useNavigate()

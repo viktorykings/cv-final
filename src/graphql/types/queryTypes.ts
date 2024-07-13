@@ -5,11 +5,11 @@ import type {
   AuthResult,
   Profile
 } from 'cv-graphql'
-import { IUser } from '../interfaces/IUser'
-import { IDepartment } from '../interfaces/IDepartment'
-import { IPosition } from '../interfaces/IPosition'
-import { ISkill } from '../interfaces/ISkill'
-import { ILanguageProficiency } from '../interfaces/ILanguageProficiency'
+import { IUser } from '../../shared/interfaces/IUser'
+import { IDepartment } from '../../shared/interfaces/IDepartment'
+import { IPosition } from '../../shared/interfaces/IPosition'
+import { ISkill } from '../../shared/interfaces/ISkill'
+import { ILanguageProficiency } from '../../shared/interfaces/ILanguageProficiency'
 
 export type LoginArgs = {
   auth: AuthInput

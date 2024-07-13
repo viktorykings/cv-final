@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { RouteObject } from 'react-router-dom'
 import Root from './Root.tsx'
 import { Paths } from './paths.ts'
-import PagesLayout from '../components/PagesLayout.tsx'
+import PagesLayout from '../components/Layouts/PagesLayout.tsx'
 import {
   UsersPage,
   ProfilePage,
@@ -18,7 +18,7 @@ import {
   Languages,
   ProfileLayout,
   ProfileSkills
-} from './lazyRouts.ts'
+} from './lazyRoutes.ts'
 
 export const PrivateRoutes: RouteObject[] = [
   {

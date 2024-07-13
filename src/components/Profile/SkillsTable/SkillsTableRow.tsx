@@ -1,6 +1,6 @@
 import { Box, Typography } from '@mui/material'
 import { useState } from 'react'
-import { ISkillMastery, SkillLevel } from '../../../interfaces/ISkillMastery'
+import { ISkillMastery, SkillLevel } from '../../../shared/interfaces/ISkillMastery'
 import SkillItem from './SkillItem'
 
 type TSkillsCategory = {

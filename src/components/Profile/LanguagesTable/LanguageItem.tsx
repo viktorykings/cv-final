@@ -1,5 +1,5 @@
 import { Button, Typography } from '@mui/material'
-import { ILanguageProficiency } from '../../../interfaces/ILanguageProficiency'
+import { ILanguageProficiency } from '../../../shared/interfaces/ILanguageProficiency'
 
 const LanguageItem = ({ name, proficiency }: ILanguageProficiency) => {
   return (

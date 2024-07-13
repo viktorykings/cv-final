@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
-import Form from '../components/Form/Form'
+import Form from '../components/Form'
 import { useSignup } from '../graphql/auth/hooks/useSignup'
-import { AUTH_TOKEN, USER_EMAIL, userToken } from '../constants/constants'
+import { AUTH_TOKEN, USER_EMAIL, userToken } from '../shared/constants'
 import { useNavigate } from 'react-router-dom'
 
 const SignUpPage = () => {

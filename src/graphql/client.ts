@@ -1,8 +1,8 @@
 import { ApolloClient, InMemoryCache, createHttpLink, from } from '@apollo/client'
 import { setContext } from '@apollo/client/link/context'
-import { AUTH_TOKEN } from '../constants/constants.ts'
+import { AUTH_TOKEN } from '../shared/constants/index.ts'
 import { onError } from '@apollo/client/link/error'
-import showToast from '../utils/showToast.tsx'
+import showToast from '../shared/utils/showToast.tsx'
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_HTTP_LINK
