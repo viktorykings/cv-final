@@ -17,7 +17,8 @@ import {
   SettingsPage,
   Languages,
   ProfileLayout,
-  ProfileSkills
+  ProfileSkills,
+  Cvs
 } from './lazyRoutes.ts'
 
 export const PrivateRoutes: RouteObject[] = [
@@ -42,7 +43,7 @@ export const PrivateRoutes: RouteObject[] = [
               { path: Paths.PROFILE, element: <ProfilePage /> },
               { path: Paths.SKILLS, element: <ProfileSkills /> },
               { path: Paths.LANGUAGES, element: <Languages /> },
-              { path: Paths.CVS, element: <CvsPage /> }
+              { path: Paths.CVS, element: <Cvs /> }
             ]
           }
         ]
