@@ -1,7 +1,7 @@
 import { TableContainer, Table, TableBody, Button, Box } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import SearchBar from '../../../shared/components/Search'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { useGetUser } from '../../../graphql/users/hooks/useGetUser'
 import { userID } from '../../../shared/constants'
@@ -14,6 +14,7 @@ import { SortOrder } from '../../../shared/interfaces/TSortOrder'
 import { TCvsTableHeaderProps } from '../../../shared/interfaces/TSort'
 import { HeadCell } from '../../../shared/components/THeadCells'
 import CvForm from './CvForm'
+import { ICV } from '../../../shared/interfaces/ICV'
 
 const headerCells: HeadCell[] = [
   {
@@ -45,7 +46,7 @@ const CvsTable = () => {
   }
 
   const [searchQuery, setSearchQuery] = useState('')
-
+  const [cvs, setCvs] = useState<ICV[]>()
   const [order, setOrder] = useState<SortOrder>('asc')
   const [orderBy, setOrderBy] = useState<keyof TCvsTableHeaderProps>('name')
 
@@ -59,12 +60,17 @@ const CvsTable = () => {
     setOrderBy(property)
   }
 
-  const filtered = customFilter(user && user.user.cvs && user.user.cvs, searchQuery)
+  const filtered = customFilter(cvs && cvs, searchQuery)
   const visibleRows = useMemo(
     () => filtered && customSort(filtered, order, orderBy),
     [order, orderBy, filtered]
   )
 
+  useEffect(() => {
+    if (user && user.user.cvs) setCvs(user.user.cvs)
+    console.log(cvs)
+  }, [user?.user.cvs, cvs, user])
+  // TODO fix refetch cvs after create/delete
   return (
     <>
       <TableContainer component={'div'} sx={{ background: 'transparent' }}>
@@ -86,7 +92,7 @@ const CvsTable = () => {
           <TableBody>
             {visibleRows &&
               visibleRows.map(row => (
-                <CvItem key={row.id} name={row.name} description={row.description} />
+                <CvItem key={row.id} id={row.id} name={row.name} description={row.description} />
               ))}
           </TableBody>
         </Table>
