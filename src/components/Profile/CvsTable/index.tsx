@@ -13,6 +13,7 @@ import customSort from '../../../shared/utils/customSort'
 import { SortOrder } from '../../../shared/interfaces/TSortOrder'
 import { TCvsTableHeaderProps } from '../../../shared/interfaces/TSort'
 import { HeadCell } from '../../../shared/components/THeadCells'
+import CvForm from './CvForm'
 
 const headerCells: HeadCell[] = [
   {
@@ -34,6 +35,14 @@ const CvsTable = () => {
   const { data: user } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
   const isCurrentUserProfile = currentUserID === user?.user.id
+
+  const [open, setOpen] = useState(false)
+  const handleClickOpen = () => {
+    setOpen(true)
+  }
+  const handleClose = () => {
+    setOpen(false)
+  }
 
   const [searchQuery, setSearchQuery] = useState('')
 
@@ -57,30 +66,35 @@ const CvsTable = () => {
   )
 
   return (
-    <TableContainer component={'div'} sx={{ background: 'transparent' }}>
-      <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchBar setSearchQuery={setSearchQuery} />
-        {isCurrentUserProfile && (
-          <Button color="secondary">
-            <AddIcon /> Create CV
-          </Button>
-        )}
-      </Box>
-      <Table sx={{ minWidth: 650 }} aria-label="simple">
-        <TableHeader
-          order={order}
-          orderBy={orderBy}
-          onRequestSort={handleRequestSort}
-          headCells={headerCells}
-        />
-        <TableBody>
-          {visibleRows &&
-            visibleRows.map(row => (
-              <CvItem key={row.id} name={row.name} description={row.description} />
-            ))}
-        </TableBody>
-      </Table>
-    </TableContainer>
+    <>
+      <TableContainer component={'div'} sx={{ background: 'transparent' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
+          <SearchBar setSearchQuery={setSearchQuery} />
+          {isCurrentUserProfile && (
+            <Button color="secondary" onClick={handleClickOpen}>
+              <AddIcon /> Create CV
+            </Button>
+          )}
+        </Box>
+        <Table sx={{ minWidth: 650 }} aria-label="simple">
+          <TableHeader
+            order={order}
+            orderBy={orderBy}
+            onRequestSort={handleRequestSort}
+            headCells={headerCells}
+          />
+          <TableBody>
+            {visibleRows &&
+              visibleRows.map(row => (
+                <CvItem key={row.id} name={row.name} description={row.description} />
+              ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
+      {user && isCurrentUserProfile && (
+        <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />
+      )}
+    </>
   )
 }
 
