@@ -24,7 +24,12 @@ const ProfileTabs = () => {
   const currentTab = routeMatch?.pattern?.path
 
   return (
-    <Tabs value={currentTab} textColor="secondary" indicatorColor="secondary">
+    <Tabs
+      value={currentTab}
+      textColor="secondary"
+      indicatorColor="secondary"
+      sx={{ margin: '10px 0 30px' }}
+    >
       <Tab
         label="Profile"
         value={buildPath(id as string, Paths.PROFILE)}

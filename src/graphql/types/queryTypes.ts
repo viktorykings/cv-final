@@ -3,7 +3,10 @@ import type {
   AddProfileSkillInput,
   AuthInput,
   AuthResult,
-  Profile
+  CreateCvInput,
+  Cv,
+  Profile,
+  UpdateCvInput
 } from 'cv-graphql'
 import { IUser } from '../../shared/interfaces/IUser'
 import { IDepartment } from '../../shared/interfaces/IDepartment'
@@ -58,4 +61,14 @@ export type skillResult = {
 }
 export type languageArgs = {
   language: AddProfileLanguageInput
+}
+export type CreateCVArgs = {
+  cv: CreateCvInput
+}
+export type UpdateCVArgs = {
+  cv: UpdateCvInput
+}
+
+export type CVResult = {
+  cv: Cv
 }
