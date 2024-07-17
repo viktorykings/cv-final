@@ -9,6 +9,18 @@ import { useReactiveVar } from '@apollo/client'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 import { userID } from '../../shared/constants'
 import CvForm from '../Profile/CvsTable/CvForm'
+const menuItems = [
+  {
+    label: 'Profile',
+    path: 'profile'
+  },
+  {
+    label: 'UpdateUser'
+  },
+  {
+    label: 'Delete User'
+  }
+]
 
 const UsersTable = () => {
   const { id } = useParams()
@@ -50,6 +62,7 @@ const UsersTable = () => {
           }) => ({ avatar, first_name, last_name, email, department_name, position_name, id })
         )}
         searchQuery={searchQuery}
+        constextMenu={menuItems}
       />
 
       {user && isCurrentUserProfile && (

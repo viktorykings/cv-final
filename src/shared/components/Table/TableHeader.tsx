@@ -1,6 +1,8 @@
 import { TableHead, TableRow, TableCell, TableSortLabel, Box } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
 import { SortOrder } from '../../interfaces/TSortOrder'
+import { normalizeText } from '../../utils/NormaliseText'
+import { TProps } from './types/TableProps'
 
 interface TableHeaderProps<T> {
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof T) => void
@@ -8,37 +10,46 @@ interface TableHeaderProps<T> {
   orderBy: string
   data: T[]
 }
-export type TablePropsTT = Record<string, string | null | undefined>
 
-// function TableHeader<T extends object>(props: TableHeaderProps<T>) {
-function TableHeader(props: TableHeaderProps<TablePropsTT>) {
+function TableHeader(props: TableHeaderProps<TProps>) {
   const { order, orderBy, onRequestSort, data } = props
 
-  console.log('table header', data)
-  const createSortHandler =
-    (property: keyof TablePropsTT) => (event: React.MouseEvent<unknown>) => {
-      onRequestSort(event, property)
-    }
+  const createSortHandler = (property: keyof TProps) => (event: React.MouseEvent<unknown>) => {
+    onRequestSort(event, property)
+  }
 
-  const keys = Object.keys(data[0])
-  console.log(keys)
+  const isNotSortable = (str: string) => {
+    return str !== 'id' && str !== 'avatar'
+  }
+  const keys = Object.keys(data[0]).map(el => {
+    return {
+      key: el,
+      label: el
+    }
+  })
   return (
     <TableHead>
       <TableRow>
         {keys.map(cell => (
-          <TableCell key={cell} sortDirection={orderBy === cell ? order : false} scope="col">
-            <TableSortLabel
-              active={orderBy === cell}
-              direction={orderBy === cell ? order : 'asc'}
-              onClick={createSortHandler(cell)}
-            >
-              {cell}
-              {orderBy === cell ? (
-                <Box component="span" sx={visuallyHidden}>
-                  {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                </Box>
-              ) : null}
-            </TableSortLabel>
+          <TableCell
+            key={cell.key}
+            sortDirection={orderBy === cell.label ? order : false}
+            scope="col"
+          >
+            {isNotSortable(cell.key) && (
+              <TableSortLabel
+                active={orderBy === cell.label}
+                direction={orderBy === cell.label ? order : 'asc'}
+                onClick={createSortHandler(cell.label)}
+              >
+                {normalizeText(cell.label)}
+                {orderBy === cell.label ? (
+                  <Box component="span" sx={visuallyHidden}>
+                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                  </Box>
+                ) : null}
+              </TableSortLabel>
+            )}
           </TableCell>
         ))}
       </TableRow>

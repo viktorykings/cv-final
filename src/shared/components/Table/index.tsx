@@ -5,19 +5,16 @@ import customFilter from '../../utils/customFilter'
 import getComparator from '../../utils/customSort'
 import TableItem from './TableItem'
 import TableHeader from './TableHeader'
-
-export type TProps = Record<string, string | null | undefined>
-export type ComparatorProps = {
-  [key in keyof TProps]: string | null | undefined
-}
+import { ComparatorProps, IContextMenuItem, TProps } from './types/TableProps'
 
 interface TableProps<T> {
   data: T[]
+  constextMenu: IContextMenuItem[]
   searchQuery: string
 }
 
 const CustomTable = (props: TableProps<TProps>) => {
-  const { data, searchQuery } = props
+  const { data, constextMenu, searchQuery } = props
 
   const [order, setOrder] = useState<SortOrder>('asc')
   const [orderBy, setOrderBy] = useState<keyof TProps>('id')
@@ -51,7 +48,7 @@ const CustomTable = (props: TableProps<TProps>) => {
           />
           <TableBody>
             {visibleRows.map(el => (
-              <TableItem key={el.id} row={el} />
+              <TableItem key={el.id} row={el} contextMenu={constextMenu} />
             ))}
           </TableBody>
         </Table>

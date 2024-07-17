@@ -26,7 +26,6 @@ const CvsTable = () => {
 
   if (!user) return <>no cvs</>
   if (!user.user.cvs) return <>no cvs</>
-  console.log(user.user.cvs)
   // TODO fix refetch cvs after create/delete
   return (
     <>

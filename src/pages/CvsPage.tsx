@@ -10,6 +10,16 @@ import { userID } from '../shared/constants'
 import { useGetAllCvs } from '../graphql/cvs/hooks/useGetCvs'
 import AddIcon from '@mui/icons-material/Add'
 
+const menuItems = [
+  {
+    label: 'Details',
+    path: 'cvs'
+  },
+  {
+    label: 'Delete CV'
+  }
+]
+
 const CvsPage = () => {
   const { data } = useGetAllCvs()
 
@@ -42,6 +52,7 @@ const CvsPage = () => {
       </Box>
       <CustomTable
         data={data.cvs.map(({ name, description, id }) => ({ name, description, id }))}
+        constextMenu={menuItems}
         searchQuery={searchQuery}
       />
 
