@@ -75,3 +75,6 @@ export type CVResult = {
 export type GetCvsResult = {
   cvs: ICV[]
 }
+export type GetCvResult = {
+  cv: ICV
+}
