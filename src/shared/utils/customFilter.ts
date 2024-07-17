@@ -1,22 +1,14 @@
-import { TArray } from '../interfaces/TSort'
-import { isUsersArr } from './typePredicates'
+import { TablePropsTT } from '../components/Table/TableHeader'
 
-function customFilter(arr: TArray | undefined, searchQuery: string) {
-  if (!arr) return arr
-
-  if (!searchQuery) {
-    return arr
-  }
-
-  if (isUsersArr(arr)) {
-    return arr.filter(d => d.profile.full_name?.toLowerCase().includes(searchQuery))
-  } else {
-    return arr.filter(
-      d =>
-        d.name?.toLowerCase().includes(searchQuery) ||
-        d.description?.toLowerCase().includes(searchQuery)
+function customFilter(arr: TablePropsTT[], searchQuery: string) {
+  return arr.filter(el => {
+    return (
+      el.name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      el.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      el.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      el.last_name?.toLowerCase().includes(searchQuery.toLowerCase())
     )
-  }
+  })
 }
 
 export default customFilter

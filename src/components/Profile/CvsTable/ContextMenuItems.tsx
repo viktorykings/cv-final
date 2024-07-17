@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { useDeleteCv } from '../../../graphql/users/cvs/hooks/useDeleteCv'
 
 interface IMenuItemProps {
-  cvId: string
+  cvId: string | null | undefined
   handleClose: () => void
 }
 

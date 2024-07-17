@@ -2,6 +2,7 @@ import React from 'react'
 import Button from '@mui/material/Button'
 import Menu from '@mui/material/Menu'
 import MoreVertIcon from '@mui/icons-material/MoreVert'
+import { TableCell } from '@mui/material'
 
 interface IMenuChildren {
   open: boolean
@@ -15,7 +16,7 @@ export default function ContextMenu(props: IMenuChildren) {
   const { open, handleClick, anchorEl, handleClose, children } = props
 
   return (
-    <div>
+    <TableCell scope="col" sx={{ width: '20px' }}>
       <Button
         id="context-menu"
         aria-controls={open ? 'basic-menu' : undefined}
@@ -38,6 +39,6 @@ export default function ContextMenu(props: IMenuChildren) {
       >
         {children}
       </Menu>
-    </div>
+    </TableCell>
   )
 }
