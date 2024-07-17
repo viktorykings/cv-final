@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { Box, Button } from '@mui/material'
-import { useParams } from 'react-router-dom'
 import CvForm from '../components/Profile/CvsTable/CvForm'
 import { useGetUser } from '../graphql/users/hooks/useGetUser'
 import SearchBar from '../shared/components/Search'
@@ -13,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add'
 const menuItems = [
   {
     label: 'Details',
-    path: 'cvs'
+    path: 'details'
   },
   {
     label: 'Delete CV'
@@ -23,13 +22,14 @@ const menuItems = [
 const CvsPage = () => {
   const { data } = useGetAllCvs()
 
-  const { id } = useParams()
-  const { data: user } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
+  const { data: user } = useGetUser(currentUserID as string)
   const isCurrentUserProfile = currentUserID === user?.user.id
+  console.log(isCurrentUserProfile)
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
+    console.log('click', user)
     setOpen(true)
   }
   const handleClose = () => {
@@ -56,9 +56,7 @@ const CvsPage = () => {
         searchQuery={searchQuery}
       />
 
-      {user && isCurrentUserProfile && (
-        <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />
-      )}
+      {user && <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />}
     </>
   )
 }

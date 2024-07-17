@@ -25,7 +25,12 @@ const ContextMenuItems = ({ items, id, handleClose }: IMenuItemProps<IContextMen
               {el.label}
             </MenuItem>
           ) : (
-            <MenuItem key={el.label} component={Link} to={`${id}`} onClick={handleClose}>
+            <MenuItem
+              key={el.label}
+              component={Link}
+              to={`/cvs/${id}/${el.path}`}
+              onClick={handleClose}
+            >
               {el.label}
             </MenuItem>
           )
