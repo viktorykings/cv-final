@@ -13,6 +13,7 @@ import { IDepartment } from '../../shared/interfaces/IDepartment'
 import { IPosition } from '../../shared/interfaces/IPosition'
 import { ISkill } from '../../shared/interfaces/ISkill'
 import { ILanguageProficiency } from '../../shared/interfaces/ILanguageProficiency'
+import { ICV } from '../../shared/interfaces/ICV'
 
 export type LoginArgs = {
   auth: AuthInput
@@ -68,7 +69,9 @@ export type CreateCVArgs = {
 export type UpdateCVArgs = {
   cv: UpdateCvInput
 }
-
 export type CVResult = {
   cv: Cv
+}
+export type GetCvsResult = {
+  cvs: ICV[]
 }

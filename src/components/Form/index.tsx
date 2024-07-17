@@ -135,7 +135,12 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
       <Button variant="contained" color="secondary" type="submit">
         Sign in
       </Button>
-      <Button variant="text" color="secondary" component={Link} to="/auth/signup">
+      <Button
+        variant="text"
+        color="secondary"
+        component={Link}
+        to={isRegisterForm ? '/auth/login' : '/auth/signup'}
+      >
         {isRegisterForm ? 'I have an account' : "I don't have an account"}
       </Button>
       <ToastContainer />

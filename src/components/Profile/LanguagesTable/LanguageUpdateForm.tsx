@@ -7,9 +7,9 @@ import { useGetLanguages } from '../../../graphql/languages/hooks/useGetAllLangu
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../../shared/constants'
 import { useAddProfileLang } from '../../../graphql/users/languages/hooks/useAddProfileLang'
-import { useUpdateProfileLang } from '../../../graphql/users/languages/hooks/useUpdateProfileLang'
 import { useDeleteProfileLang } from '../../../graphql/users/languages/hooks/useDeleteProfileLang'
 import CustomSelect from '../../../shared/components/Select'
+import { useUpdateProfileLang } from '../../../graphql/users/languages/hooks/UseUpdateProfileLang'
 
 type TFormProps = {
   open: boolean

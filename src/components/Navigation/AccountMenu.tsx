@@ -5,9 +5,12 @@ import AccountMenuItem from './AccountMenuItem'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Paths } from '../../routes/paths'
-import { AUTH_TOKEN, userToken } from '../../shared/constants'
+import { AUTH_TOKEN, userID, userToken } from '../../shared/constants'
+import { useReactiveVar } from '@apollo/client'
 
 const AccountMenu = () => {
+  const currentUserID = useReactiveVar(userID)
+
   const navigate = useNavigate()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -19,8 +22,9 @@ const AccountMenu = () => {
     setAnchorEl(null)
   }
   const handleAccountLink = (path: string) => {
-    navigate(path)
     handleClose()
+    if (path === 'profile') navigate(`/users/${currentUserID}/${path}`)
+    else navigate(path)
   }
 
   const handleLogOut = () => {
@@ -57,7 +61,11 @@ const AccountMenu = () => {
         onClose={handleClose}
       >
         {[MenuItems.PROFILE, MenuItems.SETTINGS].map(path => (
-          <AccountMenuItem key={path} text={path} handleLink={handleAccountLink} />
+          <AccountMenuItem
+            key={path}
+            text={path}
+            handleLink={() => handleAccountLink(path.toLowerCase())}
+          />
         ))}
         <AccountMenuItem key={'logout'} text="Logout" handleLink={handleLogOut} />
       </Menu>
