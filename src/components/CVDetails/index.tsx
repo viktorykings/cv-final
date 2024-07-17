@@ -20,7 +20,6 @@ const CVDetails = () => {
   const [user, setUser] = useState('')
 
   const isCurrentUserCv = user === currentUserID
-  console.log('is users cv', isCurrentUserCv)
 
   const { handleSubmit, reset, control } = useForm<TFormValues>({
     defaultValues: {
@@ -32,7 +31,6 @@ const CVDetails = () => {
 
   useEffect(() => {
     if (cv) {
-      console.log(cv)
       setUser(cv.cv.user.id)
       reset({
         name: cv.cv.name,
@@ -43,7 +41,6 @@ const CVDetails = () => {
   }, [cv, reset])
   const [updateCv] = useUpdateCv()
   const onSubmit = (formData: TFormValues) => {
-    console.log(formData)
     if (cvId && isCurrentUserCv) {
       updateCv({
         variables: {

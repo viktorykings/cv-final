@@ -34,7 +34,6 @@ const CvForm = (props: TFormProps) => {
   const [createCv] = useCreateCv()
   // const [updateCv] = useUpdateCv()
   const onSubmit = (formData: TFormValues) => {
-    console.log(formData)
     createCv({
       variables: {
         cv: {

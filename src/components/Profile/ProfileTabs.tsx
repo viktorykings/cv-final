@@ -24,7 +24,6 @@ const ProfileTabs = () => {
   const routesCvs = [Paths.DETAILS, Paths.SKILLS, Paths.PROJECTS, Paths.PREVIEW]
   const baseRoutes = id ? routesProfile : routesCvs
 
-  console.log('basepath', basePath)
   const buildPath = (id: string, path: string) => {
     return `/${basePath}/${id}/${path}`
   }
@@ -47,30 +46,6 @@ const ProfileTabs = () => {
           component={Link}
         />
       ))}
-      {/* <Tab
-        label="Profile"
-        value={buildPath(baseID as string, Paths.PROFILE)}
-        to={buildPath(baseID as string, Paths.PROFILE)}
-        component={Link}
-      />
-      <Tab
-        label="Skills"
-        value={buildPath(baseID as string, Paths.SKILLS)}
-        to={buildPath(baseID as string, Paths.PROFILE)}
-        component={Link}
-      />
-      <Tab
-        label="Languages"
-        value={buildPath(baseID as string, Paths.LANGUAGES)}
-        to={buildPath(baseID as string, Paths.PROFILE)}
-        component={Link}
-      />
-      <Tab
-        label="CVs"
-        value={buildPath(baseID as string, Paths.CVS)}
-        to={Paths.CVS}
-        component={Link}
-      /> */}
     </Tabs>
   )
 }

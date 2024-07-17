@@ -24,12 +24,9 @@ const CvsPage = () => {
 
   const currentUserID = useReactiveVar(userID)
   const { data: user } = useGetUser(currentUserID as string)
-  const isCurrentUserProfile = currentUserID === user?.user.id
-  console.log(isCurrentUserProfile)
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
-    console.log('click', user)
     setOpen(true)
   }
   const handleClose = () => {
