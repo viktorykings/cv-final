@@ -1,4 +1,5 @@
 import type {
+  AddCvSkillInput,
   AddProfileLanguageInput,
   AddProfileSkillInput,
   AuthInput,
@@ -77,4 +78,10 @@ export type GetCvsResult = {
 }
 export type GetCvResult = {
   cv: ICV
+}
+export type CvSkillResult = {
+  cv: Cv
+}
+export type CvSkillArgs = {
+  skill: AddCvSkillInput
 }

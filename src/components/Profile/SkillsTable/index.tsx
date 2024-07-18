@@ -8,20 +8,21 @@ import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
 import { ISkillMastery } from '../../../shared/interfaces/ISkillMastery'
-import { IUser } from '../../../shared/interfaces/IUser'
 
 interface ISkillTableProps {
-  user?: IUser
+  userId: string
+  cvId?: string
   skills: ISkillMastery[]
+  isProfileSkills?: boolean
 }
 
-const SkillsTable = ({ user, skills }: ISkillTableProps) => {
+const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps) => {
   const { data: categories } = useGetSkillCategory()
   const { data: allSkills } = useGetSkills()
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserProfile = currentUserID === user?.id
+  const isCurrentUserProfile = currentUserID === userId
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -40,6 +41,10 @@ const SkillsTable = ({ user, skills }: ISkillTableProps) => {
       handleClickOpen()
     }
   }
+  const skillsToRender = skills
+    .slice()
+    .map(el => (el.category === '' ? { ...el, category: 'Other' } : el))
+  const categoriesToRedner = categories && [...categories.skillCategories, 'Other']
 
   return (
     <Box
@@ -58,31 +63,24 @@ const SkillsTable = ({ user, skills }: ISkillTableProps) => {
         <AddIcon /> Add skill
       </Button>
       <div onClick={handleOpenFormOnClickSkillItem}>
-        {skills &&
+        {skillsToRender &&
           allSkills &&
-          categories &&
-          categories.skillCategories
-            .filter(category => skills.map(el => el.category).includes(category))
-            .map(el => <SkillsTableRow key={el} skills={skills} category={el || 'Other'} />)}
-        {skills &&
-          skills
-            .filter(el => el.category === '')
-            .map(el => (
-              <SkillsTableRow
-                key={el.name}
-                skills={skills.filter(el => el.category === '')}
-                category={''}
-              />
-            ))}
+          categoriesToRedner &&
+          categoriesToRedner
+            .filter(category => skillsToRender.map(el => el.category).includes(category))
+            .map(el => <SkillsTableRow key={el} skills={skillsToRender} category={el} />)}
       </div>
-      {user && isCurrentUserProfile && (
+      {isCurrentUserProfile && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}
           label="Add skill"
-          user={user}
+          userId={userId}
+          cvId={cvId}
           mastery={masteries}
           defaultSkill={defaultSkill}
+          skills={skills}
+          isProfileSkills={isProfileSkills}
         />
       )}
     </Box>

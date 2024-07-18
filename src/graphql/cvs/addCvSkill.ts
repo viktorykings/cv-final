@@ -1,7 +1,7 @@
 import { gql } from '@apollo/client'
 
 export const ADD_CV_SKILL = gql`
-  query ADD_CV_SKILL($skill: AddCvSkillInput!) {
+  mutation ADD_CV_SKILL($skill: AddCvSkillInput!) {
     addCvSkill(skill: $skill) {
       id
       created_at

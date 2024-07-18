@@ -7,6 +7,6 @@ const SkillsPage = () => {
   const { data: cv } = useGetCv(cvId as string)
   if (!cv) return <>no cv</>
 
-  return <SkillsTable skills={cv.cv.skills} />
+  return <SkillsTable userId={cv.cv.user.id} cvId={cv.cv.id} skills={cv.cv.skills} />
 }
 export default SkillsPage

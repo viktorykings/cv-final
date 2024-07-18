@@ -7,7 +7,9 @@ const ProfileSkills = () => {
   const { data: user } = useGetUser(id as string)
   if (!user) return <>no user data</>
 
-  return <SkillsTable user={user.user} skills={user.user.profile.skills} />
+  return (
+    <SkillsTable userId={user.user.id} skills={user.user.profile.skills} isProfileSkills={true} />
+  )
 }
 
 export default ProfileSkills
