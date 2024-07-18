@@ -1,24 +1,27 @@
-import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { useGetSkillCategory } from '../../../graphql/skills/hooks/useGetSkillsCategories'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
-import { useGetUser } from '../../../graphql/users/hooks/useGetUser'
 import { userID } from '../../../shared/constants'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
+import { ISkillMastery } from '../../../shared/interfaces/ISkillMastery'
+import { IUser } from '../../../shared/interfaces/IUser'
 
-const SkillsTable = () => {
-  const { id } = useParams()
-  const { data: user } = useGetUser(id as string)
+interface ISkillTableProps {
+  user?: IUser
+  skills: ISkillMastery[]
+}
+
+const SkillsTable = ({ user, skills }: ISkillTableProps) => {
   const { data: categories } = useGetSkillCategory()
-  const { data: skills } = useGetSkills()
+  const { data: allSkills } = useGetSkills()
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserProfile = currentUserID === user?.user.id
+  const isCurrentUserProfile = currentUserID === user?.id
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -55,21 +58,19 @@ const SkillsTable = () => {
         <AddIcon /> Add skill
       </Button>
       <div onClick={handleOpenFormOnClickSkillItem}>
-        {user &&
-          skills &&
+        {skills &&
+          allSkills &&
           categories &&
           categories.skillCategories
-            .filter(category => user.user.profile.skills.map(el => el.category).includes(category))
-            .map(el => (
-              <SkillsTableRow key={el} skills={user.user.profile.skills} category={el || 'Other'} />
-            ))}
-        {user &&
-          user.user.profile.skills
+            .filter(category => skills.map(el => el.category).includes(category))
+            .map(el => <SkillsTableRow key={el} skills={skills} category={el || 'Other'} />)}
+        {skills &&
+          skills
             .filter(el => el.category === '')
             .map(el => (
               <SkillsTableRow
                 key={el.name}
-                skills={user.user.profile.skills.filter(el => el.category === '')}
+                skills={skills.filter(el => el.category === '')}
                 category={''}
               />
             ))}
@@ -79,7 +80,7 @@ const SkillsTable = () => {
           open={open}
           handleClose={handleClose}
           label="Add skill"
-          user={user.user}
+          user={user}
           mastery={masteries}
           defaultSkill={defaultSkill}
         />

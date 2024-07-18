@@ -59,7 +59,7 @@ export const PrivateRoutes: RouteObject[] = [
             children: [
               { path: Paths.DETAILS, element: <DetailsPage /> },
               { path: Paths.SKILLS, element: <SkillsPage /> },
-              { path: Paths.PROJECTS, element: <SkillsPage /> },
+              { path: Paths.PROJECTS, element: <ProjectsPage /> },
               { path: Paths.PREVIEW, element: <PreviewPage /> }
             ]
           }
