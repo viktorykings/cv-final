@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import SkillsTable from '../../components/Profile/SkillsTable/index.tsx'
+import SkillsTable from '../../shared/components/SkillsTable/index.tsx'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser.tsx'
 
 const ProfileSkills = () => {

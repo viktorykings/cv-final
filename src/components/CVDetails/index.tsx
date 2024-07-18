@@ -17,7 +17,6 @@ const CVDetails = () => {
 
   const { cvId } = useParams()
   const { data: cv } = useGetCv(cvId as string)
-  console.log('cv cv det', cv)
   const [user, setUser] = useState('')
 
   const isCurrentUserCv = user === currentUserID
@@ -32,7 +31,6 @@ const CVDetails = () => {
 
   useEffect(() => {
     if (cv) {
-      // setUser(cv.cv.user.id)
       setUser(cv.cv.user.id)
       reset({
         name: cv.cv.name,

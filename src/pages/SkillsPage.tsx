@@ -1,5 +1,5 @@
 import { useParams } from 'react-router-dom'
-import SkillsTable from '../components/Profile/SkillsTable'
+import SkillsTable from '../shared/components/SkillsTable'
 import { useGetCv } from '../graphql/cvs/hooks/useGetCv'
 
 const SkillsPage = () => {

@@ -2,12 +2,12 @@ import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { useGetSkillCategory } from '../../../graphql/skills/hooks/useGetSkillsCategories'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
-import { userID } from '../../../shared/constants'
+import { userID } from '../../constants'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
-import { ISkillMastery } from '../../../shared/interfaces/ISkillMastery'
+import { ISkillMastery } from '../../interfaces/ISkillMastery'
 
 interface ISkillTableProps {
   userId: string
