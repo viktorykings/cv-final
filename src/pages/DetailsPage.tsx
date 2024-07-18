@@ -1,4 +1,6 @@
+import CVDetails from '../components/CVDetails'
+
 const DetailsPage = () => {
-  return <div>details</div>
+  return <CVDetails />
 }
 export default DetailsPage

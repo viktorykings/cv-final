@@ -53,9 +53,16 @@ export const PrivateRoutes: RouteObject[] = [
         element: <PagesLayout />,
         children: [
           { path: ``, element: <CvsPage /> },
-          { path: `:cvId/${Paths.DETAILS}`, element: <DetailsPage /> },
-          { path: `:cvId/${Paths.SKILLS}`, element: <SkillsPage /> },
-          { path: `:cvId/${Paths.PREVIEW}`, element: <PreviewPage /> }
+          {
+            path: `:cvId`,
+            element: <ProfileLayout />,
+            children: [
+              { path: Paths.DETAILS, element: <DetailsPage /> },
+              { path: Paths.SKILLS, element: <SkillsPage /> },
+              { path: Paths.PROJECTS, element: <SkillsPage /> },
+              { path: Paths.PREVIEW, element: <PreviewPage /> }
+            ]
+          }
         ]
       },
 

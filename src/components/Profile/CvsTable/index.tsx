@@ -9,6 +9,16 @@ import AddIcon from '@mui/icons-material/Add'
 import CvForm from './CvForm'
 import CustomTable from '../../../shared/components/Table'
 
+const menuItems = [
+  {
+    label: 'Details',
+    path: 'details'
+  },
+  {
+    label: 'Delete CV'
+  }
+]
+
 const CvsTable = () => {
   const { id } = useParams()
   const { data: user } = useGetUser(id as string)
@@ -39,6 +49,7 @@ const CvsTable = () => {
       <CustomTable
         data={user.user.cvs.map(({ name, description, id }) => ({ name, description, id }))}
         searchQuery={searchQuery}
+        constextMenu={menuItems}
       />
       {user && isCurrentUserProfile && (
         <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />

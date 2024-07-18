@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { Box, Button } from '@mui/material'
-import { useParams } from 'react-router-dom'
 import CvForm from '../components/Profile/CvsTable/CvForm'
 import { useGetUser } from '../graphql/users/hooks/useGetUser'
 import SearchBar from '../shared/components/Search'
@@ -13,7 +12,7 @@ import AddIcon from '@mui/icons-material/Add'
 const menuItems = [
   {
     label: 'Details',
-    path: 'cvs'
+    path: 'details'
   },
   {
     label: 'Delete CV'
@@ -23,10 +22,8 @@ const menuItems = [
 const CvsPage = () => {
   const { data } = useGetAllCvs()
 
-  const { id } = useParams()
-  const { data: user } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserProfile = currentUserID === user?.user.id
+  const { data: user } = useGetUser(currentUserID as string)
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
@@ -39,7 +36,6 @@ const CvsPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   if (!data) return <>no data</>
-
   // TODO fix refetch cvs after create/delete
   return (
     <>
@@ -51,14 +47,17 @@ const CvsPage = () => {
         </Button>
       </Box>
       <CustomTable
-        data={data.cvs.map(({ name, description, id }) => ({ name, description, id }))}
+        data={data.cvs.map(({ name, description, user, id }) => ({
+          name,
+          description,
+          email: user && user.email,
+          id
+        }))}
         constextMenu={menuItems}
         searchQuery={searchQuery}
       />
 
-      {user && isCurrentUserProfile && (
-        <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />
-      )}
+      {user && <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />}
     </>
   )
 }

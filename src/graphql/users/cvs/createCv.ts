@@ -10,6 +10,7 @@ export const CREATE_PROFILE_CV = gql`
       description
       user {
         id
+        email
       }
     }
   }

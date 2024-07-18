@@ -16,11 +16,18 @@ function useRouteMatch(patterns: readonly string[]) {
 }
 const ProfileTabs = () => {
   const { id } = useParams()
+  const { cvId } = useParams()
+  const basePath = id ? 'users' : 'cvs'
+  const baseID = id ? id : cvId
+
+  const routesProfile = [Paths.PROFILE, Paths.SKILLS, Paths.LANGUAGES, Paths.CVS]
+  const routesCvs = [Paths.DETAILS, Paths.SKILLS, Paths.PROJECTS, Paths.PREVIEW]
+  const baseRoutes = id ? routesProfile : routesCvs
+
   const buildPath = (id: string, path: string) => {
-    return `users/${id}/${path}`
+    return `/${basePath}/${id}/${path}`
   }
-  const routes = [Paths.PROFILE, Paths.SKILLS, Paths.LANGUAGES, Paths.CVS]
-  const routeMatch = useRouteMatch(routes.map(el => buildPath(id as string, el)))
+  const routeMatch = useRouteMatch(baseRoutes.map(el => buildPath(baseID as string, el)))
   const currentTab = routeMatch?.pattern?.path
 
   return (
@@ -30,25 +37,15 @@ const ProfileTabs = () => {
       indicatorColor="secondary"
       sx={{ margin: '10px 0 30px' }}
     >
-      <Tab
-        label="Profile"
-        value={buildPath(id as string, Paths.PROFILE)}
-        to={Paths.PROFILE}
-        component={Link}
-      />
-      <Tab
-        label="Skills"
-        value={buildPath(id as string, Paths.SKILLS)}
-        to={Paths.SKILLS}
-        component={Link}
-      />
-      <Tab
-        label="Languages"
-        value={buildPath(id as string, Paths.LANGUAGES)}
-        to={Paths.LANGUAGES}
-        component={Link}
-      />
-      <Tab label="CVs" value={buildPath(id as string, Paths.CVS)} to={Paths.CVS} component={Link} />
+      {baseRoutes.map(el => (
+        <Tab
+          key={el}
+          label={el}
+          value={buildPath(baseID as string, el)}
+          to={buildPath(baseID as string, el)}
+          component={Link}
+        />
+      ))}
     </Tabs>
   )
 }

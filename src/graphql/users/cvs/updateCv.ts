@@ -10,6 +10,7 @@ export const UPDATE_PROFILE_CV = gql`
       description
       user {
         id
+        email
       }
     }
   }
