@@ -15,7 +15,12 @@ export const GET_CV = gql`
       projects {
         id
         name
+        internal_name
         description
+        domain
+        start_date
+        end_date
+        team_size
       }
       skills {
         name

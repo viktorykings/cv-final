@@ -8,13 +8,14 @@ import TableHeader from './TableHeader'
 import { ComparatorProps, IContextMenuItem, TProps } from './types/TableProps'
 
 interface TableProps<T> {
+  headers?: T[]
   data: T[]
-  constextMenu: IContextMenuItem[]
+  constextMenu?: IContextMenuItem[]
   searchQuery: string
 }
 
 const CustomTable = (props: TableProps<TProps>) => {
-  const { data, constextMenu, searchQuery } = props
+  const { data, constextMenu, searchQuery, headers } = props
 
   const [order, setOrder] = useState<SortOrder>('asc')
   const [orderBy, setOrderBy] = useState<keyof TProps>('id')
@@ -43,14 +44,19 @@ const CustomTable = (props: TableProps<TProps>) => {
           <TableHeader
             order={order}
             orderBy={orderBy}
-            data={data}
+            data={headers ? headers : data}
+            // data={data}
             onRequestSort={handleRequestSort}
           />
-          <TableBody>
-            {visibleRows.map(el => (
-              <TableItem key={el.id} row={el} contextMenu={constextMenu} />
-            ))}
-          </TableBody>
+          {data.length ? (
+            <TableBody>
+              {visibleRows.map(el => (
+                <TableItem key={el.id} row={el} contextMenu={constextMenu} />
+              ))}
+            </TableBody>
+          ) : (
+            <></>
+          )}
         </Table>
       </TableContainer>
     </>
