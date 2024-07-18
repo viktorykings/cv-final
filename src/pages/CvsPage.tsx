@@ -36,7 +36,6 @@ const CvsPage = () => {
   const [searchQuery, setSearchQuery] = useState('')
 
   if (!data) return <>no data</>
-
   // TODO fix refetch cvs after create/delete
   return (
     <>
@@ -48,7 +47,12 @@ const CvsPage = () => {
         </Button>
       </Box>
       <CustomTable
-        data={data.cvs.map(({ name, description, id }) => ({ name, description, id }))}
+        data={data.cvs.map(({ name, description, user, id }) => ({
+          name,
+          description,
+          email: user && user.email,
+          id
+        }))}
         constextMenu={menuItems}
         searchQuery={searchQuery}
       />
