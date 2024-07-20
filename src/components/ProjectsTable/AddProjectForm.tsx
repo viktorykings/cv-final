@@ -13,6 +13,7 @@ import { useGetProjects } from '../../graphql/users/projects/hooks/useGetProject
 import { useEffect, useState } from 'react'
 import CustomSelect from '../../shared/components/Select'
 import { useGetProject } from '../../graphql/users/projects/hooks/useGetProject'
+import DatePickerValue from './DatePicker'
 
 interface IAddProjectForm {
   open: boolean
@@ -68,8 +69,8 @@ const AddProjectForm = (props: IAddProjectForm) => {
         internalName: project.project.internal_name || '',
         domain: project.project.domain || '',
         teamSize: project.project.team_size.toString() || '',
-        startDate: project.project.start_date || '',
-        endDate: project.project.end_date || '',
+        startDate: project.project.start_date,
+        endDate: project.project.end_date,
         description: project.project.description || ''
       })
     }
@@ -110,6 +111,7 @@ const AddProjectForm = (props: IAddProjectForm) => {
                 label="Internal Name"
                 value={formState.defaultValues?.internalName}
                 disabled
+                sx={{ boxSizing: 'border-box', margin: '16px 0 8px' }}
               />
               <TextField
                 name="domain"
@@ -123,31 +125,18 @@ const AddProjectForm = (props: IAddProjectForm) => {
                 value={formState.defaultValues?.teamSize}
                 disabled
               />
-              <TextField
-                name="startDate"
-                label="Start Date"
-                value={formState.defaultValues?.startDate}
-                disabled
-              />
-              <TextField
-                name="endDate"
-                label="End Date"
-                value={formState.defaultValues?.endDate}
-                disabled
-              />
-
               <Controller
                 name="startDate"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="Start Date" options={[field.value]} />
+                  <DatePickerValue {...field} label="Start Date" defaultValue={field.value} />
                 )}
               />
               <Controller
                 name="endDate"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="End Date" options={[field.value]} />
+                  <DatePickerValue {...field} label="End Date" defaultValue={field.value} />
                 )}
               />
               <TextField
