@@ -11,23 +11,24 @@ import { IDepartment } from '../../interfaces/IDepartment'
 import { ISkill } from '../../interfaces/ISkill'
 import { ISkillMastery } from '../../interfaces/ISkillMastery'
 import hasId from '../../../components/utils/optionHasId'
+import { IProject } from '../../interfaces/IProject'
 
 interface CustomSelectProps {
   label: string
   value: string
   onChange: (event: SelectChangeEvent<string>, child: ReactNode) => void
-  options: IDepartment[] | ISkill[] | string[] | ISkillMastery[]
+  options: IDepartment[] | ISkill[] | string[] | ISkillMastery[] | IProject[]
   error?: boolean
   helperText?: string
   isDisabled?: boolean
 }
 
 const CustomSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
-  ({ label, value, onChange, options, error, helperText }, ref) => {
+  ({ label, value, onChange, options, error, helperText, isDisabled }, ref) => {
     return (
       <FormControl variant="outlined" margin="normal" error={error} sx={{ width: '410px' }}>
         <InputLabel>{label}</InputLabel>
-        <Select ref={ref} value={value} onChange={onChange} label={label}>
+        <Select ref={ref} value={value} onChange={onChange} label={label} disabled={isDisabled}>
           {options &&
             options.map((option, i) => (
               <MenuItem

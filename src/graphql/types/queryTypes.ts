@@ -87,6 +87,9 @@ export type CvSkillArgs = {
   skill: AddCvSkillInput
 }
 
+export type GetProjectResult = {
+  project: IProject
+}
 export type GetProjectsResult = {
   projects: IProject[]
 }
