@@ -8,6 +8,7 @@ import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../shared/constants'
 import AddIcon from '@mui/icons-material/Add'
 import AddProjectForm from './AddProjectForm'
+import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 
 interface IProjectTable {
   cvId?: string
@@ -18,7 +19,8 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
   const { data: projects } = useGetProjects()
   const { data: cv } = useGetCv(cvId as string)
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserCv = currentUserID === cv?.cv.user.id
+  const { data: user } = useGetUser(currentUserID)
+  const isCurrentUserCv = cv && cv.cv.user && currentUserID === cv.cv.user.id
   const [searchQuery, setSearchQuery] = useState('')
   const tableData = cv && cv.cv.projects ? cv.cv.projects : projects?.projects
 
@@ -32,6 +34,7 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
 
   if (!tableData) return <>no data</>
   if (!projects) return <>no data</>
+  if (!cv || !cv.cv.user) return <>no cv</>
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -67,11 +70,13 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
         )}
         searchQuery={searchQuery}
       />
-      {isCurrentUserCv && (
+      {isCurrentUserCv && cvId && cv && user && (
         <AddProjectForm
           open={open}
+          cvId={cvId}
           handleClose={handleClose}
-          // project={projects.projects}
+          cv={cv.cv}
+          allProjects={projects.projects}
         />
       )}
     </>

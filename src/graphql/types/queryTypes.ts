@@ -1,4 +1,5 @@
 import type {
+  AddCvProjectInput,
   AddCvSkillInput,
   AddProfileLanguageInput,
   AddProfileSkillInput,
@@ -92,4 +93,8 @@ export type GetProjectResult = {
 }
 export type GetProjectsResult = {
   projects: IProject[]
+}
+
+export type CvProjectArgs = {
+  project: AddCvProjectInput
 }

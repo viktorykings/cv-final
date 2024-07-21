@@ -9,32 +9,40 @@ import {
 } from '@mui/material'
 import { IProject } from '../../shared/interfaces/IProject'
 import { Controller, useForm } from 'react-hook-form'
-import { useGetProjects } from '../../graphql/users/projects/hooks/useGetProjects'
 import { useEffect, useState } from 'react'
 import CustomSelect from '../../shared/components/Select'
 import { useGetProject } from '../../graphql/users/projects/hooks/useGetProject'
 import DatePickerValue from './DatePicker'
+import { useAddCvProject } from '../../graphql/cvs/hooks/useAddCvProject'
+import { ICV } from '../../shared/interfaces/ICV'
+import { useUpdateCvProject } from '../../graphql/cvs/hooks/useUpdateCvProject'
 
 interface IAddProjectForm {
+  cvId: string
   open: boolean
+  cv: ICV
   handleClose: () => void
+  allProjects: IProject[]
 }
 
 type TFormValues = {
   name: string
   internalName: string
   domain: string
-  teamSize: string
+  teamSize: number
   startDate: string
   endDate: string
   description: string
 }
+// TODO: fix date picker value format
 
 const AddProjectForm = (props: IAddProjectForm) => {
-  const { open, handleClose } = props
-  const { data: projects } = useGetProjects()
+  const { open, cv, cvId, allProjects, handleClose } = props
 
-  const [selectedProjectId, setSelectedProjectId] = useState<string | null>(null)
+  const [userCvProjects, setUserCvProject] = useState<string[]>()
+
+  const [selectedProjectName, setSelectedProjectName] = useState<string>('')
+  const [selectedProjectId, setSelectedProjectId] = useState<string>('')
   const { data: project } = useGetProject(selectedProjectId)
 
   const { control, handleSubmit, watch, reset, formState } = useForm<TFormValues>({
@@ -42,7 +50,7 @@ const AddProjectForm = (props: IAddProjectForm) => {
       name: '',
       internalName: '',
       domain: '',
-      teamSize: '',
+      teamSize: 0,
       startDate: '',
       endDate: '',
       description: ''
@@ -50,17 +58,26 @@ const AddProjectForm = (props: IAddProjectForm) => {
   })
   const watchFields = watch(['name'])
 
-  const getId = (arr: IProject[], str: string): string => {
-    const project = arr.find(el => el.name === str)
-    return project ? project.id.toString() : ''
+  const getNAme = (arr: IProject[], str: string) => {
+    const proj = arr.filter(el => el.name === str)
+    return { name: proj[0].name, id: proj[0].id.toString() }
   }
 
+  const [addCvProject] = useAddCvProject()
+  const [updateCvProject] = useUpdateCvProject()
+
   useEffect(() => {
-    if (projects && watchFields[0]) {
-      const id = getId(projects.projects, watchFields[0])
-      setSelectedProjectId(id)
+    if (cv.projects) {
+      setUserCvProject(cv.projects.map(el => el.name))
     }
-  }, [projects, watchFields])
+  }, [cv])
+
+  useEffect(() => {
+    if (allProjects && watchFields[0]) {
+      setSelectedProjectName(getNAme(allProjects, watchFields[0]).name)
+      setSelectedProjectId(getNAme(allProjects, watchFields[0]).id)
+    }
+  }, [allProjects, watchFields])
 
   useEffect(() => {
     if (project) {
@@ -68,19 +85,47 @@ const AddProjectForm = (props: IAddProjectForm) => {
         name: project.project.name || '',
         internalName: project.project.internal_name || '',
         domain: project.project.domain || '',
-        teamSize: project.project.team_size.toString() || '',
-        startDate: project.project.start_date,
-        endDate: project.project.end_date,
+        teamSize: project.project.team_size || 0,
+        startDate: project.project.start_date || '',
+        endDate: project.project.end_date || '',
         description: project.project.description || ''
       })
     }
   }, [project, reset])
 
   const onSubmit = (formData: TFormValues) => {
-    console.log(formData)
+    if (selectedProjectId && cvId && userCvProjects) {
+      if (userCvProjects && !userCvProjects.includes(selectedProjectName)) {
+        addCvProject({
+          variables: {
+            project: {
+              cvId: cvId,
+              projectId: selectedProjectId,
+              start_date: formData.startDate,
+              end_date: formData.endDate ?? '',
+              roles: [''],
+              responsibilities: ['']
+            }
+          }
+        })
+      } else {
+        updateCvProject({
+          variables: {
+            project: {
+              cvId: cvId,
+              projectId: selectedProjectId,
+              start_date: formData.startDate,
+              end_date: formData.endDate,
+              roles: [''],
+              responsibilities: ['']
+            }
+          }
+        })
+      }
+    }
   }
 
-  if (!projects) return <>no proj</>
+  if (!allProjects) return <>no proj</>
   return (
     <Dialog
       open={open}
@@ -103,7 +148,7 @@ const AddProjectForm = (props: IAddProjectForm) => {
                 name="name"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="Project" options={projects.projects} />
+                  <CustomSelect {...field} label="Project" options={allProjects} />
                 )}
               />
               <TextField

@@ -20,13 +20,6 @@ const DatePickerValue = React.forwardRef<HTMLDivElement, IDatePicker>(
           label={label}
           value={value}
           onChange={newValue => setValue(newValue)}
-          sx={{
-            '.MuiPickersDay-root': {
-              // color: 'red',
-              borderColor: 'red',
-              backgroundColor: 'red'
-            }
-          }}
         />
       </LocalizationProvider>
     )
