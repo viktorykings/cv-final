@@ -1,8 +1,11 @@
 {
   "buttons": {
-    "update": "Сохранить",
+    "update": "Обновить",
     "cancel": "Отмена",
-    "delete": "Удалить"
+    "delete": "Удалить",
+    "addSkill": "Добавить навык",
+    "addLanguage": "Добавить язык",
+    "addCv": "Добавить резюме"
   },
   "header": {
     "login": "Войти",
@@ -27,17 +30,17 @@
     }
   },
   "sideBar": {
-    "HOME": "Главная",
-    "EMPLOYEES": "Сотрудники",
-    "PROJECTS": "Проекты",
-    "CVS": "Резюме",
-    "DEPARTMENTS ": "Отделы",
-    "POSITIONS ": "Должности",
-    "SKILLS ": "Навыки",
-    "LANGUAGES ": "Языки",
-    "PROFILE ": "Профиль",
-    "SETTINGS ": "Настройки",
-    "LOGOUT ": "Выйти"
+    "home": "Главная",
+    "employees": "Сотрудники",
+    "projects": "Проекты",
+    "cvs": "Резюме",
+    "departments": "Отделы",
+    "positions": "Должности",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти"
   },
   "tableHead": {
     "users": {
@@ -77,5 +80,10 @@
       "nativeName": "Местное Название",
       "iso2": "ISO2"
     }
+  },
+  "profile": {
+    "uploadFile": "Загрузить",
+    "uploadFileInfo": "png, jpg или gif не более 0.5MB",
+    "intlDateTime": "Участник с {{val, datetime}}"
   }
 }

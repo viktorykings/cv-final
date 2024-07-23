@@ -5,6 +5,7 @@ import { useReactiveVar } from '@apollo/client'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 import { userID } from '../../shared/constants'
 import ProfileUpdateForm from './ProfileUpdateForm'
+import { useTranslation } from 'react-i18next'
 
 const VisuallyHiddenInput = styled('input')({
   clip: 'rect(0 0 0 0)',
@@ -21,6 +22,7 @@ const Profile = () => {
   const { id } = useParams()
   const { data } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
+  const { t } = useTranslation()
 
   return (
     <Box
@@ -67,9 +69,10 @@ const Profile = () => {
                   }}
                 >
                   <Typography component={'h6'}>
-                    <FileUploadOutlinedIcon /> Upload file
+                    <FileUploadOutlinedIcon />
+                    {t('profile.uploadFile')}
                   </Typography>
-                  <Typography component={'h6'}>png, jpg or gif no more than 0.5MB</Typography>
+                  <Typography component={'h6'}>{t('profile.uploadFileInfo')}</Typography>
                   <VisuallyHiddenInput type="file" />
                 </Button>
               )}
@@ -80,7 +83,12 @@ const Profile = () => {
             </Typography>
             <Typography component={'p'}>{data.user.email}</Typography>
             <Typography component={'p'}>
-              A member since {new Date(parseInt(data.user.created_at)).toDateString()}
+              {t('profile.intlDateTime', {
+                val: new Date(parseInt(data.user.created_at)),
+                formatParams: {
+                  val: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+                }
+              })}
             </Typography>
           </Box>
           <Box>

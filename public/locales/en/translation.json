@@ -2,7 +2,10 @@
   "buttons": {
     "update": "Update",
     "cancel": "Cancel",
-    "delete": "Delete"
+    "delete": "Delete",
+    "addSkill": "Add skill",
+    "addLanguage": "Add Language",
+    "addCv": "Add CV"
   },
   "header": {
     "login": "Login",
@@ -27,17 +30,17 @@
     }
   },
   "sideBar": {
-    "HOME": "HOME",
-    "EMPLOYEES": "EMPLOYEES",
-    "PROJECTS": "PROJECTS",
-    "CVS": "CVS",
-    "DEPARTMENTS ": "DEPARTMENTS",
-    "POSITIONS ": "POSITIONS",
-    "SKILLS ": "SKILLS",
-    "LANGUAGES ": "LANGUAGES",
-    "PROFILE ": "PROFILE",
-    "SETTINGS ": "SETTINGS",
-    "LOGOUT ": "LOGOUT"
+    "home": "HOME",
+    "employees": "EMPLOYEES",
+    "projects": "PROJECTS",
+    "cvs": "CVS",
+    "departments": "DEPARTMENTS",
+    "positions": "POSITIONS",
+    "skills": "SKILLS",
+    "languages": "LANGUAGES",
+    "profile": "PROFILE",
+    "settings": "SETTINGS",
+    "logout": "LOGOUT"
   },
   "tableHead": {
     "users": {
@@ -77,5 +80,10 @@
       "nativeName": "Native Name",
       "iso2": "ISO2"
     }
+  },
+  "profile": {
+    "uploadFile": "Upload file",
+    "uploadFileInfo": "png, jpg or gif no more than 0.5MB",
+    "intlDateTime": "A member since {{val, datetime}}"
   }
 }

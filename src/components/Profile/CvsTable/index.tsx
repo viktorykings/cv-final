@@ -8,6 +8,7 @@ import { userID } from '../../../shared/constants'
 import AddIcon from '@mui/icons-material/Add'
 import CvForm from './CvForm'
 import CustomTable from '../../../shared/components/Table'
+import { useTranslation } from 'react-i18next'
 
 const menuItems = [
   {
@@ -25,6 +26,7 @@ const CvsTable = () => {
   const currentUserID = useReactiveVar(userID)
   const isCurrentUserProfile = currentUserID === user?.user.id
   const [searchQuery, setSearchQuery] = useState('')
+  const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
@@ -43,7 +45,7 @@ const CvsTable = () => {
         <SearchBar setSearchQuery={setSearchQuery} />
 
         <Button color="secondary" onClick={handleClickOpen}>
-          <AddIcon /> Create CV
+          <AddIcon /> {t('buttons.addCv')}
         </Button>
       </Box>
       <CustomTable
@@ -52,7 +54,7 @@ const CvsTable = () => {
         constextMenu={menuItems}
       />
       {user && isCurrentUserProfile && (
-        <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />
+        <CvForm open={open} handleClose={handleClose} label={t('buttons.addCv')} user={user.user} />
       )}
     </>
   )

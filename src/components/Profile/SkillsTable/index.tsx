@@ -9,6 +9,7 @@ import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
+import { useTranslation } from 'react-i18next'
 
 const SkillsTable = () => {
   const { id } = useParams()
@@ -19,6 +20,7 @@ const SkillsTable = () => {
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
   const isCurrentUserProfile = currentUserID === user?.user.id
+  const { t } = useTranslation()
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -52,7 +54,7 @@ const SkillsTable = () => {
       }}
     >
       <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
-        <AddIcon /> Add skill
+        <AddIcon /> {t('buttons.addSkill')}
       </Button>
       <div onClick={handleOpenFormOnClickSkillItem}>
         {user &&
@@ -78,7 +80,7 @@ const SkillsTable = () => {
         <SkillUpdForm
           open={open}
           handleClose={handleClose}
-          label="Add skill"
+          label={t('buttons.addSkill')}
           user={user.user}
           mastery={masteries}
           defaultSkill={defaultSkill}
