@@ -23,6 +23,7 @@ import {
   LazyQueryExecFunction,
   MutationFunctionOptions
 } from '@apollo/client'
+import { useTranslation } from 'react-i18next'
 
 type TFormData = {
   email: string
@@ -40,6 +41,8 @@ interface IForm {
 
 const Form = ({ isRegisterForm, login, signup }: IForm) => {
   const [showPassword, setShowPassword] = useState(false)
+  const { t } = useTranslation()
+
   const handleClickShowPassword = () => setShowPassword(show => !show)
   const handleMouseDownPassword = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.preventDefault()
@@ -73,15 +76,15 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
       autoComplete="on"
     >
       <Typography variant="h4" gutterBottom align="center">
-        {isRegisterForm ? 'Register Now' : 'Welcome Back'}
+        {isRegisterForm ? t('form.register') : t('form.welcomeBack')}
       </Typography>
       <Typography variant="subtitle1" gutterBottom align="center">
-        {isRegisterForm ? 'Welcome! Sign up to continue.' : 'Hello again! Sign in to continue.'}
+        {isRegisterForm ? t('form.header2Register') : t('form.header2WelcomeBack')}
       </Typography>
 
       <TextField
         id="email"
-        label="Email"
+        label={t('form.email')}
         helperText={errors.email?.message}
         variant="outlined"
         color="secondary"
@@ -89,14 +92,14 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
         InputLabelProps={{ style: { color: 'primary' } }}
         error={!!errors.email}
         {...register('email', {
-          required: { value: true, message: 'Email is required' },
-          pattern: { value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/, message: 'Enter valid email' }
+          required: { value: true, message: t('form.errors.emailIsRequired') },
+          pattern: { value: /^[\w-]+@([\w-]+\.)+[\w-]{2,4}$/, message: t('form.errors.validEmail') }
         })}
         aria-invalid={errors.email ? 'true' : 'false'}
       />
       <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
         <InputLabel htmlFor="outlined-adornment-password" color="secondary">
-          Password
+          {t('form.password')}
         </InputLabel>
         <OutlinedInput
           id="outlined-adornment-password"
@@ -113,14 +116,14 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
               </IconButton>
             </InputAdornment>
           }
-          label="Password"
+          label={t('form.password')}
           color="secondary"
           error={!!errors.password}
           {...register('password', {
-            required: { value: true, message: 'At least 8 characters' },
+            required: { value: true, message: t('form.errors.passwordIsRequired') },
             pattern: {
               value: /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$/,
-              message: 'At least one number, uppercase and lowercase char'
+              message: t('form.errors.passwordValidate')
             }
           })}
           aria-invalid={errors.password ? 'true' : 'false'}
@@ -133,7 +136,7 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
       </FormControl>
 
       <Button variant="contained" color="secondary" type="submit">
-        Sign in
+        {isRegisterForm ? t('form.signup') : t('form.signin')}
       </Button>
       <Button
         variant="text"
@@ -141,7 +144,7 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
         component={Link}
         to={isRegisterForm ? '/auth/login' : '/auth/signup'}
       >
-        {isRegisterForm ? 'I have an account' : "I don't have an account"}
+        {isRegisterForm ? t('form.haveAcc') : t('form.dontHaveAcc')}
       </Button>
       <ToastContainer />
     </Box>

@@ -1,0 +1,29 @@
+{
+  "buttons": {
+    "update": "Update",
+    "cancel": "Cancel",
+    "delete": "Delete"
+  },
+  "header": {
+    "login": "Login",
+    "signup": "Signup"
+  },
+  "form": {
+    "register": "Register Now",
+    "welcomeBack": "Welcome Back",
+    "header2Register": "Welcome! Sign up to continue.",
+    "header2WelcomeBack": "Hello again! Sign in to continue.",
+    "email": "Email",
+    "password": "Password",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "haveAcc": "I have an account",
+    "dontHaveAcc": "I don't have an account",
+    "errors": {
+      "emailIsRequired": "Email is required",
+      "passwordIsRequired": "Password is required",
+      "validEmail": "Enter valid email",
+      "passwordValidate": "At least 8 characters, one number, uppercase and lowercase char"
+    }
+  }
+}

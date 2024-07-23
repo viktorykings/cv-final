@@ -6,6 +6,7 @@ import { useGetCv } from '../../graphql/cvs/hooks/useGetCv'
 import { useEffect, useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../shared/constants'
+import { useTranslation } from 'react-i18next'
 type TFormValues = {
   name: string
   education: string
@@ -14,6 +15,7 @@ type TFormValues = {
 
 const CVDetails = () => {
   const currentUserID = useReactiveVar(userID)
+  const { t } = useTranslation()
 
   const { cvId } = useParams()
   const { data: cv } = useGetCv(cvId as string)
@@ -111,7 +113,8 @@ const CVDetails = () => {
 
       {isCurrentUserCv && (
         <Button type="submit" color="secondary" variant="contained" fullWidth>
-          Update
+          {/* Update */}
+          {t('buttons.update')}
         </Button>
       )}
     </form>
