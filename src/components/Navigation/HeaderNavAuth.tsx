@@ -10,7 +10,11 @@ type SidebarProps = {
 function HeaderNavAuth({ toggleDrawer }: SidebarProps) {
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="secondary" sx={{ boxShadow: 0 }}>
+      <AppBar
+        position="static"
+        color="secondary"
+        sx={{ boxShadow: 0, backgroundColor: 'primary.main' }}
+      >
         <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
           <Box sx={{ flexGrow: 1 }}>
             <IconButton
