@@ -26,5 +26,56 @@
       "passwordValidate": "Длина пароля не менее 8 символов: 1 число, 1 заглавная и строчная буквы"
     }
   },
-  "sideBar": {}
+  "sideBar": {
+    "HOME": "Главная",
+    "EMPLOYEES": "Сотрудники",
+    "PROJECTS": "Проекты",
+    "CVS": "Резюме",
+    "DEPARTMENTS ": "Отделы",
+    "POSITIONS ": "Должности",
+    "SKILLS ": "Навыки",
+    "LANGUAGES ": "Языки",
+    "PROFILE ": "Профиль",
+    "SETTINGS ": "Настройки",
+    "LOGOUT ": "Выйти"
+  },
+  "tableHead": {
+    "users": {
+      "firstName": "Имя",
+      "lastName": "Фамилия",
+      "email": "Электронная почта",
+      "departmenеName": "Отдел",
+      "positionName": "Должность"
+    },
+    "projects": {
+      "name": "Название",
+      "internalName": "Внутреннее название",
+      "domain": "Домен",
+      "teamSize": "Размер команды",
+      "startDate": "Дата начала",
+      "endDate": "Дата окончания"
+    },
+    "cvs": {
+      "name": "Название",
+      "description": "Описание",
+      "email": "Электронная почта"
+    },
+    "departments": {
+      "name": "Название",
+      "employees": "Сотрудники"
+    },
+    "positions": {
+      "name": "Название",
+      "employees": "Сотрудники"
+    },
+    "skills": {
+      "name": "Название",
+      "category": "Категория"
+    },
+    "languages": {
+      "name": "Название",
+      "nativeName": "Местное Название",
+      "iso2": "ISO2"
+    }
+  }
 }

@@ -25,5 +25,57 @@
       "validEmail": "Enter valid email",
       "passwordValidate": "At least 8 characters, one number, uppercase and lowercase char"
     }
+  },
+  "sideBar": {
+    "HOME": "HOME",
+    "EMPLOYEES": "EMPLOYEES",
+    "PROJECTS": "PROJECTS",
+    "CVS": "CVS",
+    "DEPARTMENTS ": "DEPARTMENTS",
+    "POSITIONS ": "POSITIONS",
+    "SKILLS ": "SKILLS",
+    "LANGUAGES ": "LANGUAGES",
+    "PROFILE ": "PROFILE",
+    "SETTINGS ": "SETTINGS",
+    "LOGOUT ": "LOGOUT"
+  },
+  "tableHead": {
+    "users": {
+      "firstName": "First name",
+      "lastName": "Last name",
+      "email": "Email",
+      "departmentName": "Department name",
+      "positionName": "Position name"
+    },
+    "projects": {
+      "name": "Name",
+      "internalName": "Internal name",
+      "domain": "Domain",
+      "teamSize": "Team Size",
+      "startDate": "Start Date",
+      "endDate": "End Date"
+    },
+    "cvs": {
+      "name": "Name",
+      "description": "Description",
+      "email": "Email"
+    },
+    "departments": {
+      "name": "Name",
+      "employees": "Employees"
+    },
+    "positions": {
+      "name": "Name",
+      "employees": "Employees"
+    },
+    "skills": {
+      "name": "Name",
+      "category": "Category"
+    },
+    "languages": {
+      "name": "Name",
+      "nativeName": "Native Name",
+      "iso2": "ISO2"
+    }
   }
 }
