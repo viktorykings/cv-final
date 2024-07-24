@@ -6,7 +6,7 @@ type SearchBarProps = {
 }
 
 const SearchBar = ({ setSearchQuery }: SearchBarProps) => (
-  <div>
+  <div style={{ margin: ' 20px 0 0 ' }}>
     <TextField
       id="search-bar"
       className="text"
