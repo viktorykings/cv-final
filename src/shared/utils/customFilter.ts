@@ -7,6 +7,7 @@ function customFilter(arr: TablePropsTT[], searchQuery: string) {
       el.description?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       el.first_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       el.last_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      el.internal_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       el.category?.toLowerCase().includes(searchQuery.toLowerCase())
     )
   })
