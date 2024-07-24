@@ -1,12 +1,26 @@
-import { useParams } from 'react-router-dom'
-import SkillsTable from '../shared/components/SkillsTable'
-import { useGetCv } from '../graphql/cvs/hooks/useGetCv'
-
+import { useState } from 'react'
+import SearchBar from '../shared/components/Search'
+import Table from '../shared/components/Table'
+import { useGetSkills } from '../graphql/skills/hooks/useGettAllSkills'
 const SkillsPage = () => {
-  const { cvId } = useParams()
-  const { data: cv } = useGetCv(cvId as string)
-  if (!cv) return <>no cv</>
+  const { data: skills } = useGetSkills()
+  const [searchQuery, setSearchQuery] = useState('')
+  if (!skills) return <>no skills</>
 
-  return <SkillsTable userId={cv.cv.user.id} cvId={cv.cv.id} skills={cv.cv.skills} />
+  return (
+    <>
+      <SearchBar setSearchQuery={setSearchQuery} />
+
+      <Table
+        data={skills.skills.map(({ name, category, id }) => ({
+          name,
+          category: category ?? '',
+          id: id.toString()
+        }))}
+        constextMenu={[]}
+        searchQuery={searchQuery}
+      />
+    </>
+  )
 }
 export default SkillsPage

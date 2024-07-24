@@ -1,5 +1,8 @@
 export interface ILanguageProficiency {
+  id: string
   name: string
+  native_name: string
+  iso2: string
   proficiency: keyof typeof Proficiency
 }
 export enum Proficiency {
