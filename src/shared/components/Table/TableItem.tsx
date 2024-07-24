@@ -6,7 +6,7 @@ import { TProps, IContextMenuItem } from './types/TableProps'
 
 type TableItemProps = {
   row: TProps
-  contextMenu: IContextMenuItem[]
+  contextMenu?: IContextMenuItem[]
 }
 
 const TableItem = ({ row, contextMenu }: TableItemProps) => {
@@ -22,7 +22,7 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
   const createCell = (el: string) => {
     switch (el) {
       case 'id':
-        return (
+        return contextMenu ? (
           <ContextMenu
             key={'id'}
             open={open}
@@ -32,6 +32,8 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
           >
             <ContextMenuItems id={row.id} items={contextMenu} handleClose={handleClose} />
           </ContextMenu>
+        ) : (
+          <TableCell key={'id'}></TableCell>
         )
       case 'avatar':
         return (

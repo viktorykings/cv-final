@@ -5,8 +5,9 @@ import AccountMenuItem from './AccountMenuItem'
 import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 import { Paths } from '../../routes/paths'
-import { AUTH_TOKEN, userID, userToken } from '../../shared/constants'
+import { userID } from '../../shared/constants'
 import { useReactiveVar } from '@apollo/client'
+import { logOut } from '../../shared/utils/logOut'
 
 const AccountMenu = () => {
   const currentUserID = useReactiveVar(userID)
@@ -28,8 +29,7 @@ const AccountMenu = () => {
   }
 
   const handleLogOut = () => {
-    localStorage.removeItem(AUTH_TOKEN)
-    userToken('')
+    logOut()
     navigate(Paths.AUTH + '/' + Paths.LOGIN)
     handleClose()
   }

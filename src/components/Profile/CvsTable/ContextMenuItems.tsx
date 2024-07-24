@@ -4,7 +4,7 @@ import { useDeleteCv } from '../../../graphql/users/cvs/hooks/useDeleteCv'
 import { IContextMenuItem } from '../../../shared/components/Table/types/TableProps'
 
 interface IMenuItemProps<T> {
-  items: T[]
+  items: T[] | undefined
   id: string | null | undefined
   handleClose: () => void
 }
@@ -16,6 +16,7 @@ const ContextMenuItems = ({ items, id, handleClose }: IMenuItemProps<IContextMen
     deleteCv({ variables: { cv: { cvId: id } } })
     handleClose()
   }
+  if (!items) return <></>
   return (
     <>
       {items.map(el =>

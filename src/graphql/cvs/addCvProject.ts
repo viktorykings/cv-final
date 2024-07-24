@@ -1,8 +1,8 @@
 import { gql } from '@apollo/client'
 
-export const GET_CV = gql`
-  query GET_CV($id: ID!) {
-    cv(cvId: $id) {
+export const ADD_CV_PROJECT = gql`
+  mutation ADD_CV_PROJECT($project: AddCvProjectInput!) {
+    addCvProject(project: $project) {
       id
       created_at
       name
@@ -21,15 +21,8 @@ export const GET_CV = gql`
         start_date
         end_date
         team_size
-      }
-      skills {
-        name
-        category
-        mastery
-      }
-      languages {
-        name
-        proficiency
+        roles
+        responsibilities
       }
     }
   }

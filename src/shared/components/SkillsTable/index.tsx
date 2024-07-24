@@ -1,24 +1,28 @@
-import { useParams } from 'react-router-dom'
 import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
 import { useGetSkillCategory } from '../../../graphql/skills/hooks/useGetSkillsCategories'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
-import { useGetUser } from '../../../graphql/users/hooks/useGetUser'
-import { userID } from '../../../shared/constants'
+import { userID } from '../../constants'
 import { Box, Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
+import { ISkillMastery } from '../../interfaces/ISkillMastery'
 
-const SkillsTable = () => {
-  const { id } = useParams()
-  const { data: user } = useGetUser(id as string)
+interface ISkillTableProps {
+  userId: string
+  cvId?: string
+  skills: ISkillMastery[]
+  isProfileSkills?: boolean
+}
+
+const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps) => {
   const { data: categories } = useGetSkillCategory()
-  const { data: skills } = useGetSkills()
+  const { data: allSkills } = useGetSkills()
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserProfile = currentUserID === user?.user.id
+  const isCurrentUserProfile = currentUserID === userId
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -37,6 +41,10 @@ const SkillsTable = () => {
       handleClickOpen()
     }
   }
+  const skillsToRender = skills
+    .slice()
+    .map(el => (el.category === '' ? { ...el, category: 'Other' } : el))
+  const categoriesToRedner = categories && [...categories.skillCategories, 'Other']
 
   return (
     <Box
@@ -55,33 +63,24 @@ const SkillsTable = () => {
         <AddIcon /> Add skill
       </Button>
       <div onClick={handleOpenFormOnClickSkillItem}>
-        {user &&
-          skills &&
-          categories &&
-          categories.skillCategories
-            .filter(category => user.user.profile.skills.map(el => el.category).includes(category))
-            .map(el => (
-              <SkillsTableRow key={el} skills={user.user.profile.skills} category={el || 'Other'} />
-            ))}
-        {user &&
-          user.user.profile.skills
-            .filter(el => el.category === '')
-            .map(el => (
-              <SkillsTableRow
-                key={el.name}
-                skills={user.user.profile.skills.filter(el => el.category === '')}
-                category={''}
-              />
-            ))}
+        {skillsToRender &&
+          allSkills &&
+          categoriesToRedner &&
+          categoriesToRedner
+            .filter(category => skillsToRender.map(el => el.category).includes(category))
+            .map(el => <SkillsTableRow key={el} skills={skillsToRender} category={el} />)}
       </div>
-      {user && isCurrentUserProfile && (
+      {isCurrentUserProfile && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}
           label="Add skill"
-          user={user.user}
+          userId={userId}
+          cvId={cvId}
           mastery={masteries}
           defaultSkill={defaultSkill}
+          skills={skills}
+          isProfileSkills={isProfileSkills}
         />
       )}
     </Box>
