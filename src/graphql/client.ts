@@ -3,6 +3,7 @@ import { setContext } from '@apollo/client/link/context'
 import { AUTH_TOKEN } from '../shared/constants/index.ts'
 import { onError } from '@apollo/client/link/error'
 import showToast from '../shared/utils/showToast.tsx'
+import { logOut } from '../shared/utils/logOut.ts'
 
 const httpLink = createHttpLink({
   uri: import.meta.env.VITE_HTTP_LINK
@@ -21,6 +22,18 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
       }
     })
     if (networkError) showToast(networkError.toString())
+  }
+
+  if (graphQLErrors) {
+    for (const err of graphQLErrors) {
+      switch (err.extensions.code) {
+        case 'UNAUTHENTICATED':
+          logOut()
+          break
+        default:
+          break
+      }
+    }
   }
 })
 

@@ -1,4 +1,6 @@
 import type {
+  AddCvProjectInput,
+  AddCvSkillInput,
   AddProfileLanguageInput,
   AddProfileSkillInput,
   AuthInput,
@@ -14,6 +16,7 @@ import { IPosition } from '../../shared/interfaces/IPosition'
 import { ISkill } from '../../shared/interfaces/ISkill'
 import { ILanguageProficiency } from '../../shared/interfaces/ILanguageProficiency'
 import { ICV } from '../../shared/interfaces/ICV'
+import { IProject } from '../../shared/interfaces/IProject'
 
 export type LoginArgs = {
   auth: AuthInput
@@ -77,4 +80,21 @@ export type GetCvsResult = {
 }
 export type GetCvResult = {
   cv: ICV
+}
+export type CvSkillResult = {
+  cv: Cv
+}
+export type CvSkillArgs = {
+  skill: AddCvSkillInput
+}
+
+export type GetProjectResult = {
+  project: IProject
+}
+export type GetProjectsResult = {
+  projects: IProject[]
+}
+
+export type CvProjectArgs = {
+  project: AddCvProjectInput
 }
