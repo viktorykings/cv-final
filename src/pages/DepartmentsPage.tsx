@@ -15,7 +15,7 @@ const DepartmentsPage = () => {
       <Table
         data={departments.departments.map(({ name, id }) => ({ name, id }))}
         constextMenu={[]}
-        searchQueryProp={searchQuery}
+        searchQuery={searchQuery}
       />
     </>
   )
