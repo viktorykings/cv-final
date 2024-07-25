@@ -1,26 +1,28 @@
 import { useParams } from 'react-router-dom'
-import { Box, Typography, Avatar, styled, Button } from '@mui/material'
-import FileUploadOutlinedIcon from '@mui/icons-material/FileUploadOutlined'
+import { Box, Typography, Avatar, Button } from '@mui/material'
 import { useReactiveVar } from '@apollo/client'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 import { userID } from '../../shared/constants'
 import ProfileUpdateForm from './ProfileUpdateForm'
+import FileUploadButton from './AvatarUploadBtn'
+import ClearIcon from '@mui/icons-material/Clear'
+import { useDeleteAvatar } from '../../graphql/users/profile/hooks/useDeleteAvatar'
 
-const VisuallyHiddenInput = styled('input')({
-  clip: 'rect(0 0 0 0)',
-  clipPath: 'inset(50%)',
-  height: 1,
-  overflow: 'hidden',
-  position: 'absolute',
-  bottom: 0,
-  left: 0,
-  whiteSpace: 'nowrap',
-  width: 1
-})
 const Profile = () => {
   const { id } = useParams()
   const { data } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
+  const [deleteAvatar] = useDeleteAvatar()
+
+  const handleDeleteAvatar = () => {
+    deleteAvatar({
+      variables: {
+        avatar: {
+          userId: currentUserID
+        }
+      }
+    })
+  }
 
   return (
     <Box
@@ -51,30 +53,11 @@ const Profile = () => {
                 src={data.user.profile.avatar}
                 sx={{ width: 120, height: 120 }}
               />
-              {currentUserID === data.user.id && (
-                <Button
-                  component="label"
-                  role={undefined}
-                  variant="contained"
-                  tabIndex={-1}
-                  sx={{
-                    background: 'transparent',
-                    boxShadow: 'none',
-                    display: 'flex',
-                    flexDirection: 'column',
-                    alignItems: 'center',
-                    margin: '0 auto'
-                  }}
-                >
-                  <Typography component={'h6'}>
-                    <FileUploadOutlinedIcon /> Upload file
-                  </Typography>
-                  <Typography component={'h6'}>png, jpg or gif no more than 0.5MB</Typography>
-                  <VisuallyHiddenInput type="file" />
-                </Button>
-              )}
+              <Button onClick={handleDeleteAvatar}>
+                <ClearIcon />
+              </Button>
+              {currentUserID === data.user.id && <FileUploadButton />}
             </Box>
-
             <Typography component={'h5'} variant="h5">
               {data.user.profile.full_name}
             </Typography>
