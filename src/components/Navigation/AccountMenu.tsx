@@ -1,4 +1,3 @@
-import { AccountCircle } from '@mui/icons-material'
 import { Box, Typography, Avatar, Menu } from '@mui/material'
 import { MenuItems } from '../../assets/sidebarIcons'
 import AccountMenuItem from './AccountMenuItem'
@@ -8,9 +7,11 @@ import { Paths } from '../../routes/paths'
 import { userID } from '../../shared/constants'
 import { useReactiveVar } from '@apollo/client'
 import { logOut } from '../../shared/utils/logOut'
+import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 
 const AccountMenu = () => {
   const currentUserID = useReactiveVar(userID)
+  const { data: user } = useGetUser(currentUserID)
 
   const navigate = useNavigate()
 
@@ -35,16 +36,12 @@ const AccountMenu = () => {
   }
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
-      <Typography sx={{ marginRight: 2 }}>name</Typography>
+      <Typography sx={{ marginRight: 2 }}>{user?.user.profile.full_name}</Typography>
       <Avatar
-        aria-label="account of current user"
-        aria-controls="menu-appbar"
-        aria-haspopup="true"
+        alt={user?.user.profile.full_name}
+        src={user?.user.profile.avatar}
         onClick={handleMenu}
-        color="primary"
-      >
-        <AccountCircle />
-      </Avatar>
+      />
       <Menu
         id="menu-appbar"
         anchorEl={anchorEl}
