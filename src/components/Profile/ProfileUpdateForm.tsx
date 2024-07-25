@@ -62,7 +62,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={t('tableHead.users.firstName')}
+              label={t('tableHeadLabels.first_name')}
               variant="outlined"
               margin="normal"
               color="secondary"
@@ -76,7 +76,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label={t('tableHead.users.lastName')}
+              label={t('tableHeadLabels.last_name')}
               variant="outlined"
               margin="normal"
               color="secondary"
@@ -91,7 +91,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
             render={({ field }) => (
               <ProfileSelect
                 {...field}
-                label={t('tableHead.users.departmentName')}
+                label={t('tableHeadLabels.department_name')}
                 options={departments.departments}
               />
             )}
@@ -105,7 +105,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
             render={({ field }) => (
               <ProfileSelect
                 {...field}
-                label={t('tableHead.users.positionName')}
+                label={t('tableHeadLabels.position_name')}
                 options={positions.positions}
               />
             )}

@@ -5,11 +5,20 @@
     "delete": "Delete",
     "addSkill": "Add skill",
     "addLanguage": "Add Language",
-    "addCv": "Add CV"
+    "addCv": "Add CV",
+    "search": "Search"
   },
   "header": {
     "login": "Login",
     "signup": "Signup"
+  },
+  "cvForm": {
+    "addCv": "Add CV",
+    "updateCv": "Update CV",
+    "deleteCv": "Update CV",
+    "name": "Name",
+    "description": "Description",
+    "education": "Education"
   },
   "form": {
     "register": "Register Now",
@@ -40,50 +49,44 @@
     "languages": "LANGUAGES",
     "profile": "PROFILE",
     "settings": "SETTINGS",
-    "logout": "LOGOUT"
+    "logout": "LOGOUT",
+    "details": "DETAILS",
+    "preview": "PREVIEW"
   },
-  "tableHead": {
-    "users": {
-      "firstName": "First name",
-      "lastName": "Last name",
-      "email": "Email",
-      "departmentName": "Department name",
-      "positionName": "Position name"
-    },
-    "projects": {
-      "name": "Name",
-      "internalName": "Internal name",
-      "domain": "Domain",
-      "teamSize": "Team Size",
-      "startDate": "Start Date",
-      "endDate": "End Date"
-    },
-    "cvs": {
-      "name": "Name",
-      "description": "Description",
-      "email": "Email"
-    },
-    "departments": {
-      "name": "Name",
-      "employees": "Employees"
-    },
-    "positions": {
-      "name": "Name",
-      "employees": "Employees"
-    },
-    "skills": {
-      "name": "Name",
-      "category": "Category"
-    },
-    "languages": {
-      "name": "Name",
-      "nativeName": "Native Name",
-      "iso2": "ISO2"
-    }
+  "tableHeadLabels": {
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "department_name": "Department name",
+    "position_name": "Position name",
+    "name": "Name",
+    "internal_name": "Internal name",
+    "domain": "Domain",
+    "team_size": "Team Size",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "description": "Description",
+    "employees": "Employees",
+    "category": "Category",
+    "native_name": "Native Name",
+    "iso2": "ISO2",
+    "error": "Error"
   },
   "profile": {
     "uploadFile": "Upload file",
     "uploadFileInfo": "png, jpg or gif no more than 0.5MB",
     "intlDateTime": "A member since {{val, datetime}}"
+  },
+  "skills": {
+    "skill": "Skill",
+    "skillMastery": "Skill mastery",
+    "categories": {},
+    "masteries": {
+      "novice": "Novice",
+      "advanced": "Advanced",
+      "competent": "Competent",
+      "proficient": "Proficient",
+      "expert": "Expert"
+    }
   }
 }

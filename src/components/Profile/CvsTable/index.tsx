@@ -54,7 +54,7 @@ const CvsTable = () => {
         constextMenu={menuItems}
       />
       {user && isCurrentUserProfile && (
-        <CvForm open={open} handleClose={handleClose} label={t('buttons.addCv')} user={user.user} />
+        <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />
       )}
     </>
   )

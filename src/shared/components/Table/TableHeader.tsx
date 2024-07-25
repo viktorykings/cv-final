@@ -1,8 +1,8 @@
 import { TableHead, TableRow, TableCell, TableSortLabel, Box } from '@mui/material'
 import { visuallyHidden } from '@mui/utils'
 import { SortOrder } from '../../interfaces/TSortOrder'
-import { normalizeText } from '../../utils/NormaliseText'
 import { TProps } from './types/TableProps'
+import { useTranslation } from 'react-i18next'
 
 interface TableHeaderProps<T> {
   onRequestSort: (event: React.MouseEvent<unknown>, property: keyof T) => void
@@ -13,6 +13,7 @@ interface TableHeaderProps<T> {
 
 function TableHeader(props: TableHeaderProps<TProps>) {
   const { order, orderBy, onRequestSort, data } = props
+  const { t } = useTranslation()
 
   const createSortHandler = (property: keyof TProps) => (event: React.MouseEvent<unknown>) => {
     onRequestSort(event, property)
@@ -42,7 +43,7 @@ function TableHeader(props: TableHeaderProps<TProps>) {
                 direction={orderBy === cell.label ? order : 'asc'}
                 onClick={createSortHandler(cell.label)}
               >
-                {normalizeText(cell.label)}
+                {t(`tableHeadLabels.${cell.label}`, 'tableHeadLabels.error')}
                 {orderBy === cell.label ? (
                   <Box component="span" sx={visuallyHidden}>
                     {order === 'desc' ? 'sorted descending' : 'sorted ascending'}

@@ -59,7 +59,7 @@ const CvsPage = () => {
         searchQuery={searchQuery}
       />
 
-      {user && <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />}
+      {user && <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />}
     </>
   )
 }
