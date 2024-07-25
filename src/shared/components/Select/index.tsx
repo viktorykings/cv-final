@@ -37,7 +37,6 @@ const CustomSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
                 key={hasId(option) ? option.id : i}
                 value={typeof option === 'string' ? option : option.name}
               >
-                {/* {typeof option === 'string' ? option : option.name} */}
                 {typeof option === 'string'
                   ? t(`skills.masteries.${option.toLowerCase()}`, option)
                   : option.name}
