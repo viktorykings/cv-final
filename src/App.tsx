@@ -1,14 +1,17 @@
-import { Navigate, useRoutes } from 'react-router-dom'
-import { PrivateRoutes } from './routes/PrivateRoutes'
-import { PublicRoutes } from './routes/PublicRoutes'
-import { useReactiveVar } from '@apollo/client'
-import { userToken } from './shared/constants'
-import { Paths } from './routes/paths'
+import { BrowserRouter } from 'react-router-dom'
+import { CssBaseline, ThemeProvider } from '@mui/material'
+import Main from './components/Main'
+import { useThemeContext } from './theme/useThemeContext'
 
 const App = () => {
-  const isAuthorised = useReactiveVar(userToken)
-  const content = useRoutes(isAuthorised ? PrivateRoutes : PublicRoutes)
-  const defaultRoute = isAuthorised ? Paths.EMPLOYEES : `${Paths.AUTH}/${Paths.LOGIN}`
-  return content ? content : <Navigate to={defaultRoute} />
+  const { theme } = useThemeContext()
+  return (
+    <ThemeProvider theme={theme}>
+      <BrowserRouter>
+        <CssBaseline />
+        <Main />
+      </BrowserRouter>
+    </ThemeProvider>
+  )
 }
 export default App
