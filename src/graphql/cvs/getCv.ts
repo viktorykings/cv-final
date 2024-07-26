@@ -11,6 +11,10 @@ export const GET_CV = gql`
       user {
         id
         email
+        position_name
+        profile {
+          full_name
+        }
       }
       projects {
         id
