@@ -8,6 +8,7 @@ import { Button } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { useState } from 'react'
 import LanguageUpdateForm from './LanguageUpdateForm'
+import { useTranslation } from 'react-i18next'
 
 const LanguageLevels = [
   Proficiency.A1,
@@ -26,6 +27,7 @@ const LanguagesTable = () => {
   const isCurrentUserProfile = currentUserID === user?.user.id
   const [open, setOpen] = useState(false)
   const [language, setLanguage] = useState('')
+  const { t } = useTranslation()
 
   const handleClickOpen = () => {
     setOpen(true)
@@ -48,7 +50,7 @@ const LanguagesTable = () => {
   return (
     <>
       <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
-        <AddIcon /> Add language
+        <AddIcon /> {t('buttons.addLanguage')}
       </Button>
       <div onClick={handleOpenFormOnClickSkillItem}>
         {user &&
@@ -60,7 +62,7 @@ const LanguagesTable = () => {
         <LanguageUpdateForm
           open={open}
           handleClose={handleClose}
-          label="Add language"
+          label={t('buttons.addLanguage')}
           user={user.user}
           proficiency={LanguageLevels}
           defaultLang={language}

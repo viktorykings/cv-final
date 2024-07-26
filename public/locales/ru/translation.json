@@ -1,0 +1,91 @@
+{
+  "buttons": {
+    "update": "Обновить",
+    "cancel": "Отмена",
+    "delete": "Удалить",
+    "addSkill": "Добавить навык",
+    "addLanguage": "Добавить язык",
+    "addCv": "Добавить резюме",
+    "search": "Поиск"
+  },
+  "header": {
+    "login": "Войти",
+    "signup": "Регистрация"
+  },
+  "cvForm": {
+    "addCv": "Добовить резюме",
+    "updateCv": "Обновить резюме",
+    "deleteCv": "Удалить резюме",
+    "name": "Название",
+    "description": "Описание",
+    "education": "Образование"
+  },
+  "form": {
+    "register": "Зарегистрироваться",
+    "welcomeBack": "Добро пожаловать",
+    "header2Register": "Добро пожаловать! Зарегистрируйтесь чтобы продолжить.",
+    "header2WelcomeBack": "С возвращением! Войдите чтобы продолжить.",
+    "email": "Эл. почта",
+    "password": "Пароль",
+    "signin": "Войти",
+    "signup": "Зарегистрироваться",
+    "haveAcc": "У меня нет аккаунта",
+    "dontHaveAcc": "У меня уже есть аккаунт",
+    "errors": {
+      "emailIsRequired": "Введите адрес электронной почты",
+      "passwordIsRequired": "Введите пароль",
+      "validEmail": "Введите корректный адрес электронной почты",
+      "passwordValidate": "Длина пароля не менее 8 символов: 1 число, 1 заглавная и строчная буквы"
+    }
+  },
+  "sideBar": {
+    "home": "Главная",
+    "employees": "Сотрудники",
+    "projects": "Проекты",
+    "cvs": "Резюме",
+    "departments": "Отделы",
+    "positions": "Должности",
+    "skills": "Навыки",
+    "languages": "Языки",
+    "profile": "Профиль",
+    "settings": "Настройки",
+    "logout": "Выйти",
+    "details": "Подробности",
+    "preview": "Просмотр"
+  },
+  "tableHeadLabels": {
+    "first_name": "Имя",
+    "last_name": "Фамилия",
+    "email": "Электронная почта",
+    "department_name": "Отдел",
+    "position_name": "Должность",
+    "name": "Название",
+    "internal_name": "Внутреннее название",
+    "domain": "Домен",
+    "team_size": "Размер команды",
+    "start_date": "Дата начала",
+    "end_date": "Дата окончания",
+    "description": "Описание",
+    "employees": "Сотрудники",
+    "category": "Категория",
+    "native_name": "Местное Название",
+    "iso2": "ISO2"
+  },
+  "profile": {
+    "uploadFile": "Загрузить",
+    "uploadFileInfo": "png, jpg или gif не более 0.5MB",
+    "intlDateTime": "Участник с {{val, datetime}}"
+  },
+  "skills": {
+    "skill": "Навык",
+    "skillMastery": "Уровень навыка",
+    "categories": {},
+    "masteries": {
+      "novice": "Новичок",
+      "advanced": "Продвинутый",
+      "competent": "Компетентный",
+      "proficient": "Опытный",
+      "expert": "Эксперт"
+    }
+  }
+}

@@ -10,6 +10,7 @@ import { useAddProfileSkill } from '../../../graphql/users/skills/hooks/useAddPr
 import { useUpdateProfileSkill } from '../../../graphql/users/skills/hooks/useUpdateProfileSkill'
 import { useAddCvSkill } from '../../../graphql/cvs/hooks/useAddCvSkill'
 import { useUpdateCvSkill } from '../../../graphql/cvs/hooks/useUpdateCvSkill'
+import { useTranslation } from 'react-i18next'
 // import { useDeleteProfileSkill } from '../../../graphql/users/skills/hooks/useDeleteProfileSkill'
 
 type TFormProps = {
@@ -59,6 +60,7 @@ const SkillUpdForm = ({
   const watchFields = watch(['skill'])
   const [userSkills, setUserSkills] = useState<ISkillMastery[]>()
 
+  const { t } = useTranslation()
   useEffect(() => {
     if (skills) setUserSkills(skills)
 
@@ -156,7 +158,7 @@ const SkillUpdForm = ({
                 name="skill"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="Skill" options={allSkills.skills} />
+                  <CustomSelect {...field} label={t('skills.skill')} options={allSkills.skills} />
                 )}
               />
               <Controller
@@ -166,7 +168,7 @@ const SkillUpdForm = ({
                 render={({ field }) => (
                   <CustomSelect
                     {...field}
-                    label="Category"
+                    label={t('tableHeadLabels.category')}
                     options={[category]}
                     value={category}
                     isDisabled={true}
@@ -178,7 +180,7 @@ const SkillUpdForm = ({
                 control={control}
                 defaultValue={Mastery.Novice}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="Skill mastery" options={mastery} />
+                  <CustomSelect {...field} label={t('skills.skillMastery')} options={mastery} />
                 )}
               />
             </>
@@ -189,10 +191,10 @@ const SkillUpdForm = ({
             Delete
           </Button> */}
           <Button variant="outlined" onClick={handleClose} sx={{ color: 'text.secondary' }}>
-            Cancel
+            {t('buttons.cancel')}
           </Button>
           <Button type="submit" color="secondary" variant="contained">
-            Update
+            {t('buttons.update')}
           </Button>
         </DialogActions>
       </form>

@@ -1,11 +1,13 @@
 import { Table, TableBody, TableContainer } from '@mui/material'
 import { SortOrder } from '../../interfaces/TSortOrder'
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import customFilter from '../../utils/customFilter'
 import getComparator from '../../utils/customSort'
 import TableItem from './TableItem'
 import TableHeader from './TableHeader'
 import { ComparatorProps, IContextMenuItem, TProps } from './types/TableProps'
+import { useNavigate, useSearchParams } from 'react-router-dom'
+import { updateQueryParams } from '../../utils/updateQueryParams'
 
 interface TableProps<T> {
   headers?: T[]
@@ -17,9 +19,16 @@ interface TableProps<T> {
 const CustomTable = (props: TableProps<TProps>) => {
   const { data, constextMenu, searchQuery, headers } = props
 
-  const [order, setOrder] = useState<SortOrder>('asc')
-  const [orderBy, setOrderBy] = useState<keyof TProps>('id')
-  // TODO FILTER AND SORT IN QUERY PARAMS
+  const [searchParams, setSearchParams] = useSearchParams()
+  const navigate = useNavigate()
+
+  const initialOrder = (searchParams.get('order') || 'asc') as SortOrder
+  const initialOrderBy = (searchParams.get('sort') || 'id') as keyof TProps
+  const initialSearchQuery = searchParams.get('filter') || searchQuery
+
+  const [order, setOrder] = useState<SortOrder>(initialOrder)
+  const [orderBy, setOrderBy] = useState<keyof TProps>(initialOrderBy)
+  const [paramsSearchQuery, setSearchQuery] = useState<string>(initialSearchQuery)
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, path: keyof TProps): void => {
     event.preventDefault()
@@ -29,7 +38,26 @@ const CustomTable = (props: TableProps<TProps>) => {
       setOrderBy(path)
       setOrder('asc')
     }
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+    updateQueryParams(newSearchParams, 'sort', path)
+    updateQueryParams(newSearchParams, 'order', order)
+    setSearchParams(newSearchParams)
+    navigate({
+      search: newSearchParams.toString()
+    })
   }
+
+  useEffect(() => {
+    const newSearchParams = new URLSearchParams(searchParams.toString())
+    updateQueryParams(newSearchParams, 'filter', paramsSearchQuery)
+    setSearchParams(newSearchParams)
+    if (!searchQuery) updateQueryParams(newSearchParams, 'filter', '')
+    navigate({
+      search: newSearchParams.toString()
+    })
+    if (searchQuery !== '') setSearchQuery(searchQuery)
+  }, [paramsSearchQuery, searchParams, searchQuery, setSearchParams, navigate])
+
   const visibleRows: TProps[] = useMemo(() => {
     const filtered = customFilter(data, searchQuery)
     return filtered

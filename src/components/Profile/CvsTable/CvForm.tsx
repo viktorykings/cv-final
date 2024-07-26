@@ -11,6 +11,7 @@ import { useForm } from 'react-hook-form'
 import { useCreateCv } from '../../../graphql/users/cvs/hooks/useCreateCv'
 import { userID } from '../../../shared/constants'
 import { IUser } from '../../../shared/interfaces/IUser'
+import { useTranslation } from 'react-i18next'
 
 type TFormProps = {
   open: boolean
@@ -26,6 +27,7 @@ type TFormValues = {
 
 const CvForm = (props: TFormProps) => {
   const { open, label, handleClose } = props
+  const { t } = useTranslation()
 
   const currentUserID = useReactiveVar(userID)
 
@@ -58,10 +60,10 @@ const CvForm = (props: TFormProps) => {
     >
       <form onSubmit={handleSubmit(onSubmit)}>
         <DialogContent>
-          <DialogContentText>{label}</DialogContentText>
+          <DialogContentText>{t(`cvForm.${label}`, 'tableHeadLabels.error')}</DialogContentText>
           <TextField
             id="name"
-            label="Name"
+            label={t('cvForm.name')}
             variant="outlined"
             color="secondary"
             type="text"
@@ -72,7 +74,7 @@ const CvForm = (props: TFormProps) => {
           />
           <TextField
             id="education"
-            label="Education"
+            label={t('cvForm.education')}
             variant="outlined"
             color="secondary"
             type="text"
@@ -83,7 +85,7 @@ const CvForm = (props: TFormProps) => {
           />
           <TextField
             id="description"
-            label="Description"
+            label={t('cvForm.description')}
             variant="outlined"
             color="secondary"
             type="text"
@@ -100,13 +102,13 @@ const CvForm = (props: TFormProps) => {
             //   onClick={() => handleDelete(defaultLang)}
             sx={{ color: 'text.secondary' }}
           >
-            Delete
+            {t(`buttons.delete`)}
           </Button>
           <Button variant="outlined" onClick={handleClose} sx={{ color: 'text.secondary' }}>
-            Cancel
+            {t(`buttons.cancel`)}
           </Button>
           <Button type="submit" color="secondary" variant="contained">
-            Update
+            {t(`buttons.update`)}
           </Button>
         </DialogActions>
       </form>
