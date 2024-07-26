@@ -46,7 +46,6 @@ const PreviewPage = () => {
     const htmlContent = (componentRef.current as HTMLElement).innerHTML
 
     if (htmlContent) {
-      console.log(htmlContent)
       const styles = Array.from(document.styleSheets)
         .map(styleSheet => {
           try {
