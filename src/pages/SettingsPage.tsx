@@ -18,9 +18,10 @@ const SettingsPage = () => {
         p: 2,
         m: 2
       }}
+      onClick={toggleColorMode}
     >
       {mode} mode
-      <IconButton sx={{ ml: 1 }} onClick={toggleColorMode} color="inherit">
+      <IconButton sx={{ ml: 1 }} color="inherit">
         {mode === 'dark' ? <DarkMode /> : <LightMode />}
       </IconButton>
     </Box>
