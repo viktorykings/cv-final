@@ -22,12 +22,20 @@ import {
   CvProjectsPage,
   CvSkillsPage
 } from './lazyRoutes.ts'
+import { CircularProgress } from '@mui/material'
 
 export const PrivateRoutes: RouteObject[] = [
   {
     path: Paths.INDEX,
     element: (
-      <Suspense fallback="LOADING...">
+      <Suspense
+        fallback={
+          <CircularProgress
+            color="secondary"
+            sx={{ position: 'absolute', top: '50%', left: '50%' }}
+          />
+        }
+      >
         <Root />
       </Suspense>
     ),

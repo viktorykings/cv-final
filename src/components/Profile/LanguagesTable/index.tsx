@@ -53,7 +53,14 @@ const LanguagesTable = () => {
       <div onClick={handleOpenFormOnClickSkillItem}>
         {user &&
           user.user.profile.languages.map(el => (
-            <LanguageItem key={el.name} name={el.name} proficiency={el.proficiency} />
+            <LanguageItem
+              key={el.name}
+              name={el.name}
+              proficiency={el.proficiency}
+              id={''}
+              native_name={''}
+              iso2={''}
+            />
           ))}
       </div>
       {user && isCurrentUserProfile && (
