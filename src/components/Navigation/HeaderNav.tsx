@@ -23,7 +23,7 @@ function HeaderNav() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ boxShadow: 0 }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
           <Tabs value={currentTab} textColor="secondary" indicatorColor="secondary" centered>
             <Tab
