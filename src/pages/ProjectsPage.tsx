@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useGetProjects } from '../graphql/projects/hooks/useGetProjects'
 import SearchBar from '../shared/components/Search'
-import Table from '../shared/components/Table'
 import { CircularProgress } from '@mui/material'
+import CustomTable from '../shared/components/Table'
 
 const ProjectsPage = () => {
   const { data: projects } = useGetProjects()
@@ -15,7 +15,7 @@ const ProjectsPage = () => {
     <>
       <SearchBar setSearchQuery={setSearchQuery} />
 
-      <Table
+      <CustomTable
         data={projects.projects.map(
           ({ name, internal_name, domain, start_date, end_date, id }) => ({
             name,

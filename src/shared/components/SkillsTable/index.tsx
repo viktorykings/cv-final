@@ -23,8 +23,8 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
-  const { t } = useTranslation()
   const isCurrentUserProfile = currentUserID === userId
+  const { t } = useTranslation()
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -79,7 +79,7 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
             .filter(category => skillsToRender.map(el => el.category).includes(category))
             .map(el => <SkillsTableRow key={el} skills={skillsToRender} category={el} />)}
       </div>
-      {isCurrentUserProfile && (
+      {isCurrentUserProfile && cvId && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}

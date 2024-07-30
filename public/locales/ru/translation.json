@@ -92,6 +92,11 @@
   "cvs": {
     "noCvs": "Нет добавленных резюме"
   },
+  "projects": {
+    "noProjects": "Нет добавленных проектов",
+    "error": "Что-то пошло не так!",
+    "goToMain": "На главную"
+  },
   "languages": {
     "language": "Язык",
     "language_proficiency": "Уровень языка",

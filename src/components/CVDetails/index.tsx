@@ -1,4 +1,4 @@
-import { TextField, Button } from '@mui/material'
+import { TextField, Button, CircularProgress } from '@mui/material'
 import { Controller, useForm } from 'react-hook-form'
 import { useUpdateCv } from '../../graphql/users/cvs/hooks/useUpdateCv'
 import { useParams } from 'react-router-dom'
@@ -30,9 +30,8 @@ const CVDetails = () => {
       description: ''
     }
   })
-
   useEffect(() => {
-    if (cv) {
+    if (cv && cv.cv.user) {
       setUser(cv.cv.user.id)
       reset({
         name: cv.cv.name,
@@ -40,7 +39,7 @@ const CVDetails = () => {
         description: cv.cv.description
       })
     }
-  }, [cv, reset])
+  }, [cv, cv?.cv.user, reset])
   const [updateCv] = useUpdateCv()
   const onSubmit = (formData: TFormValues) => {
     if (cvId && isCurrentUserCv) {
@@ -56,6 +55,11 @@ const CVDetails = () => {
       })
     }
   }
+  if (!cv)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
+
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <Controller
