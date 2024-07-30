@@ -1,4 +1,4 @@
-import { Button, Box, CircularProgress } from '@mui/material'
+import { Button, Box, CircularProgress, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import SearchBar from '../../../shared/components/Search'
 import { useState } from 'react'
@@ -40,15 +40,23 @@ const CvsTable = () => {
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
+  if (!user.user.cvs.length)
+    return (
+      <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
+        {t('cvs.noCvs')}
+      </Typography>
+    )
   // TODO fix refetch cvs after create/delete
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <SearchBar setSearchQuery={setSearchQuery} />
 
-        <Button color="secondary" onClick={handleClickOpen}>
-          <AddIcon /> {t('buttons.addCv')}
-        </Button>
+        {isCurrentUserProfile && (
+          <Button color="secondary" onClick={handleClickOpen}>
+            <AddIcon /> {t('buttons.addCv')}
+          </Button>
+        )}
       </Box>
       <CustomTable
         data={user.user.cvs.map(({ name, description, id }) => ({ name, description, id }))}

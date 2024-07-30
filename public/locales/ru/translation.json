@@ -86,11 +86,16 @@
       "competent": "Компетентный",
       "proficient": "Опытный",
       "expert": "Эксперт"
-    }
+    },
+    "noSkills": "Нет добавленных навыков"
+  },
+  "cvs": {
+    "noCvs": "Нет добавленных резюме"
   },
   "languages": {
     "language": "Язык",
-    "language_proficiency": "Уровень языка"
+    "language_proficiency": "Уровень языка",
+    "noLanguages": "Нет добавленных языков"
   },
   "contextMenu": {
     "profile": "Профиль",
