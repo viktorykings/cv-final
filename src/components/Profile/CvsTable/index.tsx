@@ -1,4 +1,4 @@
-import { Button, Box } from '@mui/material'
+import { Button, Box, CircularProgress } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import SearchBar from '../../../shared/components/Search'
 import { useState } from 'react'
@@ -36,8 +36,10 @@ const CvsTable = () => {
     setOpen(false)
   }
 
-  if (!user) return <>no cvs</>
-  if (!user.user.cvs) return <>no cvs</>
+  if (!user || !user.user || !user.user.cvs)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
   // TODO fix refetch cvs after create/delete
   return (
     <>

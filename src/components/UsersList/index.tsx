@@ -1,4 +1,4 @@
-import { Box } from '@mui/material'
+import { Box, CircularProgress } from '@mui/material'
 import SearchBar from '../../shared/components/Search'
 import { useState } from 'react'
 import CustomTable from '../../shared/components/Table'
@@ -21,8 +21,10 @@ const UsersTable = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
 
-  if (!data) return <>no data</>
-  if (!data.users) return <>no users</>
+  if (!data || !data.users)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

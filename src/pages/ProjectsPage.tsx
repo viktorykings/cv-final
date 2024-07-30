@@ -2,11 +2,15 @@ import { useState } from 'react'
 import { useGetProjects } from '../graphql/projects/hooks/useGetProjects'
 import SearchBar from '../shared/components/Search'
 import Table from '../shared/components/Table'
+import { CircularProgress } from '@mui/material'
 
 const ProjectsPage = () => {
   const { data: projects } = useGetProjects()
   const [searchQuery, setSearchQuery] = useState('')
-  if (!projects) return <>no projects</>
+  if (!projects)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
   return (
     <>
       <SearchBar setSearchQuery={setSearchQuery} />

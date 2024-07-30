@@ -1,6 +1,6 @@
 import { useState } from 'react'
 import { useReactiveVar } from '@apollo/client'
-import { Box, Button } from '@mui/material'
+import { Box, Button, CircularProgress } from '@mui/material'
 import CvForm from '../components/Profile/CvsTable/CvForm'
 import { useGetUser } from '../graphql/users/hooks/useGetUser'
 import SearchBar from '../shared/components/Search'
@@ -37,7 +37,10 @@ const CvsPage = () => {
 
   const [searchQuery, setSearchQuery] = useState('')
 
-  if (!data) return <>no data</>
+  if (!data)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
   // TODO fix refetch cvs after create/delete
   return (
     <>

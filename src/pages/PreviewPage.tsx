@@ -1,5 +1,5 @@
 import { useRef } from 'react'
-import { Box, Button, Container, styled, Typography } from '@mui/material'
+import { Box, Button, CircularProgress, Container, styled, Typography } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import { useGetCv } from '../graphql/cvs/hooks/useGetCv'
 import { useGetSkillCategory } from '../graphql/skills/hooks/useGetSkillsCategories'
@@ -37,8 +37,10 @@ const PreviewPage = () => {
   const componentRef = useRef<HTMLDivElement>(null)
   const [exportPDF] = useExportPDF()
 
-  if (!cv) return <>no cv</>
-  if (!categories) return <>no cv</>
+  if (!cv || !categories)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
 
   const skillsToRender = createSkillsGroups(cv.cv.skills, categories.skillCategories)
 
