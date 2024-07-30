@@ -10,6 +10,7 @@ import { useAddProfileLang } from '../../../graphql/users/languages/hooks/useAdd
 import { useDeleteProfileLang } from '../../../graphql/users/languages/hooks/useDeleteProfileLang'
 import CustomSelect from '../../../shared/components/Select'
 import { useUpdateProfileLang } from '../../../graphql/users/languages/hooks/UseUpdateProfileLang'
+import { useTranslation } from 'react-i18next'
 
 type TFormProps = {
   open: boolean
@@ -32,7 +33,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
       proficiency: Proficiency.A1
     }
   })
-
+  const { t } = useTranslation()
   const { data: languages } = useGetLanguages()
   const [addLanguage] = useAddProfileLang()
   const [updateLanguage] = useUpdateProfileLang()
@@ -102,7 +103,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
                 render={({ field }) => (
                   <CustomSelect
                     {...field}
-                    label="Language"
+                    label={t(`languages.language`)}
                     options={languages.languages.map(el => el.name)}
                   />
                 )}
@@ -111,7 +112,11 @@ const LanguageUpdateForm = (props: TFormProps) => {
                 name="proficiency"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label="Language proficiency" options={proficiency} />
+                  <CustomSelect
+                    {...field}
+                    label={t(`languages.language_proficiency`)}
+                    options={proficiency}
+                  />
                 )}
               />
             </>
@@ -123,13 +128,13 @@ const LanguageUpdateForm = (props: TFormProps) => {
             onClick={() => handleDelete(defaultLang)}
             sx={{ color: 'text.secondary' }}
           >
-            Delete
+            {t(`buttons.delete`)}
           </Button>
           <Button variant="outlined" onClick={handleClose} sx={{ color: 'text.secondary' }}>
-            Cancel
+            {t(`buttons.cancel`)}
           </Button>
           <Button type="submit" color="secondary" variant="contained">
-            Update
+            {t(`buttons.update`)}
           </Button>
         </DialogActions>
       </form>

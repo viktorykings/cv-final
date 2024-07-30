@@ -88,5 +88,18 @@
       "proficient": "Proficient",
       "expert": "Expert"
     }
+  },
+  "languages": {
+    "language": "Language",
+    "language_proficiency": "Language proficiency"
+  },
+  "contextMenu": {
+    "profile": "Profile",
+    "addCv": "Add CV",
+    "updateCv": "Update CV",
+    "deleteCv": "Delete CV",
+    "details": "Details",
+    "settings": "Settings",
+    "logout": "Log out"
   }
 }

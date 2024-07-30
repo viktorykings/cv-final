@@ -12,11 +12,11 @@ import { useTranslation } from 'react-i18next'
 
 const menuItems = [
   {
-    label: 'Details',
+    label: 'details',
     path: 'details'
   },
   {
-    label: 'Delete CV'
+    label: 'deleteCv'
   }
 ]
 
