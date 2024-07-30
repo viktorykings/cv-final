@@ -9,7 +9,6 @@ import ClearIcon from '@mui/icons-material/Clear'
 import { useDeleteAvatar } from '../../graphql/users/profile/hooks/useDeleteAvatar'
 import { useTranslation } from 'react-i18next'
 
-
 const Profile = () => {
   const { id } = useParams()
   const { data } = useGetUser(id as string)
@@ -56,9 +55,11 @@ const Profile = () => {
                 src={data.user.profile.avatar}
                 sx={{ width: 120, height: 120 }}
               />
-              <Button onClick={handleDeleteAvatar}>
-                <ClearIcon />
-              </Button>
+              {currentUserID === data.user.id && data.user.profile.avatar && (
+                <Button onClick={handleDeleteAvatar}>
+                  <ClearIcon />
+                </Button>
+              )}
               {currentUserID === data.user.id && <FileUploadButton />}
             </Box>
             <Typography component={'h5'} variant="h5">
