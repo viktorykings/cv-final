@@ -14,9 +14,9 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
     console.log(graphQLErrors)
     graphQLErrors.forEach(({ message }) => {
       if (message === 'Invalid credentials') {
-        showToast('Wrong email or password')
-      } else if (message.match('duplicate key value')) {
-        showToast('User already exist')
+        showToast('wrongEmailOrPassword')
+      } else if (message.match('duplicate key value') || message.match('User already exists')) {
+        showToast('alreadyExist')
       } else {
         showToast(message)
       }
