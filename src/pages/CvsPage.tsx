@@ -36,7 +36,6 @@ const CvsPage = () => {
   }
 
   const [searchQuery, setSearchQuery] = useState('')
-
   if (!data)
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />

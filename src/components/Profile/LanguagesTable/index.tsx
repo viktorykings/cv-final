@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { userID } from '../../../shared/constants'
 import LanguageItem from './LanguageItem'
 import { Proficiency } from '../../../shared/interfaces/ILanguageProficiency'
-import { Button } from '@mui/material'
+import { Button, CircularProgress, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import { useState } from 'react'
 import LanguageUpdateForm from './LanguageUpdateForm'
@@ -24,7 +24,6 @@ const LanguagesTable = () => {
   const { id } = useParams()
   const { data: user } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
-  const isCurrentUserProfile = currentUserID === user?.user.id
   const [open, setOpen] = useState(false)
   const [language, setLanguage] = useState('')
   const { t } = useTranslation()
@@ -47,25 +46,37 @@ const LanguagesTable = () => {
       }
     }
   }
+  if (!user)
+    return (
+      <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
+    )
+  const isCurrentUserProfile = currentUserID === user.user.id
+
   return (
     <>
-      <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
-        <AddIcon /> {t('buttons.addLanguage')}
-      </Button>
+      {isCurrentUserProfile && (
+        <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
+          <AddIcon /> {t('buttons.addLanguage')}
+        </Button>
+      )}
       <div onClick={handleOpenFormOnClickSkillItem}>
-        {user &&
-          user.user.profile.languages.map(el => (
-            <LanguageItem
-              key={el.name}
-              name={el.name}
-              proficiency={el.proficiency}
-              id={''}
-              native_name={''}
-              iso2={''}
-            />
-          ))}
+        {!user.user.profile.languages.length && (
+          <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
+            {t('languages.noLanguages')}
+          </Typography>
+        )}
+        {user.user.profile.languages.map(el => (
+          <LanguageItem
+            key={el.name}
+            name={el.name}
+            proficiency={el.proficiency}
+            id={''}
+            native_name={''}
+            iso2={''}
+          />
+        ))}
       </div>
-      {user && isCurrentUserProfile && (
+      {isCurrentUserProfile && (
         <LanguageUpdateForm
           open={open}
           handleClose={handleClose}

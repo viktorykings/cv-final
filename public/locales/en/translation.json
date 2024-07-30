@@ -87,11 +87,21 @@
       "competent": "Competent",
       "proficient": "Proficient",
       "expert": "Expert"
-    }
+    },
+    "noSkills": "No skills added"
+  },
+  "cvs": {
+    "noCvs": "No cvs added"
+  },
+  "projects": {
+    "noProjects": "No added projects",
+    "error": "Something went wrong!",
+    "goToMain": "Go to main"
   },
   "languages": {
     "language": "Language",
-    "language_proficiency": "Language proficiency"
+    "language_proficiency": "Language proficiency",
+    "noLanguages": "No languages added"
   },
   "contextMenu": {
     "profile": "Profile",

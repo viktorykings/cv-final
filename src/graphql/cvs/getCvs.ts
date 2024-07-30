@@ -9,6 +9,7 @@ export const GET_CVS = gql`
       education
       description
       user {
+        id
         email
       }
     }

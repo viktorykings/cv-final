@@ -3,7 +3,7 @@ import { useReactiveVar } from '@apollo/client'
 import { useGetSkillCategory } from '../../../graphql/skills/hooks/useGetSkillsCategories'
 import { useGetSkills } from '../../../graphql/skills/hooks/useGettAllSkills'
 import { userID } from '../../constants'
-import { Box, Button } from '@mui/material'
+import { Box, Button, Typography } from '@mui/material'
 import AddIcon from '@mui/icons-material/Add'
 import SkillsTableRow from './SkillsTableRow'
 import SkillUpdForm from './SkillUpdForm'
@@ -23,8 +23,8 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
   const [open, setOpen] = useState(false)
   const [defaultSkill, setDefaultSkill] = useState('')
   const currentUserID = useReactiveVar(userID)
-  const { t } = useTranslation()
   const isCurrentUserProfile = currentUserID === userId
+  const { t } = useTranslation()
 
   const masteries: string[] = ['Novice', 'Advanced', 'Competent', 'Proficient', 'Expert']
   const handleClickOpen = () => {
@@ -61,9 +61,16 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
         gap: 4
       }}
     >
-      <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
-        <AddIcon /> {t('buttons.addSkill')}
-      </Button>
+      {isCurrentUserProfile && (
+        <Button sx={{ color: 'text.secondary', margin: '0 auto' }} onClick={handleClickOpen}>
+          <AddIcon /> {t('buttons.addSkill')}
+        </Button>
+      )}
+      {!skills.length && (
+        <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
+          {t('skills.noSkills')}
+        </Typography>
+      )}
       <div onClick={handleOpenFormOnClickSkillItem}>
         {skillsToRender &&
           allSkills &&
@@ -72,7 +79,7 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
             .filter(category => skillsToRender.map(el => el.category).includes(category))
             .map(el => <SkillsTableRow key={el} skills={skillsToRender} category={el} />)}
       </div>
-      {isCurrentUserProfile && (
+      {isCurrentUserProfile && cvId && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}
