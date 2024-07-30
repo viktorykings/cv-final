@@ -8,6 +8,7 @@ import CustomTable from '../shared/components/Table'
 import { userID } from '../shared/constants'
 import { useGetAllCvs } from '../graphql/cvs/hooks/useGetCvs'
 import AddIcon from '@mui/icons-material/Add'
+import { useTranslation } from 'react-i18next'
 
 const menuItems = [
   {
@@ -24,6 +25,7 @@ const CvsPage = () => {
 
   const currentUserID = useReactiveVar(userID)
   const { data: user } = useGetUser(currentUserID as string)
+  const { t } = useTranslation()
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
@@ -43,7 +45,7 @@ const CvsPage = () => {
         <SearchBar setSearchQuery={setSearchQuery} />
 
         <Button color="secondary" onClick={handleClickOpen}>
-          <AddIcon /> Create CV
+          <AddIcon /> {t('buttons.addCv')}
         </Button>
       </Box>
       <CustomTable
@@ -57,7 +59,7 @@ const CvsPage = () => {
         searchQuery={searchQuery}
       />
 
-      {user && <CvForm open={open} handleClose={handleClose} label="Add CV" user={user.user} />}
+      {user && <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />}
     </>
   )
 }

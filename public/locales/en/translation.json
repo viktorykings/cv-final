@@ -1,0 +1,92 @@
+{
+  "buttons": {
+    "update": "Update",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "addSkill": "Add skill",
+    "addLanguage": "Add Language",
+    "addCv": "Add CV",
+    "search": "Search"
+  },
+  "header": {
+    "login": "Login",
+    "signup": "Signup"
+  },
+  "cvForm": {
+    "addCv": "Add CV",
+    "updateCv": "Update CV",
+    "deleteCv": "Update CV",
+    "name": "Name",
+    "description": "Description",
+    "education": "Education"
+  },
+  "form": {
+    "register": "Register Now",
+    "welcomeBack": "Welcome Back",
+    "header2Register": "Welcome! Sign up to continue.",
+    "header2WelcomeBack": "Hello again! Sign in to continue.",
+    "email": "Email",
+    "password": "Password",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "haveAcc": "I have an account",
+    "dontHaveAcc": "I don't have an account",
+    "errors": {
+      "emailIsRequired": "Email is required",
+      "passwordIsRequired": "Password is required",
+      "validEmail": "Enter valid email",
+      "passwordValidate": "At least 8 characters, one number, uppercase and lowercase char"
+    }
+  },
+  "sideBar": {
+    "home": "HOME",
+    "employees": "EMPLOYEES",
+    "projects": "PROJECTS",
+    "cvs": "CVS",
+    "departments": "DEPARTMENTS",
+    "positions": "POSITIONS",
+    "skills": "SKILLS",
+    "languages": "LANGUAGES",
+    "profile": "PROFILE",
+    "settings": "SETTINGS",
+    "logout": "LOGOUT",
+    "details": "DETAILS",
+    "preview": "PREVIEW"
+  },
+  "tableHeadLabels": {
+    "first_name": "First name",
+    "last_name": "Last name",
+    "email": "Email",
+    "department_name": "Department name",
+    "position_name": "Position name",
+    "name": "Name",
+    "internal_name": "Internal name",
+    "domain": "Domain",
+    "team_size": "Team Size",
+    "start_date": "Start Date",
+    "end_date": "End Date",
+    "description": "Description",
+    "employees": "Employees",
+    "category": "Category",
+    "native_name": "Native Name",
+    "iso2": "ISO2",
+    "error": "Error"
+  },
+  "profile": {
+    "uploadFile": "Upload file",
+    "uploadFileInfo": "png, jpg or gif no more than 0.5MB",
+    "intlDateTime": "A member since {{val, datetime}}"
+  },
+  "skills": {
+    "skill": "Skill",
+    "skillMastery": "Skill mastery",
+    "categories": {},
+    "masteries": {
+      "novice": "Novice",
+      "advanced": "Advanced",
+      "competent": "Competent",
+      "proficient": "Proficient",
+      "expert": "Expert"
+    }
+  }
+}

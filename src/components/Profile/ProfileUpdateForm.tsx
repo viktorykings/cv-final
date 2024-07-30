@@ -9,6 +9,7 @@ import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../shared/constants'
 import { IDepartment } from '../../shared/interfaces/IDepartment'
 import { useUpdateUserProfile } from '../../graphql/users/profile/hooks/useUpdateProfile'
+import { useTranslation } from 'react-i18next'
 
 type FormValues = {
   firstName: string
@@ -23,6 +24,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
   const { data: departments } = useGetDepartments()
   const [updateProfile] = useUpdateUserProfile()
   const [updateUser] = useUpdateUser()
+  const { t } = useTranslation()
 
   const getId = (arr: IDepartment[] | undefined, str: string) => {
     if (!arr) return
@@ -60,7 +62,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label="First Name"
+              label={t('tableHeadLabels.first_name')}
               variant="outlined"
               margin="normal"
               color="secondary"
@@ -74,7 +76,7 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
           render={({ field }) => (
             <TextField
               {...field}
-              label="Last Name"
+              label={t('tableHeadLabels.last_name')}
               variant="outlined"
               margin="normal"
               color="secondary"
@@ -87,7 +89,11 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
             control={control}
             defaultValue={data.department_name || ''}
             render={({ field }) => (
-              <ProfileSelect {...field} label="Department" options={departments.departments} />
+              <ProfileSelect
+                {...field}
+                label={t('tableHeadLabels.department_name')}
+                options={departments.departments}
+              />
             )}
           />
         )}
@@ -97,13 +103,17 @@ const ProfileUpdateForm = ({ data }: { data: IUser }) => {
             control={control}
             defaultValue={data.position_name || ''}
             render={({ field }) => (
-              <ProfileSelect {...field} label="Position" options={positions.positions} />
+              <ProfileSelect
+                {...field}
+                label={t('tableHeadLabels.position_name')}
+                options={positions.positions}
+              />
             )}
           />
         )}
         {currentUserID === data.id && (
           <Button type="submit" variant="contained" color="secondary">
-            update
+            {t('buttons.update')}
           </Button>
         )}
       </Box>

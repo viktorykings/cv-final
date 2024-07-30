@@ -7,11 +7,14 @@ import ProfileUpdateForm from './ProfileUpdateForm'
 import FileUploadButton from './AvatarUploadBtn'
 import ClearIcon from '@mui/icons-material/Clear'
 import { useDeleteAvatar } from '../../graphql/users/profile/hooks/useDeleteAvatar'
+import { useTranslation } from 'react-i18next'
+
 
 const Profile = () => {
   const { id } = useParams()
   const { data } = useGetUser(id as string)
   const currentUserID = useReactiveVar(userID)
+  const { t } = useTranslation()
   const [deleteAvatar] = useDeleteAvatar()
 
   const handleDeleteAvatar = () => {
@@ -63,7 +66,12 @@ const Profile = () => {
             </Typography>
             <Typography component={'p'}>{data.user.email}</Typography>
             <Typography component={'p'}>
-              A member since {new Date(parseInt(data.user.created_at)).toDateString()}
+              {t('profile.intlDateTime', {
+                val: new Date(parseInt(data.user.created_at)),
+                formatParams: {
+                  val: { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }
+                }
+              })}
             </Typography>
           </Box>
           <Box>

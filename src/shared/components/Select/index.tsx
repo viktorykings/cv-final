@@ -12,6 +12,7 @@ import { ISkill } from '../../interfaces/ISkill'
 import { ISkillMastery } from '../../interfaces/ISkillMastery'
 import hasId from '../../../components/utils/optionHasId'
 import { IProject } from '../../interfaces/IProject'
+import { useTranslation } from 'react-i18next'
 
 interface CustomSelectProps {
   label: string
@@ -25,6 +26,7 @@ interface CustomSelectProps {
 
 const CustomSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
   ({ label, value, onChange, options, error, helperText, isDisabled }, ref) => {
+    const { t } = useTranslation()
     return (
       <FormControl variant="outlined" margin="normal" error={error} sx={{ width: '410px' }}>
         <InputLabel>{label}</InputLabel>
@@ -35,7 +37,9 @@ const CustomSelect = forwardRef<HTMLDivElement, CustomSelectProps>(
                 key={hasId(option) ? option.id : i}
                 value={typeof option === 'string' ? option : option.name}
               >
-                {typeof option === 'string' ? option : option.name}
+                {typeof option === 'string'
+                  ? t(`skills.masteries.${option.toLowerCase()}`, option)
+                  : option.name}
               </MenuItem>
             ))}
         </Select>

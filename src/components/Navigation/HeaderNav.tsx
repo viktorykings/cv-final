@@ -1,4 +1,5 @@
 import { Tabs, Tab, Box, AppBar, Toolbar } from '@mui/material'
+import { useTranslation } from 'react-i18next'
 import { Link, matchPath, useLocation } from 'react-router-dom'
 
 function useRouteMatch(patterns: readonly string[]) {
@@ -18,21 +19,22 @@ function useRouteMatch(patterns: readonly string[]) {
 function HeaderNav() {
   const routeMatch = useRouteMatch(['/auth/signup', '/auth/login'])
   const currentTab = routeMatch?.pattern?.path
+  const { t } = useTranslation()
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
+      <AppBar position="static" sx={{ boxShadow: 0 }}>
         <Toolbar sx={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-end' }}>
           <Tabs value={currentTab} textColor="secondary" indicatorColor="secondary" centered>
             <Tab
-              label="Login"
+              label={t('header.login')}
               value="/auth/login"
               to="/auth/login"
               component={Link}
               sx={{ width: 150 }}
             />
             <Tab
-              label="Signup"
+              label={t('header.signup')}
               value="/auth/signup"
               to="/auth/signup"
               component={Link}

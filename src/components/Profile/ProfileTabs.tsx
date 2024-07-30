@@ -1,6 +1,7 @@
 import { Tabs, Tab } from '@mui/material'
 import { useLocation, matchPath, Link, useParams } from 'react-router-dom'
 import { Paths } from '../../routes/paths'
+import { useTranslation } from 'react-i18next'
 
 function useRouteMatch(patterns: readonly string[]) {
   const { pathname } = useLocation()
@@ -30,6 +31,8 @@ const ProfileTabs = () => {
   const routeMatch = useRouteMatch(baseRoutes.map(el => buildPath(baseID as string, el)))
   const currentTab = routeMatch?.pattern?.path
 
+  const { t } = useTranslation()
+
   return (
     <Tabs
       value={currentTab}
@@ -40,7 +43,7 @@ const ProfileTabs = () => {
       {baseRoutes.map(el => (
         <Tab
           key={el}
-          label={el}
+          label={t(`sideBar.${el.toLowerCase()}`, 'tableHeadLabels.error')}
           value={buildPath(baseID as string, el)}
           to={buildPath(baseID as string, el)}
           component={Link}
