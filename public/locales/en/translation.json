@@ -111,5 +111,9 @@
     "details": "Details",
     "settings": "Settings",
     "logout": "Log out"
+  },
+  "toasts": {
+    "wrongEmailOrPassword": "Wrong email or password",
+    "alreadyExist": "User already exist"
   }
 }

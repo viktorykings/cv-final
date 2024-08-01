@@ -110,5 +110,9 @@
     "details": "Подробности",
     "settings": "Настройки",
     "logout": "Выйти"
+  },
+  "toasts": {
+    "wrongEmailOrPassword": "Неправильный логин или пароль",
+    "alreadyExist": "Пользователь уже существует"
   }
 }

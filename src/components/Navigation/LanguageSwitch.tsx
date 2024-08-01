@@ -1,7 +1,6 @@
 import { Box, FormControl, Select, MenuItem, SelectChangeEvent } from '@mui/material'
-import { useState } from 'react'
 import LanguageIcon from '@mui/icons-material/Language'
-import i18n from '../../shared/utils/locales/i18n'
+import { useTranslation } from 'react-i18next'
 
 enum Languages {
   EN = 'en',
@@ -14,14 +13,12 @@ const languages = {
 }
 
 const LanguageSwitch = () => {
-  const [lang, setLang] = useState('en')
-
+  const { i18n } = useTranslation()
   const changeLanguage = (lng: string) => {
     i18n.changeLanguage(lng)
   }
 
   const handleChangeLang = (event: SelectChangeEvent) => {
-    setLang(event.target.value)
     changeLanguage(event.target.value)
   }
   return (
@@ -31,7 +28,7 @@ const LanguageSwitch = () => {
         <Select
           labelId="demo-simple-select-helper-label"
           id="demo-simple-select-helper"
-          value={lang}
+          value={i18n.language}
           label="language"
           onChange={handleChangeLang}
           color="secondary"
