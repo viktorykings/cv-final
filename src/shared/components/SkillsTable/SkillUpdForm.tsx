@@ -12,6 +12,7 @@ import { useAddCvSkill } from '../../../graphql/cvs/hooks/useAddCvSkill'
 import { useUpdateCvSkill } from '../../../graphql/cvs/hooks/useUpdateCvSkill'
 import { useTranslation } from 'react-i18next'
 import { useDeleteProfileSkill } from '../../../graphql/users/skills/hooks/useDeleteProfileSkill'
+import { useDeleteCvSkill } from '../../../graphql/cvs/hooks/useDeleteCvSkill'
 
 type TFormProps = {
   open: boolean
@@ -52,10 +53,10 @@ const SkillUpdForm = ({
   const { data: allSkills } = useGetSkills()
   const [addSkill] = useAddProfileSkill()
   const [updateSkill] = useUpdateProfileSkill()
-
+  const [deleteSkill] = useDeleteProfileSkill()
   const [addCvSkill] = useAddCvSkill()
   const [updateCvSkill] = useUpdateCvSkill()
-  const [deleteSkill] = useDeleteProfileSkill()
+  const [deleteCvSkill] = useDeleteCvSkill()
   const [category, setCategory] = useState('')
   const watchFields = watch(['skill'])
   const [userSkills, setUserSkills] = useState<ISkillMastery[]>()
@@ -128,14 +129,26 @@ const SkillUpdForm = ({
   }
 
   const handleDelete = (skill: string) => {
-    deleteSkill({
-      variables: {
-        skill: {
-          userId: currentUserID,
-          name: [skill]
+    if (isProfileSkills) {
+      deleteSkill({
+        variables: {
+          skill: {
+            userId: currentUserID,
+            name: [skill]
+          }
         }
-      }
-    })
+      })
+    } else {
+      deleteCvSkill({
+        variables: {
+          skill: {
+            cvId: cvId ?? '',
+            name: [skill]
+          }
+        }
+      })
+    }
+
     handleClose()
   }
 
