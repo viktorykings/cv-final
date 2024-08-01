@@ -37,7 +37,6 @@ const CvsPage = () => {
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
-  // TODO fix refetch cvs after create/delete
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

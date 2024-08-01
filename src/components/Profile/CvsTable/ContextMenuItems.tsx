@@ -1,24 +1,22 @@
 import { MenuItem } from '@mui/material'
 import { Link } from 'react-router-dom'
-import { useDeleteCv } from '../../../graphql/users/cvs/hooks/useDeleteCv'
 import { IContextMenuItem } from '../../../shared/components/Table/types/TableProps'
 import { useTranslation } from 'react-i18next'
 
 interface IMenuItemProps<T> {
   items: T[] | undefined
   id: string | null | undefined
-  handleClose: () => void
+  handleClose?: () => void
   handleDelete?: () => void
 }
 
-const ContextMenuItems = ({ items, id, handleClose }: IMenuItemProps<IContextMenuItem>) => {
-  const [deleteCv] = useDeleteCv()
+const ContextMenuItems = ({
+  items,
+  id,
+  handleClose,
+  handleDelete
+}: IMenuItemProps<IContextMenuItem>) => {
   const { t } = useTranslation()
-
-  const handleDelete = () => {
-    deleteCv({ variables: { cv: { cvId: id } } })
-    handleClose()
-  }
 
   const createContextMenuItem = (item: IContextMenuItem) => {
     switch (item.path) {
@@ -35,12 +33,7 @@ const ContextMenuItems = ({ items, id, handleClose }: IMenuItemProps<IContextMen
         )
       case 'deleteCv':
         return (
-          <MenuItem
-            key={item.label}
-            component={Link}
-            to={`/cvs/${id}/${item.path}`}
-            onClick={handleDelete}
-          >
+          <MenuItem key={item.label} onClick={handleDelete}>
             {t(`contextMenu.${item.label}`, '')}
           </MenuItem>
         )

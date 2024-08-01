@@ -5,6 +5,7 @@ import ContextMenuItems from '../../../components/Profile/CvsTable/ContextMenuIt
 import { TProps, IContextMenuItem } from './types/TableProps'
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../constants'
+import { useDeleteCv } from '../../../graphql/users/cvs/hooks/useDeleteCv'
 
 type TableItemProps = {
   row: TProps
@@ -22,6 +23,18 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+  const [deleteCv] = useDeleteCv(currentUserID)
+  const handleDelete = (cvId: string) => {
+    deleteCv({
+      variables: {
+        cv: {
+          cvId: cvId
+        }
+      }
+    })
+    handleClose()
+  }
+
   const createCell = (el: string) => {
     switch (el) {
       case 'id':
@@ -40,6 +53,7 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
                   ? [...contextMenu, { label: 'deleteCv', path: 'deleteCv' }]
                   : contextMenu
               }
+              handleDelete={() => handleDelete(row.id ?? '')}
               handleClose={handleClose}
             />
           </ContextMenu>

@@ -33,7 +33,7 @@ const CvForm = (props: TFormProps) => {
 
   const { register, handleSubmit } = useForm<TFormValues>()
 
-  const [createCv] = useCreateCv()
+  const [createCv] = useCreateCv(currentUserID)
   // const [updateCv] = useUpdateCv()
   const onSubmit = (formData: TFormValues) => {
     createCv({

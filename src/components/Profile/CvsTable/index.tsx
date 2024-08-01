@@ -47,7 +47,6 @@ const CvsTable = () => {
         {t('cvs.noCvs')}
       </Typography>
     )
-  // TODO fix refetch cvs after create/delete
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
