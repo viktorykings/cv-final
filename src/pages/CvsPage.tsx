@@ -14,9 +14,6 @@ const menuItems = [
   {
     label: 'details',
     path: 'details'
-  },
-  {
-    label: 'deleteCv'
   }
 ]
 
@@ -55,7 +52,8 @@ const CvsPage = () => {
           name,
           description,
           email: user && user.email,
-          id
+          id,
+          userId: user && user.id
         }))}
         constextMenu={menuItems}
         searchQuery={searchQuery}

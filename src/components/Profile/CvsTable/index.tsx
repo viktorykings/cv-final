@@ -16,7 +16,8 @@ const menuItems = [
     path: 'details'
   },
   {
-    label: 'deleteCv'
+    label: 'deleteCv',
+    path: 'deleteCv'
   }
 ]
 

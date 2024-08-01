@@ -3,5 +3,7 @@ import { GetCvsResult } from '../../types/queryTypes'
 import { GET_CVS } from '../getCvs'
 
 export const useGetAllCvs = () => {
-  return useQuery<GetCvsResult>(GET_CVS)
+  return useQuery<GetCvsResult>(GET_CVS, {
+    fetchPolicy: 'network-only'
+  })
 }

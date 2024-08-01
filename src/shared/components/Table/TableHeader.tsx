@@ -31,28 +31,30 @@ function TableHeader(props: TableHeaderProps<TProps>) {
   return (
     <TableHead>
       <TableRow>
-        {keys.map(cell => (
-          <TableCell
-            key={cell.key}
-            sortDirection={orderBy === cell.label ? order : false}
-            scope="col"
-          >
-            {isNotSortable(cell.key) && (
-              <TableSortLabel
-                active={orderBy === cell.label}
-                direction={orderBy === cell.label ? order : 'asc'}
-                onClick={createSortHandler(cell.label)}
-              >
-                {t(`tableHeadLabels.${cell.label}`, 'tableHeadLabels.error')}
-                {orderBy === cell.label ? (
-                  <Box component="span" sx={visuallyHidden}>
-                    {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
-                  </Box>
-                ) : null}
-              </TableSortLabel>
-            )}
-          </TableCell>
-        ))}
+        {keys
+          .filter(el => el.key !== 'userId')
+          .map(cell => (
+            <TableCell
+              key={cell.key}
+              sortDirection={orderBy === cell.label ? order : false}
+              scope="col"
+            >
+              {isNotSortable(cell.key) && (
+                <TableSortLabel
+                  active={orderBy === cell.label}
+                  direction={orderBy === cell.label ? order : 'asc'}
+                  onClick={createSortHandler(cell.label)}
+                >
+                  {t(`tableHeadLabels.${cell.label}`, 'tableHeadLabels.error')}
+                  {orderBy === cell.label ? (
+                    <Box component="span" sx={visuallyHidden}>
+                      {order === 'desc' ? 'sorted descending' : 'sorted ascending'}
+                    </Box>
+                  ) : null}
+                </TableSortLabel>
+              )}
+            </TableCell>
+          ))}
       </TableRow>
     </TableHead>
   )
