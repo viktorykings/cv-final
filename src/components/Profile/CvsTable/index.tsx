@@ -28,7 +28,6 @@ const CvsTable = () => {
   const isCurrentUserProfile = currentUserID === user?.user.id
   const [searchQuery, setSearchQuery] = useState('')
   const { t } = useTranslation()
-  console.log(isCurrentUserProfile, user)
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
     setOpen(true)
