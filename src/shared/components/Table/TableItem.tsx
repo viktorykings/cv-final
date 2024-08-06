@@ -38,7 +38,7 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
   const createCell = (el: string) => {
     switch (el) {
       case 'id':
-        return contextMenu ? (
+        return contextMenu?.length ? (
           <ContextMenu
             key={'id'}
             open={open}
@@ -78,7 +78,8 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
               overflow: 'hidden',
               whiteSpace: 'nowrap',
               maxWidth: 200,
-              textOverflow: 'ellipsis'
+              textOverflow: 'ellipsis',
+              height: '100px'
             }}
           >
             {row[el]}
