@@ -1,8 +1,8 @@
 import { Box, Typography, Avatar, Menu } from '@mui/material'
 import { MenuItems } from '../../assets/sidebarIcons'
 import AccountMenuItem from './AccountMenuItem'
-import { useNavigate } from 'react-router-dom'
-import { useState } from 'react'
+import { useNavigate, useLocation } from 'react-router-dom'
+import { useState, useEffect } from 'react'
 import { Paths } from '../../routes/paths'
 import { userID } from '../../shared/constants'
 import { useReactiveVar } from '@apollo/client'
@@ -14,8 +14,10 @@ const AccountMenu = () => {
   const { data: user } = useGetUser(currentUserID)
 
   const navigate = useNavigate()
+  const location = useLocation()
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
+
   const handleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorEl(event.currentTarget)
   }
@@ -23,8 +25,8 @@ const AccountMenu = () => {
   const handleClose = () => {
     setAnchorEl(null)
   }
+
   const handleAccountLink = (path: string) => {
-    handleClose()
     if (path === 'profile') navigate(`/users/${currentUserID}/${path}`)
     else navigate(path)
   }
@@ -32,8 +34,12 @@ const AccountMenu = () => {
   const handleLogOut = () => {
     logOut()
     navigate(Paths.AUTH + '/' + Paths.LOGIN)
-    handleClose()
   }
+
+  useEffect(() => {
+    handleClose()
+  }, [location.pathname])
+
   return (
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       <Typography sx={{ marginRight: 2 }}>{user?.user.profile.full_name}</Typography>
@@ -54,7 +60,7 @@ const AccountMenu = () => {
           vertical: 'top',
           horizontal: 'right'
         }}
-        open={Boolean(anchorEl)}
+        open={Boolean(anchorEl) ?? false}
         onClose={handleClose}
       >
         {[MenuItems.PROFILE, MenuItems.SETTINGS].map(path => (
