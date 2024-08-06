@@ -28,7 +28,7 @@ const CvsTable = () => {
   const isCurrentUserProfile = currentUserID === user?.user.id
   const [searchQuery, setSearchQuery] = useState('')
   const { t } = useTranslation()
-
+  console.log(isCurrentUserProfile, user)
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
     setOpen(true)
@@ -41,11 +41,20 @@ const CvsTable = () => {
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
-  if (!user.user.cvs.length)
+  if (!isCurrentUserProfile && !user.user.cvs.length)
     return (
       <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
         {t('cvs.noCvs')}
       </Typography>
+    )
+  if (isCurrentUserProfile && !user.user.cvs.length)
+    return (
+      <>
+        <Button color="secondary" onClick={handleClickOpen}>
+          <AddIcon /> {t('buttons.addCv')}
+        </Button>
+        <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />
+      </>
     )
   return (
     <>
@@ -63,9 +72,6 @@ const CvsTable = () => {
         searchQuery={searchQuery}
         constextMenu={menuItems}
       />
-      {user && isCurrentUserProfile && (
-        <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />
-      )}
     </>
   )
 }
