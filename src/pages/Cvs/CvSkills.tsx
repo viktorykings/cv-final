@@ -5,11 +5,13 @@ import { CircularProgress } from '@mui/material'
 
 const CvSkillsPage = () => {
   const { cvId } = useParams()
-  const { data: cv } = useGetCv(cvId as string)
-  if (!cv || !cv.cv.user)
+  const { data: cv, loading, refetch } = useGetCv(cvId as string)
+  if (loading || !cv || !cv.cv.user) {
+    refetch()
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
+  }
 
   return <SkillsTable userId={cv.cv.user.id} cvId={cv.cv.id} skills={cv.cv.skills} />
 }

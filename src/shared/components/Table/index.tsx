@@ -64,7 +64,6 @@ const CustomTable = (props: TableProps<TProps>) => {
       .slice()
       .sort(getComparator(order, orderBy) as (a: ComparatorProps, b: ComparatorProps) => number)
   }, [order, orderBy, data, searchQuery])
-
   return (
     <>
       <TableContainer component={'div'} sx={{ background: 'transparent', width: ' 100%' }}>

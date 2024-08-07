@@ -3,9 +3,12 @@ import { GetCvResult } from '../../types/queryTypes'
 import { GET_CV } from '../getCv'
 
 export const useGetCv = (id: string) => {
-  return useQuery<GetCvResult>(GET_CV, {
-    variables: { id },
-    fetchPolicy: 'network-only',
-    nextFetchPolicy: 'cache-and-network'
+  const { data, loading, refetch } = useQuery<GetCvResult>(GET_CV, {
+    variables: { id }
   })
+  return {
+    data,
+    loading,
+    refetch
+  }
 }

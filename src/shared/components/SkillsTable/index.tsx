@@ -79,7 +79,7 @@ const SkillsTable = ({ skills, userId, cvId, isProfileSkills }: ISkillTableProps
             .filter(category => skillsToRender.map(el => el.category).includes(category))
             .map(el => <SkillsTableRow key={el} skills={skillsToRender} category={el} />)}
       </div>
-      {isCurrentUserProfile && cvId && (
+      {isCurrentUserProfile && (
         <SkillUpdForm
           open={open}
           handleClose={handleClose}

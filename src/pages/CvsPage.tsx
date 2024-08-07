@@ -14,9 +14,6 @@ const menuItems = [
   {
     label: 'details',
     path: 'details'
-  },
-  {
-    label: 'deleteCv'
   }
 ]
 
@@ -40,7 +37,6 @@ const CvsPage = () => {
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
-  // TODO fix refetch cvs after create/delete
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -55,7 +51,8 @@ const CvsPage = () => {
           name,
           description,
           email: user && user.email,
-          id
+          id,
+          userId: user && user.id
         }))}
         constextMenu={menuItems}
         searchQuery={searchQuery}

@@ -7,8 +7,10 @@ import type {
   AuthResult,
   CreateCvInput,
   Cv,
+  DeleteCvSkillInput,
   Profile,
-  UpdateCvInput
+  UpdateCvInput,
+  UpdateCvSkillInput
 } from 'cv-graphql'
 import { IUser } from '../../shared/interfaces/IUser'
 import { IDepartment } from '../../shared/interfaces/IDepartment'
@@ -87,6 +89,9 @@ export type CvSkillResult = {
 export type CvSkillArgs = {
   skill: AddCvSkillInput
 }
+export type UpdateCvSkillArgs = {
+  skill: UpdateCvSkillInput
+}
 
 export type GetProjectResult = {
   project: IProject
@@ -97,4 +102,7 @@ export type GetProjectsResult = {
 
 export type CvProjectArgs = {
   project: AddCvProjectInput
+}
+export type DeleteCvSkill = {
+  skill: DeleteCvSkillInput
 }

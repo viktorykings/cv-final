@@ -11,7 +11,8 @@ import { useUpdateProfileSkill } from '../../../graphql/users/skills/hooks/useUp
 import { useAddCvSkill } from '../../../graphql/cvs/hooks/useAddCvSkill'
 import { useUpdateCvSkill } from '../../../graphql/cvs/hooks/useUpdateCvSkill'
 import { useTranslation } from 'react-i18next'
-// import { useDeleteProfileSkill } from '../../../graphql/users/skills/hooks/useDeleteProfileSkill'
+import { useDeleteProfileSkill } from '../../../graphql/users/skills/hooks/useDeleteProfileSkill'
+import { useDeleteCvSkill } from '../../../graphql/cvs/hooks/useDeleteCvSkill'
 
 type TFormProps = {
   open: boolean
@@ -52,10 +53,10 @@ const SkillUpdForm = ({
   const { data: allSkills } = useGetSkills()
   const [addSkill] = useAddProfileSkill()
   const [updateSkill] = useUpdateProfileSkill()
-
+  const [deleteSkill] = useDeleteProfileSkill()
   const [addCvSkill] = useAddCvSkill()
   const [updateCvSkill] = useUpdateCvSkill()
-  // const [deleteSkill] = useDeleteProfileSkill()
+  const [deleteCvSkill] = useDeleteCvSkill()
   const [category, setCategory] = useState('')
   const watchFields = watch(['skill'])
   const [userSkills, setUserSkills] = useState<ISkillMastery[]>()
@@ -127,16 +128,29 @@ const SkillUpdForm = ({
     }
   }
 
-  // const handleDelete = () => {
-  //   deleteSkill({
-  //     variables: {
-  //       skill: {
-  //         userId: currentUserID,
-  //         name: ['MobX']
-  //       }
-  //     }
-  //   })
-  // }
+  const handleDelete = (skill: string) => {
+    if (isProfileSkills) {
+      deleteSkill({
+        variables: {
+          skill: {
+            userId: currentUserID,
+            name: [skill]
+          }
+        }
+      })
+    } else {
+      deleteCvSkill({
+        variables: {
+          skill: {
+            cvId: cvId ?? '',
+            name: [skill]
+          }
+        }
+      })
+    }
+
+    handleClose()
+  }
 
   return (
     <Dialog
@@ -158,7 +172,12 @@ const SkillUpdForm = ({
                 name="skill"
                 control={control}
                 render={({ field }) => (
-                  <CustomSelect {...field} label={t('skills.skill')} options={allSkills.skills} />
+                  <CustomSelect
+                    {...field}
+                    label={t('skills.skill')}
+                    options={allSkills.skills}
+                    isDisabled={!!defaultSkill}
+                  />
                 )}
               />
               <Controller
@@ -187,9 +206,13 @@ const SkillUpdForm = ({
           )}
         </DialogContent>
         <DialogActions>
-          {/* <Button variant="outlined" onClick={handleDelete} sx={{ color: 'text.secondary' }}>
-            Delete
-          </Button> */}
+          <Button
+            variant="outlined"
+            onClick={() => handleDelete(defaultSkill)}
+            sx={{ color: 'text.secondary' }}
+          >
+            {t('buttons.delete')}
+          </Button>
           <Button variant="outlined" onClick={handleClose} sx={{ color: 'text.secondary' }}>
             {t('buttons.cancel')}
           </Button>

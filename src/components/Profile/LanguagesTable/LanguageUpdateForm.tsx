@@ -80,6 +80,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
         }
       }
     })
+    handleClose()
   }
   return (
     <Dialog
@@ -105,6 +106,7 @@ const LanguageUpdateForm = (props: TFormProps) => {
                     {...field}
                     label={t(`languages.language`)}
                     options={languages.languages.map(el => el.name)}
+                    isDisabled={!!defaultLang}
                   />
                 )}
               />
