@@ -50,8 +50,8 @@ const CustomTable = (props: TableProps<TProps>) => {
   useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
     updateQueryParams(newSearchParams, 'filter', paramsSearchQuery)
+    if (!searchQuery) updateQueryParams(newSearchParams, 'filter')
     setSearchParams(newSearchParams)
-    if (!searchQuery) updateQueryParams(newSearchParams, 'filter', '')
     navigate({
       search: newSearchParams.toString()
     })

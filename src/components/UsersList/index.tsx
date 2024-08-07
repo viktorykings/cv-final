@@ -7,12 +7,6 @@ const menuItems = [
   {
     label: 'Profile',
     path: 'profile'
-  },
-  {
-    label: 'UpdateUser'
-  },
-  {
-    label: 'Delete User'
   }
 ]
 

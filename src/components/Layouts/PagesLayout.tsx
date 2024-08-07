@@ -1,10 +1,10 @@
-import { Box } from '@mui/material'
 import { Outlet } from 'react-router-dom'
+import BasicBreadcrumbs from '../Breadcrumbs'
 
 const PagesLayout = () => {
   return (
     <>
-      <Box>breadcrumbs</Box>
+      <BasicBreadcrumbs />
       <Outlet />
     </>
   )
