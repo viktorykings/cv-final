@@ -2,12 +2,18 @@ import { Box, AppBar, Toolbar, IconButton } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import AccountMenu from './AccountMenu'
 import LanguageSwitch from './LanguageSwitch'
+import { useCallback, useState } from 'react'
+import SideBar from '../Sidebar'
 
-type SidebarProps = {
-  toggleDrawer: (newOpen: boolean) => void
-}
+function HeaderNavAuth() {
+  const [open, setOpen] = useState(false)
 
-function HeaderNavAuth({ toggleDrawer }: SidebarProps) {
+  const toggleDrawer = useCallback(
+    (newOpen: boolean) => () => {
+      setOpen(newOpen)
+    },
+    []
+  )
   return (
     <Box sx={{ flexGrow: 1 }}>
       <AppBar
@@ -23,13 +29,14 @@ function HeaderNavAuth({ toggleDrawer }: SidebarProps) {
               color="secondary"
               aria-label="menu"
               sx={{ mr: 2 }}
-              onClick={() => toggleDrawer(true)}
+              onClick={toggleDrawer(true)}
             >
               <MenuIcon />
             </IconButton>
           </Box>
           <LanguageSwitch />
           <AccountMenu />
+          <SideBar open={open} toggleDrawer={() => toggleDrawer(false)} />
         </Toolbar>
       </AppBar>
     </Box>

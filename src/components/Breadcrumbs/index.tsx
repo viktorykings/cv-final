@@ -5,14 +5,13 @@ import { Link, useLocation } from 'react-router-dom'
 export default function BasicBreadcrumbs() {
   const location = useLocation()
   const crumbs = location.pathname.toUpperCase().split('/').slice(1)
-  console.log(location, crumbs)
   return (
     <Breadcrumbs aria-label="breadcrumb" sx={{ m: 3 }}>
-      <Link color="inherit" to={`/${crumbs[0].toLowerCase()}`}>
+      <Link key={crumbs[0]} color="inherit" to={`/${crumbs[0].toLowerCase()}`}>
         {crumbs[0]}
       </Link>
       {crumbs.slice(1).map(el => (
-        <Typography>{el}</Typography>
+        <Typography key={el}>{el}</Typography>
       ))}
     </Breadcrumbs>
   )

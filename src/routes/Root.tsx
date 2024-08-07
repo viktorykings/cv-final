@@ -4,21 +4,15 @@ import HeaderNav from '../components/Navigation/HeaderNav'
 import { useReactiveVar } from '@apollo/client'
 import { userToken } from '../shared/constants'
 import HeaderNavAuth from '../components/Navigation/HeaderNavAuth'
-import { Container, Drawer } from '@mui/material'
-import SidebarList from '../components/Sidebar'
-import { useState } from 'react'
+import { Container } from '@mui/material'
 
 function Root() {
   const isAuth = useReactiveVar(userToken)
-  const [open, setOpen] = useState(false)
-  const toggleDrawer = (newOpen: boolean) => {
-    setOpen(newOpen)
-  }
   return (
     <>
       <Header>
         <Container maxWidth="xl" disableGutters>
-          {isAuth ? <HeaderNavAuth toggleDrawer={toggleDrawer} /> : <HeaderNav />}
+          {isAuth ? <HeaderNavAuth /> : <HeaderNav />}
         </Container>
       </Header>
       <Container
@@ -27,9 +21,6 @@ function Root() {
       >
         <Outlet />
       </Container>
-      <Drawer open={open ?? false} onClose={() => toggleDrawer(false)}>
-        <SidebarList toggleDrawer={toggleDrawer} open={open} />
-      </Drawer>
     </>
   )
 }
