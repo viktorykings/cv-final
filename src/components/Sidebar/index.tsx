@@ -1,6 +1,5 @@
 import { Box, List, IconButton, Divider, Drawer } from '@mui/material'
 import { MenuItems } from '../../assets/sidebarIcons'
-// import { useNavigate } from 'react-router-dom'
 import CloseIcon from '@mui/icons-material/Close'
 import SidebarListItem from './SidebarItem'
 
@@ -10,9 +9,6 @@ type SidebarProps = {
 }
 
 const Sidebar = ({ open, toggleDrawer }: SidebarProps) => {
-  // если закомментировать navigate Sidebar не закрывается
-  // const navigate = useNavigate()
-
   return (
     <Drawer open={open} onClose={toggleDrawer(false)}>
       <Box sx={{ width: 250, p: 2 }} role="presentation" onClick={toggleDrawer(false)}>

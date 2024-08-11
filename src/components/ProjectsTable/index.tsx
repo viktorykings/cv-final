@@ -10,7 +10,6 @@ import AddIcon from '@mui/icons-material/Add'
 import AddProjectForm from './AddProjectForm'
 import { useGetUser } from '../../graphql/users/hooks/useGetUser'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
 
 interface IProjectTable {
   cvId?: string
@@ -19,14 +18,13 @@ interface IProjectTable {
 
 const ProjectsTable = ({ cvId }: IProjectTable) => {
   const { data: projects } = useGetProjects()
-  const { data: cv } = useGetCv(cvId as string)
+  const { data: cv, loading, refetch } = useGetCv(cvId as string)
   const currentUserID = useReactiveVar(userID)
   const { data: user } = useGetUser(currentUserID)
   const isCurrentUserCv = cv && cv.cv.user && currentUserID === cv.cv.user.id
   const [searchQuery, setSearchQuery] = useState('')
   const tableData = cv && cv.cv.projects ? cv.cv.projects : projects?.projects
   const { t } = useTranslation()
-  const navigate = useNavigate()
 
   const [open, setOpen] = useState(false)
   const handleClickOpen = () => {
@@ -36,25 +34,20 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
     setOpen(false)
   }
 
-  if (!projects || !cv)
+  if (!projects || !cv || loading || !cv.cv.user) {
+    refetch()
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
-  if (!tableData || !tableData.length || !projects.projects.length)
+  }
+
+  if (!tableData || !tableData.length || !projects.projects.length) {
     return (
       <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
         {t('projects.noProjects')}
       </Typography>
     )
-  if (!cv.cv.user)
-    return (
-      <>
-        <Typography color={'text.secondary'}>{t('projects.error')}</Typography>{' '}
-        <Button color="secondary" variant="outlined" onClick={() => navigate('/users')}>
-          {t('projects.goToMain')}
-        </Button>
-      </>
-    )
+  }
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>

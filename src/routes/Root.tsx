@@ -4,7 +4,8 @@ import HeaderNav from '../components/Navigation/HeaderNav'
 import { useReactiveVar } from '@apollo/client'
 import { userToken } from '../shared/constants'
 import HeaderNavAuth from '../components/Navigation/HeaderNavAuth'
-import { Container } from '@mui/material'
+import { CircularProgress, Container } from '@mui/material'
+import { Suspense } from 'react'
 
 function Root() {
   const isAuth = useReactiveVar(userToken)
@@ -15,12 +16,21 @@ function Root() {
           {isAuth ? <HeaderNavAuth /> : <HeaderNav />}
         </Container>
       </Header>
-      <Container
-        maxWidth="xl"
-        sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
+      <Suspense
+        fallback={
+          <CircularProgress
+            color="secondary"
+            sx={{ position: 'absolute', top: '50%', left: '50%' }}
+          />
+        }
       >
-        <Outlet />
-      </Container>
+        <Container
+          maxWidth="xl"
+          sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
+        >
+          <Outlet />
+        </Container>
+      </Suspense>
     </>
   )
 }
