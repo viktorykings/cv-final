@@ -29,7 +29,6 @@ type TFormValues = {
   name: string
   internalName: string
   domain: string
-  teamSize: number
   startDate: string
   endDate: string
   description: string
@@ -50,7 +49,6 @@ const AddProjectForm = (props: IAddProjectForm) => {
       name: '',
       internalName: '',
       domain: '',
-      teamSize: 0,
       startDate: '',
       endDate: '',
       description: ''
@@ -85,7 +83,6 @@ const AddProjectForm = (props: IAddProjectForm) => {
         name: project.project.name || '',
         internalName: project.project.internal_name || '',
         domain: project.project.domain || '',
-        teamSize: project.project.team_size || 0,
         startDate: project.project.start_date || '',
         endDate: project.project.end_date || '',
         description: project.project.description || ''
@@ -162,12 +159,6 @@ const AddProjectForm = (props: IAddProjectForm) => {
                 name="domain"
                 label="Domain"
                 value={formState.defaultValues?.domain}
-                disabled
-              />
-              <TextField
-                name="teamSize"
-                label="Team Size"
-                value={formState.defaultValues?.teamSize}
                 disabled
               />
               <Controller

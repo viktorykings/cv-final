@@ -11,13 +11,7 @@ export const GET_PROJECTS = gql`
       domain
       start_date
       end_date
-      team_size
-      tech_stack {
-        id
-        created_at
-        name
-        category
-      }
+      environment
     }
   }
 `

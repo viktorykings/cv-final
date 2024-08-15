@@ -1,5 +1,3 @@
-import { ISkill } from './ISkill'
-
 export interface IProject {
   id: number
   created_at: string
@@ -9,6 +7,5 @@ export interface IProject {
   domain: string
   start_date: string
   end_date?: string
-  team_size: number
-  tech_stack: ISkill[]
+  environment: string
 }

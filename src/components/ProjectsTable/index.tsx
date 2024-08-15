@@ -60,27 +60,23 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
       </Box>
       <CustomTable
         headers={projects.projects.map(
-          ({ name, internal_name, domain, team_size, start_date, end_date, id }) => ({
+          ({ name, internal_name, domain, start_date, end_date, id }) => ({
             name,
             internal_name,
             domain,
-            team_size: team_size.toString(),
             start_date,
             end_date,
             id: id.toString()
           })
         )}
-        data={tableData.map(
-          ({ name, internal_name, domain, team_size, start_date, end_date, id }) => ({
-            name,
-            internal_name,
-            domain,
-            team_size: team_size.toString(),
-            start_date,
-            end_date,
-            id: id.toString()
-          })
-        )}
+        data={tableData.map(({ name, internal_name, domain, start_date, end_date, id }) => ({
+          name,
+          internal_name,
+          domain,
+          start_date,
+          end_date,
+          id: id.toString()
+        }))}
         searchQuery={searchQuery}
       />
       {isCurrentUserCv && cvId && cv && user && (
