@@ -37,6 +37,12 @@ const ContextMenuItems = ({
             {t(`contextMenu.${item.label}`, '')}
           </MenuItem>
         )
+      case 'deleteProject':
+        return (
+          <MenuItem key={item.label} onClick={handleDelete}>
+            {t(`contextMenu.${item.label}`, '')}
+          </MenuItem>
+        )
       default:
         return (
           <MenuItem

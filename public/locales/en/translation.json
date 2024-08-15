@@ -6,7 +6,8 @@
     "addSkill": "Add skill",
     "addLanguage": "Add Language",
     "addCv": "Add CV",
-    "search": "Search"
+    "search": "Search",
+    "addProject": "Add project"
   },
   "header": {
     "login": "Login",
@@ -107,6 +108,7 @@
     "addCv": "Add CV",
     "updateCv": "Update CV",
     "deleteCv": "Delete CV",
+    "deleteProject": "Delete project",
     "details": "Details",
     "settings": "Settings",
     "logout": "Log out"
