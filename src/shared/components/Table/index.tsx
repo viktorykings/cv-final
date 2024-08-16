@@ -19,10 +19,8 @@ interface TableProps<T> {
 
 const CustomTable = (props: TableProps<TProps>) => {
   const { data, constextMenu, searchQuery, headers, setSearchQuery } = props
-
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
-
   const initialOrder = (searchParams.get('order') || 'asc') as SortOrder
   const initialOrderBy = (searchParams.get('sort') || 'id') as keyof TProps
   const initialSearchQuery = searchParams.get('filter')
@@ -36,7 +34,7 @@ const CustomTable = (props: TableProps<TProps>) => {
       setOrder(order === 'asc' ? 'desc' : 'asc')
     } else {
       setOrderBy(path)
-      setOrder('asc')
+      setOrder(order === 'asc' ? 'desc' : 'asc')
     }
     const newSearchParams = new URLSearchParams(searchParams.toString())
     updateQueryParams(newSearchParams, 'sort', path)

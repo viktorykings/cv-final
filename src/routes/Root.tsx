@@ -6,8 +6,6 @@ import { userToken } from '../shared/constants'
 import HeaderNavAuth from '../components/Navigation/HeaderNavAuth'
 import { CircularProgress, Container } from '@mui/material'
 import { Suspense } from 'react'
-import { ErrorBoundary } from 'react-error-boundary'
-import ErrorPage from '../pages/ErrorPage'
 
 function Root() {
   const isAuth = useReactiveVar(userToken)
@@ -30,9 +28,7 @@ function Root() {
           maxWidth="xl"
           sx={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}
         >
-          <ErrorBoundary fallback={<ErrorPage />}>
-            <Outlet />
-          </ErrorBoundary>
+          <Outlet />
         </Container>
       </Suspense>
     </>

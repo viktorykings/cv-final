@@ -11,7 +11,6 @@ type SearchBarProps = {
 const SearchBar = ({ searchQuery, setSearchQuery }: SearchBarProps) => {
   const { t } = useTranslation()
 
-  console.log(searchQuery)
   const handleSearch = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setSearchQuery((e.target as HTMLInputElement).value)
   }

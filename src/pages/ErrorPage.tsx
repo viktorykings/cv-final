@@ -1,19 +1,30 @@
 import { Box, Button, Typography } from '@mui/material'
-import { useErrorBoundary } from 'react-error-boundary'
 import { useTranslation } from 'react-i18next'
-import { useNavigate } from 'react-router-dom'
+import { isRouteErrorResponse, useNavigate, useRouteError } from 'react-router-dom'
 
 const ErrorPage = () => {
   const { t } = useTranslation()
   const navigate = useNavigate()
-  const { resetBoundary } = useErrorBoundary()
+  const error = useRouteError()
+  let errorMessage: string = ''
+
+  if (isRouteErrorResponse(error)) {
+    errorMessage = error.statusText
+  } else if (error instanceof Error) {
+    errorMessage = error.message
+  } else if (typeof error === 'string') {
+    errorMessage = error
+  } else {
+    errorMessage = 'Unknown error'
+    console.error(error)
+  }
   return (
     <Box sx={{ position: 'absolute', top: '40%', left: '40%', height: '100px' }}>
       <Typography>{t('globalError')}</Typography>
+      <Typography>{errorMessage}</Typography>
       <Button
         color="secondary"
         onClick={() => {
-          resetBoundary()
           navigate('users')
         }}
       >
