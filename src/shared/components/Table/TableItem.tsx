@@ -6,6 +6,8 @@ import { TProps, IContextMenuItem } from './types/TableProps'
 import { useReactiveVar } from '@apollo/client'
 import { userID } from '../../constants'
 import { useDeleteCv } from '../../../graphql/users/cvs/hooks/useDeleteCv'
+import { useDeleteCvProject } from '../../../graphql/cvs/hooks/useDeleteCvProject'
+import { useParams } from 'react-router-dom'
 
 type TableItemProps = {
   row: TProps
@@ -13,6 +15,7 @@ type TableItemProps = {
 }
 
 const TableItem = ({ row, contextMenu }: TableItemProps) => {
+  const { cvId } = useParams()
   const currentUserID = useReactiveVar(userID)
   const cells = Object.keys(row)
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null)
@@ -34,9 +37,40 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
     })
     handleClose()
   }
+  const [deleteCvProject] = useDeleteCvProject(currentUserID, cvId)
+  const handleDeleteCvProject = (cvId: string, projectId: string) => {
+    if (cvId && projectId) {
+      deleteCvProject({
+        variables: {
+          project: {
+            cvId: cvId,
+            projectId: projectId
+          }
+        }
+      })
+    }
+    handleClose()
+  }
 
   const createCell = (el: string) => {
     switch (el) {
+      case 'delete':
+        return (
+          <ContextMenu
+            key={`delete${row.id}`}
+            open={open}
+            anchorEl={anchorEl}
+            handleClick={handleClick}
+            handleClose={handleClose}
+          >
+            <ContextMenuItems
+              id={row.id}
+              items={[{ label: 'deleteProject', path: 'deleteProject' }]}
+              handleDelete={() => handleDeleteCvProject(cvId ?? '', row.delete ?? '')}
+              handleClose={handleClose}
+            />
+          </ContextMenu>
+        )
       case 'id':
         return contextMenu?.length ? (
           <ContextMenu
@@ -53,7 +87,7 @@ const TableItem = ({ row, contextMenu }: TableItemProps) => {
                   ? [...contextMenu, { label: 'deleteCv', path: 'deleteCv' }]
                   : contextMenu
               }
-              handleDelete={() => handleDelete(row.id ?? '')}
+              handleDelete={() => handleDelete(row.delete ?? '')}
               handleClose={handleClose}
             />
           </ContextMenu>

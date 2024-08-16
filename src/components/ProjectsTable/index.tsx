@@ -15,6 +15,12 @@ interface IProjectTable {
   cvId?: string
   projectId?: string
 }
+const menuItems = [
+  {
+    label: 'delete',
+    path: 'delete'
+  }
+]
 
 const ProjectsTable = ({ cvId }: IProjectTable) => {
   const { data: projects } = useGetProjects()
@@ -33,19 +39,33 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
   const handleClose = () => {
     setOpen(false)
   }
-
   if (!projects || !cv || loading || !cv.cv.user) {
     refetch()
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
   }
-
   if (!tableData || !tableData.length || !projects.projects.length) {
     return (
-      <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
-        {t('projects.noProjects')}
-      </Typography>
+      <>
+        {isCurrentUserCv && (
+          <Button color="secondary" onClick={handleClickOpen}>
+            <AddIcon /> {t('buttons.addProject')}
+          </Button>
+        )}
+        <Typography sx={{ display: 'flex', justifyContent: 'center' }} color={'text.secondary'}>
+          {t('projects.noProjects')}
+        </Typography>
+        {isCurrentUserCv && cvId && cv && user && (
+          <AddProjectForm
+            open={open}
+            cvId={cvId}
+            handleClose={handleClose}
+            cv={cv.cv}
+            allProjects={projects.projects}
+          />
+        )}
+      </>
     )
   }
   return (
@@ -54,34 +74,31 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
         <SearchBar setSearchQuery={setSearchQuery} />
         {isCurrentUserCv && (
           <Button color="secondary" onClick={handleClickOpen}>
-            <AddIcon /> Create CV
+            <AddIcon /> {t('buttons.addProject')}
           </Button>
         )}
       </Box>
       <CustomTable
         headers={projects.projects.map(
-          ({ name, internal_name, domain, team_size, start_date, end_date, id }) => ({
+          ({ name, internal_name, domain, start_date, end_date, id }) => ({
             name,
             internal_name,
             domain,
-            team_size: team_size.toString(),
             start_date,
             end_date,
-            id: id.toString()
+            delete: id.toString()
           })
         )}
-        data={tableData.map(
-          ({ name, internal_name, domain, team_size, start_date, end_date, id }) => ({
-            name,
-            internal_name,
-            domain,
-            team_size: team_size.toString(),
-            start_date,
-            end_date,
-            id: id.toString()
-          })
-        )}
+        data={tableData.map(({ name, internal_name, domain, start_date, end_date, id }) => ({
+          name,
+          internal_name,
+          domain,
+          start_date,
+          end_date,
+          delete: id.toString()
+        }))}
         searchQuery={searchQuery}
+        constextMenu={isCurrentUserCv ? menuItems : []}
       />
       {isCurrentUserCv && cvId && cv && user && (
         <AddProjectForm

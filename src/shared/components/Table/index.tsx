@@ -78,7 +78,7 @@ const CustomTable = (props: TableProps<TProps>) => {
           {data.length ? (
             <TableBody>
               {visibleRows.map(el => (
-                <TableItem key={el.id} row={el} contextMenu={constextMenu} />
+                <TableItem key={el.id ?? el.delete} row={el} contextMenu={constextMenu} />
               ))}
             </TableBody>
           ) : (

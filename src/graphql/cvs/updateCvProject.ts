@@ -20,7 +20,6 @@ export const UPDATE_CV_PROJECT = gql`
         domain
         start_date
         end_date
-        team_size
         roles
         responsibilities
       }

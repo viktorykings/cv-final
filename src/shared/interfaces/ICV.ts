@@ -24,7 +24,6 @@ interface ICvProject {
   domain: string
   start_date: string
   end_date?: string
-  team_size: number
   roles: string[]
   responsibilities: string[]
 }

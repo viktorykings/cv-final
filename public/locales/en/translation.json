@@ -6,7 +6,8 @@
     "addSkill": "Add skill",
     "addLanguage": "Add Language",
     "addCv": "Add CV",
-    "search": "Search"
+    "search": "Search",
+    "addProject": "Add project"
   },
   "header": {
     "login": "Login",
@@ -62,7 +63,6 @@
     "name": "Name",
     "internal_name": "Internal name",
     "domain": "Domain",
-    "team_size": "Team Size",
     "start_date": "Start Date",
     "end_date": "End Date",
     "description": "Description",
@@ -108,6 +108,7 @@
     "addCv": "Add CV",
     "updateCv": "Update CV",
     "deleteCv": "Delete CV",
+    "deleteProject": "Delete project",
     "details": "Details",
     "settings": "Settings",
     "logout": "Log out"

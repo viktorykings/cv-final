@@ -9,6 +9,7 @@ import type {
   Cv,
   DeleteCvSkillInput,
   Profile,
+  RemoveCvProjectInput,
   UpdateCvInput,
   UpdateCvSkillInput
 } from 'cv-graphql'
@@ -102,6 +103,9 @@ export type GetProjectsResult = {
 
 export type CvProjectArgs = {
   project: AddCvProjectInput
+}
+export type DeleteCvProjectArgs = {
+  project: RemoveCvProjectInput
 }
 export type DeleteCvSkill = {
   skill: DeleteCvSkillInput

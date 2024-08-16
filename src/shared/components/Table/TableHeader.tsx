@@ -20,7 +20,7 @@ function TableHeader(props: TableHeaderProps<TProps>) {
   }
 
   const isNotSortable = (str: string) => {
-    return str !== 'id' && str !== 'avatar'
+    return str !== 'id' && str !== 'delete' && str !== 'avatar'
   }
   const keys = Object.keys(data[0]).map(el => {
     return {
