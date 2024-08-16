@@ -71,7 +71,7 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         {isCurrentUserCv && (
           <Button color="secondary" onClick={handleClickOpen}>
             <AddIcon /> {t('buttons.addProject')}
@@ -98,6 +98,7 @@ const ProjectsTable = ({ cvId }: IProjectTable) => {
           delete: id.toString()
         }))}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
         constextMenu={isCurrentUserCv ? menuItems : []}
       />
       {isCurrentUserCv && cvId && cv && user && (

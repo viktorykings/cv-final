@@ -76,6 +76,7 @@ const CVDetails = () => {
             type="text"
             fullWidth
             sx={{ margin: '32px 0' }}
+            disabled={!isCurrentUserCv}
           />
         )}
       />
@@ -92,6 +93,7 @@ const CVDetails = () => {
             color="secondary"
             type="text"
             fullWidth
+            disabled={!isCurrentUserCv}
           />
         )}
       />
@@ -111,6 +113,7 @@ const CVDetails = () => {
             multiline
             rows={7}
             sx={{ marginBottom: '32px' }}
+            disabled={!isCurrentUserCv}
           />
         )}
       />

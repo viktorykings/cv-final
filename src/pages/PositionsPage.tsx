@@ -13,7 +13,7 @@ const PositionsPage = () => {
     )
   return (
     <>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <Table
         data={positions.positions.map(({ name, id }) => ({
@@ -23,6 +23,7 @@ const PositionsPage = () => {
         }))}
         constextMenu={[]}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

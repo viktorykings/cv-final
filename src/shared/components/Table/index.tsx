@@ -14,21 +14,21 @@ interface TableProps<T> {
   data: T[]
   constextMenu?: IContextMenuItem[]
   searchQuery: string
+  setSearchQuery: (s: string) => void
 }
 
 const CustomTable = (props: TableProps<TProps>) => {
-  const { data, constextMenu, searchQuery, headers } = props
+  const { data, constextMenu, searchQuery, headers, setSearchQuery } = props
 
   const [searchParams, setSearchParams] = useSearchParams()
   const navigate = useNavigate()
 
   const initialOrder = (searchParams.get('order') || 'asc') as SortOrder
   const initialOrderBy = (searchParams.get('sort') || 'id') as keyof TProps
-  const initialSearchQuery = searchParams.get('filter') || searchQuery
+  const initialSearchQuery = searchParams.get('filter')
 
   const [order, setOrder] = useState<SortOrder>(initialOrder)
   const [orderBy, setOrderBy] = useState<keyof TProps>(initialOrderBy)
-  const [paramsSearchQuery, setSearchQuery] = useState<string>(initialSearchQuery)
 
   const handleRequestSort = (event: React.MouseEvent<unknown>, path: keyof TProps): void => {
     event.preventDefault()
@@ -46,18 +46,19 @@ const CustomTable = (props: TableProps<TProps>) => {
       search: newSearchParams.toString()
     })
   }
-
+  useEffect(() => {
+    if (initialSearchQuery) setSearchQuery(initialSearchQuery)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   useEffect(() => {
     const newSearchParams = new URLSearchParams(searchParams.toString())
-    updateQueryParams(newSearchParams, 'filter', paramsSearchQuery)
-    if (!searchQuery) updateQueryParams(newSearchParams, 'filter')
+    if (!initialSearchQuery) updateQueryParams(newSearchParams, 'filter')
+    updateQueryParams(newSearchParams, 'filter', searchQuery)
     setSearchParams(newSearchParams)
     navigate({
       search: newSearchParams.toString()
     })
-    if (searchQuery !== '') setSearchQuery(searchQuery)
-  }, [paramsSearchQuery, searchParams, searchQuery, setSearchParams, navigate])
-
+  }, [searchParams, searchQuery, setSearchParams, setSearchQuery, initialSearchQuery, navigate])
   const visibleRows: TProps[] = useMemo(() => {
     const filtered = customFilter(data, searchQuery)
     return filtered
@@ -72,7 +73,6 @@ const CustomTable = (props: TableProps<TProps>) => {
             order={order}
             orderBy={orderBy}
             data={headers ? headers : data}
-            // data={data}
             onRequestSort={handleRequestSort}
           />
           {data.length ? (

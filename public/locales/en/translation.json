@@ -7,8 +7,10 @@
     "addLanguage": "Add Language",
     "addCv": "Add CV",
     "search": "Search",
-    "addProject": "Add project"
+    "addProject": "Add project",
+    "goHome": "Go to main"
   },
+  "globalError": "Something went wrong!",
   "header": {
     "login": "Login",
     "signup": "Signup"

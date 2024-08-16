@@ -4,12 +4,14 @@ import { useTranslation } from 'react-i18next'
 import { ChangeEvent } from 'react'
 
 type SearchBarProps = {
+  searchQuery: string
   setSearchQuery: (value: string) => void
 }
 
-const SearchBar = ({ setSearchQuery }: SearchBarProps) => {
+const SearchBar = ({ searchQuery, setSearchQuery }: SearchBarProps) => {
   const { t } = useTranslation()
 
+  console.log(searchQuery)
   const handleSearch = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setSearchQuery((e.target as HTMLInputElement).value)
   }
@@ -24,6 +26,7 @@ const SearchBar = ({ setSearchQuery }: SearchBarProps) => {
         placeholder={t('buttons.search')}
         size="small"
         sx={{ width: '320px' }}
+        value={searchQuery}
         InputProps={{
           startAdornment: (
             <InputAdornment position="start">
