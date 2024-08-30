@@ -18,7 +18,7 @@ const menuItems = [
 ]
 
 const CvsPage = () => {
-  const { data } = useGetAllCvs()
+  const { data, refetch } = useGetAllCvs()
 
   const currentUserID = useReactiveVar(userID)
   const { data: user } = useGetUser(currentUserID as string)
@@ -33,14 +33,20 @@ const CvsPage = () => {
   }
 
   const [searchQuery, setSearchQuery] = useState('')
-  if (!data)
+  if (!data) {
     return (
       <CircularProgress color="secondary" sx={{ position: 'absolute', top: '50%', left: '50%' }} />
     )
+  }
+  // cv with id 94 doesnt have user so filtered
+  const isUserNonNull = data.cvs.filter(el => el.id !== '94').every(el => el.user !== null)
+  if (!isUserNonNull) {
+    refetch()
+  }
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         <Button color="secondary" onClick={handleClickOpen}>
           <AddIcon /> {t('buttons.addCv')}
@@ -56,6 +62,7 @@ const CvsPage = () => {
         }))}
         constextMenu={menuItems}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
 
       {user && <CvForm open={open} handleClose={handleClose} label="addCv" user={user.user} />}

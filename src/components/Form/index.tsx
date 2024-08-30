@@ -54,7 +54,6 @@ const Form = ({ isRegisterForm, login, signup }: IForm) => {
   } = useForm<TFormData>()
 
   const onSubmit: SubmitHandler<TFormData> = async formData => {
-    console.log(formData)
     if (signup) await signup({ variables: { auth: formData } })
     if (login) await login({ variables: { auth: formData } })
   }

@@ -13,7 +13,7 @@ const SkillsPage = () => {
 
   return (
     <>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <Table
         data={skills.skills.map(({ name, category, id }) => ({
@@ -23,6 +23,7 @@ const SkillsPage = () => {
         }))}
         constextMenu={[]}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

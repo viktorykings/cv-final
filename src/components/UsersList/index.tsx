@@ -22,7 +22,7 @@ const UsersTable = () => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
       </Box>
       <CustomTable
         data={data.users.map(
@@ -35,6 +35,7 @@ const UsersTable = () => {
           }) => ({ avatar, first_name, last_name, email, department_name, position_name, id })
         )}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
         constextMenu={menuItems}
       />
     </>

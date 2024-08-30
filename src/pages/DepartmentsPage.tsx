@@ -14,12 +14,13 @@ const DepartmentsPage = () => {
     )
   return (
     <>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <Table
         data={departments.departments.map(({ name, id }) => ({ name, id }))}
         constextMenu={[]}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

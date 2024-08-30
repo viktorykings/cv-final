@@ -58,7 +58,7 @@ const CvsTable = () => {
   return (
     <>
       <Box sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <SearchBar setSearchQuery={setSearchQuery} />
+        <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
         {isCurrentUserProfile && (
           <Button color="secondary" onClick={handleClickOpen}>
@@ -70,6 +70,7 @@ const CvsTable = () => {
         data={user.user.cvs.map(({ name, description, id }) => ({ name, description, id }))}
         searchQuery={searchQuery}
         constextMenu={menuItems}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

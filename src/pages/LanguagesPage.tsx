@@ -13,7 +13,7 @@ const LanguagesPage = () => {
     )
   return (
     <>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <Table
         data={languages.languages.map(({ name, native_name, iso2, id }) => ({
@@ -24,6 +24,7 @@ const LanguagesPage = () => {
         }))}
         constextMenu={[]}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

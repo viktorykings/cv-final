@@ -13,7 +13,7 @@ const ProjectsPage = () => {
     )
   return (
     <>
-      <SearchBar setSearchQuery={setSearchQuery} />
+      <SearchBar searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
 
       <CustomTable
         data={projects.projects.map(
@@ -28,6 +28,7 @@ const ProjectsPage = () => {
         )}
         constextMenu={[]}
         searchQuery={searchQuery}
+        setSearchQuery={setSearchQuery}
       />
     </>
   )

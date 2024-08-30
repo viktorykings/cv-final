@@ -7,8 +7,10 @@
     "addLanguage": "Добавить язык",
     "addCv": "Добавить резюме",
     "search": "Поиск",
-    "addProject": "Добавить проект"
+    "addProject": "Добавить проект",
+    "goHome": "На главную"
   },
+  "globalError": "Что-то пошло не так!",
   "header": {
     "login": "Войти",
     "signup": "Регистрация"
